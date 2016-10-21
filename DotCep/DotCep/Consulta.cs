@@ -1,9 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace DotCEP
 {
-    public static class Consulta
+    public static class Consultas
     {
         /// <summary>
         /// Retorna um objeto do tipo Enereco com todas as informações do CEP informado.
@@ -25,19 +26,28 @@ namespace DotCEP
         }
 
         /// <summary>
-        /// Verifica se o CEP (válido) existe, ou são apenas 8 numeros que não formam um CEP verdadeiro.
+        /// Verifica se o CEP existe, ou são apenas 8 numeros que não formam um CEP verdadeiro.
         /// </summary>
         /// <returns><c>true</c>, if existencia was verificared, <c>false</c> otherwise.</returns>
         /// <param name="JSON">JSO.</param>
-        private static bool VerificarExistenciaDoCEP(string JSON)
+        public static bool VerificarExistenciaDoCEP(uint CEP)
         {
-            if (JSON.Contains("\"erro\": true"))
+            if (VerificarValidadeDoCep(CEP))
             {
-                return false;
+                String StrJSON = ControleJSON.ObterStringJSONS(GerarURLDaPesquisaPorCEP(CEP));
+
+                if (!StrJSON.Contains("\"erro\": true"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return true;
+                return false;
             }
         }
 

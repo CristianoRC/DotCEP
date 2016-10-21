@@ -1,22 +1,24 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace DotCep
+namespace DotCEP
 {
-    public static class CEP
+    public static class Consulta
     {
-        public static Endereco ObterEndereco(uint CEP)
+        /// <summary>
+        /// Retorna um objeto do tipo Enereco com todas as informações do CEP informado.
+        /// </summary>
+        /// <returns>The endereco completo.</returns>
+        /// <param name="CEP">CE.</param>
+        public static Endereco ObterEnderecoCompleto(uint CEP)
         {
             Endereco enderecoBase = new Endereco();
 
             if (VerificarValidadeDoCep(CEP))
             {
-                String StrJSON = ControleJSON.ObterStringJSONS(CEP);
+                String StrJSON = ControleJSON.ObterStringJSONS(GerarURLDaPesquisaPorCEP(CEP));
 
-                if (VerificarExistencia(StrJSON))
-                {
-                    enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
-                }
+                enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
             }
 
             return enderecoBase;
@@ -27,7 +29,7 @@ namespace DotCep
         /// </summary>
         /// <returns><c>true</c>, if existencia was verificared, <c>false</c> otherwise.</returns>
         /// <param name="JSON">JSO.</param>
-        private static bool VerificarExistencia(string JSON)
+        private static bool VerificarExistenciaDoCEP(string JSON)
         {
             if (JSON.Contains("\"erro\": true"))
             {
@@ -56,6 +58,10 @@ namespace DotCep
             }
         }
 
+        private static string GerarURLDaPesquisaPorCEP(uint CEP)
+        {
+            const String CaminhoPadrao = @"https://viacep.com.br/ws/{0}/json/";
+            return String.Format(CaminhoPadrao, CEP.ToString());
+        }
     }
 }
-

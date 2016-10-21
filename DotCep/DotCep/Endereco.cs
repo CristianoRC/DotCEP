@@ -1,4 +1,4 @@
-﻿namespace DotCep
+﻿namespace DotCEP
 {
     public class Endereco
     {

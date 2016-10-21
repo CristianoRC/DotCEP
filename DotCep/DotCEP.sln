@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCep", "DotCep\DotCep.csproj", "{A28B2C45-3DC2-46DD-9029-35EECFF84BF8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCEP", "DotCep\DotCEP.csproj", "{A28B2C45-3DC2-46DD-9029-35EECFF84BF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

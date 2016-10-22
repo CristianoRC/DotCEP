@@ -37,7 +37,7 @@
     <Compile Include="Endereco.cs" />
     <Compile Include="ControleJSON.cs" />
     <Compile Include="UF.cs" />
-    <Compile Include="Consulta.cs" />
+    <Compile Include="Consultas.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

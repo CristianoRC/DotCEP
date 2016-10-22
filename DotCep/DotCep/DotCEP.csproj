@@ -38,6 +38,9 @@
     <Compile Include="ControleJSON.cs" />
     <Compile Include="UF.cs" />
     <Compile Include="Consultas.cs" />
+    <Compile Include="Formatacao.cs" />
+    <Compile Include="Validacoes.cs" />
+    <Compile Include="ControleDeUrl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace DotCEP
 
             if (CEP.ToString().Length == 8)
             {
-                String StrJSON = ControleJSON.ObterStringJSONS(GerarURLDaPesquisa(CEP));
+                String StrJSON = ControleJSON.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
                 enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
             }
@@ -35,7 +35,7 @@ namespace DotCEP
         public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
         {
             List<Endereco> Enderecos = new List<Endereco>();
-            String url = GerarURLDaPesquisa(UF, Cidade, Logradouro);
+            String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
             String StrJSON = ControleJSON.ObterStringJSONS(url);
 
             Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
@@ -80,86 +80,6 @@ namespace DotCEP
             }
 
             return saida;
-        }
-
-        public static bool VerificarExistenciaDoCEP(string CEP)
-        {
-            uint CEPsemFormato;
-
-            if (VerificarValidadeDoCep(CEP))
-            {
-                CEP = CEP.Replace("-", "");
-
-                CEPsemFormato = Convert.ToUInt32(CEP);
-
-                String StrJSON = ControleJSON.ObterStringJSONS(GerarURLDaPesquisa(CEPsemFormato));
-
-                if (!StrJSON.Contains("\"erro\": true"))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static bool VerificarValidadeDoCep(string CEPformatado)
-        {    
-            if (CEPformatado.Trim().Length == 9)
-            {
-                return System.Text.RegularExpressions.Regex.IsMatch(CEPformatado, ("[0-9]{5}-[0-9]{3}"));
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public static string FormatarCEP(uint CEP)
-        {
-            string CEPformatado = CEP.ToString();
-
-            if (CEPformatado.Length == 8)
-            {
-                CEPformatado = CEPformatado.Substring(0, 5) + "-" + CEPformatado.Substring(5, 3);
-            }
-
-            return  CEPformatado;
-        }
-
-        public static string FormatarCEP(string CEP)
-        {
-            string CEPformatado = CEP;
-
-            if (CEPformatado.Length == 8)
-            {
-                CEPformatado = CEPformatado.Substring(0, 5) + "-" + CEPformatado.Substring(5, 3);
-            }
-
-            return  CEPformatado;
-        }
-
-
-
-        private static string GerarURLDaPesquisa(uint CEP)
-        {
-            const String CaminhoPadrao = @"https://viacep.com.br/ws/{0}/json/";
-            return String.Format(CaminhoPadrao, CEP.ToString());
-        }
-
-        private static string GerarURLDaPesquisa(UF UF, string Cidade, String Logradouro)
-        {
-            const String CaminhoPadrao = @"https://viacep.com.br/ws/{0}/{1}/{2}/json/";
-
-            string caminhoFinal = String.Format(CaminhoPadrao, UF.ToString(), Cidade, Logradouro);
-
-            return caminhoFinal;
         }
     }
 }

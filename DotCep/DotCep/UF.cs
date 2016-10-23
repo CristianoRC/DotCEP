@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotCEP
+﻿namespace DotCEP
 {
     public enum UF
     {

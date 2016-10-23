@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotCEP
+﻿namespace DotCEP
 {
     public static class Formatacao
     {
@@ -13,7 +11,7 @@ namespace DotCEP
                 CEPformatado = CEPformatado.Substring(0, 5) + "-" + CEPformatado.Substring(5, 3);
             }
 
-            return  CEPformatado;
+            return CEPformatado;
         }
 
         public static string FormatarCEP(string CEP)
@@ -25,7 +23,7 @@ namespace DotCEP
                 CEPformatado = CEPformatado.Substring(0, 5) + "-" + CEPformatado.Substring(5, 3);
             }
 
-            return  CEPformatado;
+            return CEPformatado;
         }
 
     }

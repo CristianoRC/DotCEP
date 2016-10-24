@@ -1,12 +1,19 @@
-# dotCEP
 
+![DotCEP Icon](http://i.imgur.com/12X632a.png)
 <p> </p>
+<h1> NuGet </h1>
+
+<h4><b><code>Install-Package DotCEP</code>
+
+<b>DotCEP: <a href="https://www.nuget.org/packages/DotCEP/" target="_blank" >NuGet</a></b>
 <h1> Sobre </h1>
 Biblioteca para facilitar o trabalho com CEP, utilizando .NET C#.
 
-Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target="_blank" >Via Cep</a>
+Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target="_blank" >Via Cep.</a>
 
-<h6>O Webservice tem uma pequena limitação na questão de requisições: Acima de 300 requisições em menos de 15 minutos pelo mesmo IP poderá haver temporariamente o bloqueio do mesmo.</h6>
+O Webservice contém uma pequena limitação na questão de requisições: Acima de 300 requisições em menos de 15 minutos pelo mesmo IP, poderá haver temporariamente o bloqueio do mesmo.
+
+<hr> </hr>
 
 <h3> Contatos </h3>
 <b>Site:</b> http://cristianoprogramador.com/
@@ -26,5 +33,3 @@ Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target=
 
 <b>License:</b> <a href="https://github.com/CristianoRC/SoftwareOrdemDeServico/blob/master/LICENSE.txt" target="License" >
 The MIT License (MIT)</a>
-
-<hr> </hr>

@@ -4,8 +4,10 @@ namespace DotCEP
 {
     internal static class ControleDeUrl
     {
-        internal static string GerarURLDaPesquisa(uint CEP)
+		internal static string GerarURLDaPesquisa(string CEP)
         {
+			CEP = CEP.Replace("-","");
+
             const String CaminhoPadrao = @"https://viacep.com.br/ws/{0}/json/";
             return String.Format(CaminhoPadrao, CEP.ToString());
         }

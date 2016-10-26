@@ -11,7 +11,7 @@ namespace DotCEP
         /// </summary>
         /// <returns>The endereco completo.</returns>
         /// <param name="CEP">CE.</param>
-        public static Endereco ObterEnderecoCompleto(uint CEP)
+        public static Endereco ObterEnderecoCompleto(string CEP)
         {
             Endereco enderecoBase = new Endereco();
 

@@ -23,15 +23,11 @@ namespace DotCEP
 
 		public static bool VerificarExistenciaDoCEP(string CEP)
 		{
-			uint CEPsemFormato;
-
 			if (VerificarValidadeDoCep(CEP))
 			{
 				CEP = CEP.Replace("-", "");
 
-				CEPsemFormato = Convert.ToUInt32(CEP);
-
-				String StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEPsemFormato));
+				String StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
 				if (!StrJSON.Contains("\"erro\": true"))
 				{

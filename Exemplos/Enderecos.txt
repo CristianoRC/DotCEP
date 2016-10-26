@@ -1,89 +1,87 @@
 
-    cep: "91410-490",
-    logradouro: "Rua Olavo Dutra",
-    complemento: "",
-    bairro: "Partenon",
-    cidade: "Porto Alegre",
-    uf: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
+    cep: 91410-490
+    logradouro: Rua Olavo Dutra
+    complemento: 
+    bairro: Partenon
+    localidade: Porto Alegre
+    uf: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
   
 
-    cep: "90040-310",
-    logradouro: "Rua Olavo Bilac",
-    complemento: "",
-    bairro: "Azenha",
-    cidade: "Porto Alegre",
-    uf: "RS",
-    unidade": "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "90570-070",
-    logradouro: "Rua Olavo Barreto Viana",
-    complemento: "",
-    bairro: "Moinhos de Vento",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "90570-901",
-    logradouro: "Rua Olavo Barreto Viana",
-    complemento: "36",
-    bairro: "Moinhos de Vento",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "91180-370",
-    logradouro: "Rua Reverendo Olavo Nunes",
-    complemento: "",
-    bairro: "Rubem Berta",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "90440-170",
-    logradouro: "Rua Engenheiro Olavo Nunes",
-    complemento: "",
-    bairro: "Bela Vista",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "91150-034",
-    logradouro: "Rua José Olavo do Nascimento",
-    complemento: "",
-    bairro: "Sarandi",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  },
-  {
-    cep: "91540-650",
-    logradouro: "Acesso Olavo Domingos de Oliveira",
-    complemento: "",
-    bairro: "Jardim Carvalho",
-    cidade: "Porto Alegre",
-    UF: "RS",
-    unidade: "",
-    ibge: "4314902",
-    gia: ""
-  }
-]
+    cep: 90040-310
+    logradouro: Rua Olavo Bilac
+    complemento: 
+    bairro: Azenha
+    localidade: Porto Alegre
+    uf: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 90570-070
+    logradouro: Rua Olavo Barreto Viana
+    complemento: 
+    bairro: Moinhos de Vento
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 90570-901
+    logradouro: Rua Olavo Barreto Viana
+    complemento: 36
+    bairro: Moinhos de Vento
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 91180-370
+    logradouro: Rua Reverendo Olavo Nunes
+    complemento: 
+    bairro: Rubem Berta
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 90440-170
+    logradouro: Rua Engenheiro Olavo Nunes
+    complemento: 
+    bairro: Bela Vista
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 91150-034
+    logradouro: Rua José Olavo do Nascimento
+    complemento: 
+    bairro: Sarandi
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 
+
+
+    cep: 91540-650
+    logradouro: Acesso Olavo Domingos de Oliveira
+    complemento: 
+    bairro: Jardim Carvalho
+    localidade: Porto Alegre
+    UF: RS
+    unidade: 
+    ibge: 4314902
+    gia: 

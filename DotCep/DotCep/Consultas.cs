@@ -17,7 +17,7 @@ namespace DotCEP
 
             if (CEP.ToString().Length == 8)
             {
-                String StrJSON = ControleJSON.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+                String StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
                 enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
             }
@@ -29,14 +29,14 @@ namespace DotCEP
         /// Possíveis enderecos, utilizando o filtro de estado, cidade e logradouro,
         /// </summary>
         /// <returns>The lista de possiveis enderecos.</returns>
-        /// <param name="UF">U.</param>
+        /// <param name="UF">UF.</param>
         /// <param name="Cidade">Cidade.</param>
         /// <param name="logradouro">Logradouro.</param>
         public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
         {
             List<Endereco> Enderecos = new List<Endereco>();
             String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
-            String StrJSON = ControleJSON.ObterStringJSONS(url);
+            String StrJSON = ControleRequisicoes.ObterStringJSONS(url);
 
             Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
 
@@ -46,8 +46,8 @@ namespace DotCEP
         /// <summary>
         /// Obtem um CEP, mas só se as informações forem unicos e verdadeiros, se não ele retorna valores Empty.
         /// </summary>
-        /// <returns>The CE.</returns>
-        /// <param name="UF">U.</param>
+        /// <returns>The CEP.</returns>
+        /// <param name="UF">UF.</param>
         /// <param name="Cidade">Cidade.</param>
         /// <param name="Logradouro">Logradouro.</param>
         /// <param name="Formatado">If set to <c>true</c> formatado.</param>

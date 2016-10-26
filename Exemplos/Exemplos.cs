@@ -8,15 +8,15 @@ namespace CEP_Testes
 	{
 		public static void Main(string[] args)
 		{
-			ConsultarListaDeEnderecos(UF.RS, "Porto Alegre", "Olavo");
-			ConsultarCEP(UF.RS, "Pelotas", "Avenida Saldanha Marinho", true);
+			//ConsultarListaDeEnderecos(UF.RS, "Porto Alegre", "Olavo");
+			//ConsultarCEP(UF.RS, "Pelotas", "Avenida Saldanha Marinho", true);
 			ObterEndereco(70160900);
 
-			ValidarCEP("70160-900");
-			VerificarExistenciaCEP("70160900");
+			//ValidarCEP("70160-900");
+			//VerificarExistenciaCEP("70160900");
 
-			FormatarCEP(70160900);
-			FormatarCEP("70160900");
+			//FormatarCEP(70160900);
+			//FormatarCEP("70160900");
 
 			Console.ReadKey();
 		}

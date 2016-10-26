@@ -8,6 +8,8 @@
     <RootNamespace>DotCEP</RootNamespace>
     <AssemblyName>DotCEP</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ReleaseVersion>1.0.1</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,7 +37,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Endereco.cs" />
-    <Compile Include="ControleJSON.cs" />
+    <Compile Include="ControleRequisicoes.cs" />
     <Compile Include="UF.cs" />
     <Compile Include="Consultas.cs" />
     <Compile Include="Formatacao.cs" />

@@ -8,20 +8,19 @@ namespace CEP_Testes
 	{
 		public static void Main(string[] args)
 		{
-			//ConsultarListaDeEnderecos(UF.RS, "Porto Alegre", "Olavo");
-			//ConsultarCEP(UF.RS, "Pelotas", "Avenida Saldanha Marinho", true);
-			ObterEndereco(70160900);
+			ConsultarListaDeEnderecos(UF.RS, "Porto Alegre", "Olavo");
+			ConsultarCEP(UF.RS, "Pelotas", "Avenida Saldanha Marinho", true);
+			ObterEndereco("96085000");
 
-			//ValidarCEP("70160-900");
-			//VerificarExistenciaCEP("70160900");
+			ValidarCEP("70160-900");
+			VerificarExistenciaCEP("70160900");
 
-			//FormatarCEP(70160900);
-			//FormatarCEP("70160900");
+			FormatarCEP("01001001");
 
 			Console.ReadKey();
 		}
 
-		private static void ObterEndereco(uint CEP)
+		private static void ObterEndereco(string CEP)
 		{
 			Endereco enderecoBase = new Endereco();
 
@@ -86,11 +85,6 @@ namespace CEP_Testes
 
 
 		private static void FormatarCEP(string CEP)
-		{
-			Console.WriteLine(Formatacao.FormatarCEP(CEP));
-		}
-
-		private static void FormatarCEP(uint CEP)
 		{
 			Console.WriteLine(Formatacao.FormatarCEP(CEP));
 		}

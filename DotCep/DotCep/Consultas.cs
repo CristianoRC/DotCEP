@@ -34,7 +34,6 @@ namespace DotCEP
 			return enderecoBase;
 		}
 
-
 		public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
 		{
 			List<Endereco> Enderecos = new List<Endereco>();
@@ -45,7 +44,6 @@ namespace DotCEP
 
 			return Enderecos;
 		}
-
 
 		public static string ObterCEP(UF UF, String Cidade, String Logradouro, bool Formatado)
 		{

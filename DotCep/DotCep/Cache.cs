@@ -29,9 +29,9 @@ namespace DotCEP
 
 				database.Execute(cmd.GetUpdatedText());
 			}
-			catch (Exception ex)
+			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.Message);
+				throw new Exception("Erro no banco: " + ex.v_message);
 			}
 		}
 
@@ -71,9 +71,9 @@ namespace DotCEP
 
 
 			}
-			catch (Exception ex)
+			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.Message);
+				throw new Exception("Erro no banco: " + ex.v_message);
 			}
 
 
@@ -99,9 +99,9 @@ namespace DotCEP
 				database.Execute(cmd.GetUpdatedText());
 
 			}
-			catch (Exception ex)
+			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.Message);
+				throw new Exception("Erro no banco: " + ex.v_message);
 			}
 		}
 
@@ -126,7 +126,7 @@ namespace DotCEP
 
 			string HoraEdataAtual = DateTime.Now.ToString("yyyyMMdd HHmmss");
 
-			DateTime dataAtual = DateTime.ParseExact(HoraEdataAtual,"yyyyMMdd HHmmss",CultureInfo.InvariantCulture);
+			DateTime dataAtual = DateTime.ParseExact(HoraEdataAtual, "yyyyMMdd HHmmss", CultureInfo.InvariantCulture);
 			DateTime dataDaConsulta = DateTime.ParseExact(p_DataConsulta, "yyyyMMdd HHmmss", CultureInfo.InvariantCulture);
 
 
@@ -145,10 +145,17 @@ namespace DotCEP
 
 		private static string ObterCaminhoBanco()
 		{
-			if (((int) Environment.OSVersion.Platform) < 4)
-				return string.Format("\\Cache\\Cache.db"); // Windows
+			String caminhoexecutavel = System.AppDomain.CurrentDomain.BaseDirectory;
+
+
+			if (((int)Environment.OSVersion.Platform) < 4)
+			{
+				return string.Format(@"{0}\\Cache\\Cache.db", caminhoexecutavel); // Windows
+			}
 			else
-				return String.Format("/Cache/Cache.db"); // Linux e MacOSX
+			{
+				return String.Format(@"{0}/Cache/Cache.db", caminhoexecutavel); // Linux e MacOSX
+			}
 		}
 	}
 }

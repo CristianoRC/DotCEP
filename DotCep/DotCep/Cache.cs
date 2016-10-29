@@ -145,8 +145,10 @@ namespace DotCEP
 
 		private static string ObterCaminhoBanco()
 		{
-			//TODO: Verificar como que vai ficar no Linux.
-			return String.Format("/Cache/Cache.db");
+			if (((int) Environment.OSVersion.Platform) < 4)
+				return string.Format("\\Cache\\Cache.db"); // Windows
+			else
+				return String.Format("/Cache/Cache.db"); // Linux e MacOSX
 		}
 	}
 }

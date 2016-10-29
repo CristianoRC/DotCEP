@@ -9,18 +9,26 @@ namespace DotCEP
 		public static Endereco ObterEnderecoCompleto(string CEP)
 		{
 			Endereco enderecoBase = new Endereco();
-
+			String StrJSON = String.Empty;
 
 			if (Validacoes.VerificarValidadeDoCep(CEP))
 			{
-				if (CEP.Length == 9)
+				CEP = CEP.Replace("-", "");
+
+				StrJSON = Cache.ObterJson(CEP);
+
+				if (StrJSON != String.Empty)
 				{
-					CEP = CEP.Replace("-", "");
+					enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
 				}
+				else
+				{
+					StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
-				String StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+					enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
 
-				enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
+					Cache.Criar(CEP, StrJSON);
+				}
 			}
 
 			return enderecoBase;
@@ -53,17 +61,6 @@ namespace DotCEP
 				else
 				{
 					saida = ListaDeEnderecos[0].cep.Replace("-", "");
-				}
-			}
-			else
-			{
-				if (Formatado)
-				{
-					saida = "     -   ";
-				}
-				else
-				{
-					saida = String.Empty;
 				}
 			}
 

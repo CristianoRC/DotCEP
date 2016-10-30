@@ -4,11 +4,8 @@
 <h1>NuGet </h1>
 
 <b><code>Install-Package DotCEP</code><br >
-<br >
 
 Mais informações sobre a instalação correta da biblioteca na <a href="https://github.com/CristianoRC/DotCEP/wiki" target="_blank" >Wiki </a> do projeto. 
-
-<br >
 
 <b> DotCEP: <a href="https://www.nuget.org/packages/DotCEP/" target="_blank" >NuGet</a></b>
 

@@ -13,7 +13,7 @@ namespace DotCEP
 
 			if (Validacoes.VerificarValidadeDoCep(CEP))
 			{
-				CEP = CEP.Replace("-", "");
+				CEP = CEP.Replace("-", "").Trim();
 
 				StrJSON = Cache.ObterJson(CEP);
 

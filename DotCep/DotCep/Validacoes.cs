@@ -23,11 +23,22 @@ namespace DotCEP
 
 		public static bool VerificarExistenciaDoCEP(string CEP)
 		{
+			string StrJSON;
+
 			if (VerificarValidadeDoCep(CEP))
 			{
-				CEP = CEP.Replace("-", "");
 
-				String StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+				CEP = CEP.Replace("-", "").Trim();
+				StrJSON = Cache.ObterJson(CEP);
+
+
+				if (StrJSON == string.Empty)
+				{
+					StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+
+					Cache.Criar(CEP, StrJSON);
+				}
+
 
 				if (!StrJSON.Contains("\"erro\": true"))
 				{
@@ -37,6 +48,7 @@ namespace DotCEP
 				{
 					return false;
 				}
+
 			}
 			else
 			{

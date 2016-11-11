@@ -37,32 +37,27 @@ namespace DotCEP
 		public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
 		{
 			List<Endereco> Enderecos = new List<Endereco>();
-			String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
-			String StrJSON = ControleRequisicoes.ObterStringJSONS(url);
 
-			Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
+			List<string> EnderecosJSON = Cache.ObterJson(UF, Cidade, Logradouro);
 
-			return Enderecos;
-		}
-
-		public static string ObterCEP(UF UF, String Cidade, String Logradouro, bool Formatado)
-		{
-			string saida = string.Empty;
-			List<Endereco> ListaDeEnderecos = ObterListaDeEnderecos(UF, Cidade, Logradouro);
-
-			if (ListaDeEnderecos.Count == 1)
+			if (EnderecosJSON.Count != 0)
 			{
-				if (Formatado)
+				foreach (string item in EnderecosJSON)
 				{
-					saida = ListaDeEnderecos[0].cep;
-				}
-				else
-				{
-					saida = ListaDeEnderecos[0].cep.Replace("-", "");
+					Enderecos.Add(JsonConvert.DeserializeObject<Endereco>(item));
 				}
 			}
+			else
+			{
+				String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
+				String StrJSON = ControleRequisicoes.ObterStringJSONS(url);
 
-			return saida;
+				Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
+
+				Cache.Criar(UF, Cidade, Logradouro, StrJSON);
+			}
+
+			return Enderecos;
 		}
 	}
 }

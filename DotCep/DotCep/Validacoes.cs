@@ -29,7 +29,7 @@ namespace DotCEP
 			{
 
 				CEP = CEP.Replace("-", "").Trim();
-				StrJSON = Cache.ObterJson(CEP);
+				StrJSON = ControleJSON.ObterJsonDoCacheLocal(CEP);
 
 
 				if (StrJSON == string.Empty)

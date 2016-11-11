@@ -68,6 +68,9 @@
     <Compile Include="ControleDeUrl.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="CacheEnderecos.cs" />
+    <Compile Include="Ferramentas.cs" />
+    <Compile Include="ControleJSON.cs" />
+    <Compile Include="Datas.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

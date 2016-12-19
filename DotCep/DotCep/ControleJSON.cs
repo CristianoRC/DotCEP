@@ -76,7 +76,7 @@ namespace DotCEP
 
 				if (tabela.Rows.Count != 0)
 				{
-					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0][1].ToString()))
+					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0]["retorno"].ToString()))
 					{
 						foreach (DataRow item in tabela.Rows)
 						{

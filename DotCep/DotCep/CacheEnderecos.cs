@@ -21,9 +21,13 @@ namespace DotCEP
 			cmd.SetValue("dataconsulta", Datas.ObterDataFormatada(), false);
 			cmd.SetValue("parametros", parametros, false);
 
+			database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBanco());
+
 			try
 			{
 				#region Inserindo informações sobre consulta de endereços no banco 
+
+				database.Open();
 
 				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBanco());
 				database.SetExecuteSecurity(false);
@@ -48,6 +52,10 @@ namespace DotCEP
 			catch (Spartacus.Database.Exception ex)
 			{
 				throw new Exception("Erro: " + ex.v_message);
+			}
+			finally
+			{
+				database.Close();
 			}
 
 		}

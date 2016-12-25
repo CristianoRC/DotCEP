@@ -20,15 +20,12 @@ Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target=
 
 O Webservice contém uma pequena limitação na questão de requisições: Acima de 300 requisições em menos de 15 minutos pelo mesmo IP, poderá haver temporariamente o bloqueio do mesmo.
 
-<hr></hr>
-
 <h1> Dependências </h1>
 
 <a href="https://www.nuget.org/packages/Newtonsoft.Json/" target="_blank" > <b>Json.NET</b> </a>
 
 <a href="https://www.nuget.org/packages/Spartacus/" target="_blank" > <b>Spartacus</b> </a>
 
-<hr></hr>
 
 <h3> Contatos </h3>
 <b>Site:</b> http://cristianoprogramador.com/

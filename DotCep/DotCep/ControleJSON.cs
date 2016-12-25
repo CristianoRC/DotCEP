@@ -23,7 +23,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBanco());
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
@@ -69,7 +69,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBanco());
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");

@@ -15,7 +15,7 @@ namespace DotCEP
 		}
 
 		/// <summary>
-		/// Verifica se o interváli de tempo é maior que 30 dias.
+		/// Verifica se o interválo de tempo é maior que 30 dias.
 		/// </summary>
 		/// <returns><c>true</c>, se a data for menor que 30 dias, <c>false</c> mais que 30 dias.</returns>
 		/// <param name="DataConsulta">Data consulta.</param>

@@ -12,7 +12,7 @@ namespace DotCEP.Localidades
 		public string Nome { get; set; }
 		#endregion
 
-		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, ushort CodigoEstado)
+		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			Municipio municipioBase = new Municipio();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
@@ -23,7 +23,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
-			cmd.SetValue("codigo", CodigoEstado.ToString());
+			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
@@ -76,7 +76,7 @@ namespace DotCEP.Localidades
 			return saida;
 		}
 
-		public static int ObterCodigoDoMunicipio(String NomeMunicipio, ushort CodigoEstado)
+		public static int ObterCodigoDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			int saida = 0;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
@@ -87,7 +87,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("estado", Spartacus.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
-			cmd.SetValue("estado", CodigoEstado.ToString());
+			cmd.SetValue("estado", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
@@ -116,7 +116,7 @@ namespace DotCEP.Localidades
 			return listaDeMunicipios;
 		}
 
-		public static List<Municipio> ObterListaDeMunicipio(ushort CodigoEstado)
+		public static List<Municipio> ObterListaDeMunicipio(UF SiglaEstado)
 		{
 			List<Municipio> listaDeMunicipios = new List<Municipio>();
 			DataTable tabelaResultado;
@@ -124,7 +124,7 @@ namespace DotCEP.Localidades
 
 			cmd.v_text = "select t.* from Municipios t where t.CodigoEstado = #codigo#";
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
-			cmd.SetValue("codigo", CodigoEstado.ToString());
+			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
@@ -147,7 +147,7 @@ namespace DotCEP.Localidades
 			return municipioBase;
 		}
 
-		private static DataTable ObterInformacoesDoBanco(String p_Query)
+		private static DataTable ObterInformacoesDoBanco(string p_Query)
 		{
 			DataTable tabelaSaida = new DataTable();
 			Spartacus.Database.Generic database;

@@ -135,7 +135,7 @@ namespace DotCEP.Localidades
 			return estadoBase;
 		}
 
-		private static DataTable ObterInformacoesDoBanco(String p_Query)
+		private static DataTable ObterInformacoesDoBanco(string p_Query)
 		{
 			DataTable tabelaSaida = new DataTable();
 			Spartacus.Database.Generic database;

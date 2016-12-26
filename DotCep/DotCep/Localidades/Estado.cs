@@ -55,13 +55,51 @@ namespace DotCEP.Localidades
 
 			cmd.v_text = "select t.nome from ESTADOS t where t.sigla = #sigla#";
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
-			cmd.SetValue("sigla", p_Sigla);
+			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
 			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
 				Saida = tabelaResultado.Rows[0]["Nome"].ToString();
+			}
+
+			return Saida;
+		}
+
+		public static string ObterSiglaDoEstado(int p_Codigo)
+		{
+			String Saida = "Estado não encontrado, verifique o codigo";
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "select t.Sigla from ESTADOS t where t.codigo = #codigo#";
+			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.SetValue("codigo", p_Codigo.ToString());
+
+			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+
+			if (tabelaResultado.Rows.Count != 0)
+			{
+				Saida = tabelaResultado.Rows[0]["Sigla"].ToString();
+			}
+
+			return Saida;
+		}
+
+		public static string ObterSiglaDoEstado(string p_Nome)
+		{
+			String Saida = "Estado não encontrado, verifique a sigla";
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "select t.Sigla from ESTADOS t where t.Nome = #nome#";
+			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+			cmd.SetValue("nome", p_Nome);
+
+			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+
+			if (tabelaResultado.Rows.Count != 0)
+			{
+				Saida = tabelaResultado.Rows[0]["Sigla"].ToString();
 			}
 
 			return Saida;
@@ -74,7 +112,7 @@ namespace DotCEP.Localidades
 
 			cmd.v_text = "select t.codigo from ESTADOS t where t.sigla = #sigla#";
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
-			cmd.SetValue("sigla", p_Sigla);
+			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
 			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 

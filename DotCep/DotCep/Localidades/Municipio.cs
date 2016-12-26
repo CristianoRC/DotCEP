@@ -12,15 +12,18 @@ namespace DotCEP.Localidades
 		public string Nome { get; set; }
 		#endregion
 
-		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio)
+		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, ushort CodigoEstado)
 		{
 			Municipio municipioBase = new Municipio();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 			DataTable tabelaResultado = new DataTable();
 
-			cmd.v_text = "Select * from Municipios m where m.nome = #nome#";
+			cmd.v_text = "Select * from Municipios m where m.nome = #nome# and m.codigoestado = #codigo#";
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+
 			cmd.SetValue("nome", NomeMunicipio);
+			cmd.SetValue("codigo", CodigoEstado.ToString());
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 

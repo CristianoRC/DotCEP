@@ -56,7 +56,7 @@ namespace DotCEP.Localidades
 			return municipioBase;
 		}
 
-		public static String ObterNomeDoMunicipio(uint CodigoMunicipio)
+		public static string ObterNomeDoMunicipio(uint CodigoMunicipio)
 		{
 			String saida = String.Empty;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();

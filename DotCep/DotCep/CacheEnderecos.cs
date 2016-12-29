@@ -8,7 +8,7 @@ namespace DotCEP
 	{
 		internal static void Criar(UF p_UF, string p_Localidade, string p_Logradouro, string p_ResultadoJSON)
 		{
-			string parametros = Ferramentas.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
+			string parametros = Formatacao.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
 
 			Spartacus.Database.Generic database;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
@@ -101,7 +101,7 @@ namespace DotCEP
 
 			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
 
-			cmd.SetValue("parametros", Ferramentas.FormatarStrParametros(p_UF, Localidade, Logradouro), false);
+			cmd.SetValue("parametros", Formatacao.FormatarStrParametros(p_UF, Localidade, Logradouro), false);
 
 			try
 			{
@@ -176,6 +176,5 @@ namespace DotCEP
 				throw new Exception("Erro: " + ex.v_message);
 			}
 		}
-
 	}
 }

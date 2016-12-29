@@ -15,7 +15,7 @@ namespace DotCEP
 			{
 				CEP = CEP.Replace("-", "").Trim();
 
-				StrJSON = ControleJSON.ObterJsonDoCacheLocal(CEP);
+				StrJSON = Cache.ObterJsonDoCacheLocal(CEP);
 
 				if (StrJSON != String.Empty)
 				{
@@ -38,7 +38,7 @@ namespace DotCEP
 		{
 			List<Endereco> Enderecos = new List<Endereco>();
 
-			List<string> EnderecosJSON = ControleJSON.ObterJsonDoCacheLocal(UF, Cidade, Logradouro);
+			List<string> EnderecosJSON = Cache.ObterJsonDoCacheLocal(UF, Cidade, Logradouro);
 
 			if (EnderecosJSON.Count != 0)
 			{

@@ -28,6 +28,6 @@
 		SC = 42,// Santa Catarina
 		SP = 35,// São Paulo
 		SE = 28,// Sergipe
-		TO = 17// Tocantins
+		TO = 17 // Tocantins
 	}
 }

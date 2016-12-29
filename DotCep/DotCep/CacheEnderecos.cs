@@ -6,9 +6,9 @@ namespace DotCEP
 {
 	internal static partial class Cache
 	{
-		internal static void Criar(UF p_UF, string Localidade, string Logradouro, string Resultado)
+		internal static void Criar(UF p_UF, string p_Localidade, string p_Logradouro, string p_ResultadoJSON)
 		{
-			string parametros = Ferramentas.FormatarStrParametros(p_UF, Localidade, Logradouro);
+			string parametros = Ferramentas.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
 
 			Spartacus.Database.Generic database;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
@@ -38,7 +38,7 @@ namespace DotCEP
 
 				#region Formatando e inserindo enderecos no banco
 
-				List<string> EnderecosJSON = ControleJSON.SepararArrayJSON(Resultado);
+				List<string> EnderecosJSON = ControleJSON.SepararArrayJSON(p_ResultadoJSON);
 				string IDInsercao = ObterIDultimaInsercao();
 
 
@@ -85,6 +85,54 @@ namespace DotCEP
 			{
 				throw new Exception("Erro no banco: " + ex.v_message);
 			}
+		}
+
+		internal static List<string> ObterJsonDoCacheLocal(UF p_UF, string Localidade, string Logradouro)
+		{
+			List<string> strJSON = new List<string>();
+
+			Spartacus.Database.Generic database;
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			DataTable tabela = new DataTable();
+
+			cmd.v_text = @"select c.retorno, x.DataConsulta, c.idconsultaendereco from cache c 
+						  inner join ConsultaEndereco x on x.ID = c.idconsultaendereco 
+			              where x.Parametros = #parametros#";
+
+			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
+
+			cmd.SetValue("parametros", Ferramentas.FormatarStrParametros(p_UF, Localidade, Logradouro), false);
+
+			try
+			{
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database.SetExecuteSecurity(false);
+
+				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
+
+				if (tabela.Rows.Count != 0)
+				{
+					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0]["retorno"].ToString()))
+					{
+						foreach (DataRow item in tabela.Rows)
+						{
+							strJSON.Add(item[0].ToString());
+						}
+					}
+					else
+					{
+						Cache.Deletar(Convert.ToInt16(tabela.Rows[0][2]));
+					}
+				}
+
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception("Erro no banco: " + ex.v_message);
+			}
+
+
+			return strJSON;
 		}
 
 		private static void deletarConsulta(int IDConsulta)

@@ -27,7 +27,7 @@
 			{
 
 				CEP = CEP.Replace("-", "").Trim();
-				StrJSON = ControleJSON.ObterJsonDoCacheLocal(CEP);
+				StrJSON = Cache.ObterJsonDoCacheLocal(CEP);
 
 
 				if (StrJSON == string.Empty)

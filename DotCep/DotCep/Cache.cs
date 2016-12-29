@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace DotCEP
 {
@@ -87,6 +88,51 @@ namespace DotCEP
 			{
 				throw new Exception("Erro no banco: " + ex.v_message);
 			}
+		}
+
+		internal static string ObterJsonDoCacheLocal(string CEP)
+		{
+			string strJSON = string.Empty;
+
+			Spartacus.Database.Generic database;
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			DataTable tabela = new DataTable();
+
+			cmd.v_text = "select * from cache where CEP = #cep#";
+
+			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
+
+			cmd.SetValue("cep", CEP);
+
+
+			try
+			{
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database.SetExecuteSecurity(false);
+
+				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
+
+				if (tabela.Rows.Count != 0)
+				{
+					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
+					{
+						strJSON = tabela.Rows[0]["Retorno"].ToString();
+					}
+					else
+					{
+						Cache.Deletar(CEP);
+					}
+				}
+
+
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception("Erro no banco: " + ex.v_message);
+			}
+
+
+			return strJSON;
 		}
 	}
 }

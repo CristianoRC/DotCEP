@@ -3,14 +3,15 @@
 
 <br>
 
-| Build Status | Licença | Release | Testes unitários | Wiki|
-|-------------------|------|-----------------|-----------------|-----------------|
-|![Build status](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square) |[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/CristianoRC/SoftwareOrdemDeServico/blob/master/LICENSE.txt)|[![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.1.1-blue.svg?style=flat-square)](https://www.nuget.org/packages/DotCEP/)|![codecov.io](https://img.shields.io/badge/Cobertura-0%25-blue.svg?style=flat-square)|[![Wiki](https://img.shields.io/badge/Wiki-Ajuda-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/wiki)
+| Release | Licença | Testes unitários | Wiki|
+|------|-----------------|-----------------|-----------------|
+|[![Versão](https://img.shields.io/badge/Vers%C3%A3o-1.2.0-blue.svg?style=flat-square)](https://www.nuget.org/packages/DotCEP/)| [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/CristianoRC/SoftwareOrdemDeServico/blob/master/LICENSE.txt)|![codecov.io](https://img.shields.io/badge/Cobertura-0%25-blue.svg?style=flat-square)|[![Wiki](https://img.shields.io/badge/Wiki-Ajuda-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/wiki)|
 
 <br>
 
 <h1>Sobre</h1>
-Biblioteca para facilitar o trabalho com CEP, utilizando .NET C#.
+Biblioteca para facilitar o trabalho com CEP em sofwares <b>desktop</b>, utilizando .NET C#, pode ser utilizada no Windows e  Linux, utilizando o Mono(Windows Forms/ Console Application).
+Utiliza um sistema de cache local com SQLite para uma melhor performance e economia do uso de rede.
 
 Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target="_blank" >Via Cep.</a>
 
@@ -20,7 +21,7 @@ O Webservice contém uma pequena limitação na questão de requisições: Acima
 
 <a href="https://www.nuget.org/packages/Newtonsoft.Json/" target="_blank" > <b>Json.NET</b> </a>
 
-<a href="https://www.nuget.org/packages/Spartacus/" target="_blank" > <b>Spartacus</b> </a>
+<a href="https://github.com/wind39/spartacus" target="_blank" > <b>Spartacus</b> </a>
 
 <br>
 

@@ -18,7 +18,7 @@ namespace DotCEP
 		/// Verifica se o interválo de tempo é maior que 30 dias.
 		/// </summary>
 		/// <returns><c>true</c>, se a data for menor que 30 dias, <c>false</c> mais que 30 dias.</returns>
-		/// <param name="DataConsulta">Data consulta.</param>
+		/// <param name="p_DataConsulta">Data consulta.</param>
 		internal static bool ValidarIntervaloDeTempo(string p_DataConsulta)
 		{
 			bool resultado = false;
@@ -37,7 +37,6 @@ namespace DotCEP
 			{
 				resultado = true;
 			}
-
 
 			return resultado;
 		}

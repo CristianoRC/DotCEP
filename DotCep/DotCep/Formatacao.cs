@@ -1,4 +1,6 @@
-﻿namespace DotCEP
+﻿using System;
+
+namespace DotCEP
 {
 	public static class Formatacao
 	{
@@ -9,14 +11,17 @@
 
 		public static string FormatarCEP(string CEP)
 		{
-			string CEPformatado = CEP;
+			CEP = CEP.Replace(" ", "");
+			CEP = CEP.Replace("-", "");
 
-			if (CEPformatado.Length == 8)
+			try
 			{
-				CEPformatado = CEPformatado.Substring(0, 5) + "-" + CEPformatado.Substring(5, 3);
+				return Convert.ToUInt64(CEP).ToString(@"00000\-000");
 			}
-
-			return CEPformatado;
+			catch
+			{
+				return String.Empty;
+			}
 		}
 	}
 }

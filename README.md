@@ -37,19 +37,17 @@ Se você está com dúvidas sobre a instalação ou a utilização da biblioteca
 
 <br>
 
-<h3> Contatos </h3>
-<b>Site:</b> http://cristianoprogramador.com/
-
-<b>Blog:</b> http://cristianoprogramador.wordpress.com/
-
-<b>E-mail:</b> contato@cristianoprogramador.com
-
-<hr >
-
-<br>
-
 <h3> Agradecimentos </h3>
 <a href="http://williamivanski.com.br/" target="_blank" >Professor William Ivanski.</a>
 
 <a href="https://plus.google.com/communities/102417267229322909418" target="_blank" >Colegas do Curso de Programação C#.</a>
 
+<hr >
+
+<h3> Contatos </h3>
+
+<b>E-mail:</b> contato@cristianoprogramador.com
+
+<b>Site:</b> http://cristianoprogramador.com/
+
+<b>Blog:</b> http://cristianoprogramador.wordpress.com/

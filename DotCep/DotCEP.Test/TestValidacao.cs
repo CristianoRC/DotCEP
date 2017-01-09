@@ -35,5 +35,27 @@ namespace DotCEP.Test
 			bool resultadoDaExistencia = DotCEP.Validacoes.VerificarExistenciaDoCEP("960850000");
 			Assert.AreEqual(false, resultadoDaExistencia);
 		}
+
+		[TearDown]
+		public void ApagarCache()
+		{
+			Spartacus.Database.Generic database = new Spartacus.Database.Sqlite(ObterCaminhoBancoCache());
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "Delete from Cache";
+			database.Execute(cmd.GetUpdatedText());
+		}
+
+		private static string ObterCaminhoBancoCache()
+		{
+			if (((int)Environment.OSVersion.Platform) < 4)
+			{
+				return string.Format(@"{0}\\Cache\\Cache.db", System.AppDomain.CurrentDomain.BaseDirectory); // Windows
+			}
+			else
+			{
+				return String.Format(@"{0}/Cache/Cache.db", System.AppDomain.CurrentDomain.BaseDirectory); // Linux e MacOSX
+			}
+		}
 	}
 }

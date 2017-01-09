@@ -30,6 +30,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Spartacus">
+      <HintPath>..\packages\Spartacus.0.42.0\lib\net40\Spartacus.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -46,6 +49,7 @@
     <Compile Include="TestUF.cs" />
     <Compile Include="Localidades\TestEstado.cs" />
     <Compile Include="Localidades\TestMunicipio.cs" />
+    <Compile Include="TestConsultas.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Localidades\" />

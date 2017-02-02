@@ -51,11 +51,11 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Spartacus">
-      <HintPath>..\packages\Spartacus.0.42.0\lib\net40\Spartacus.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
+    <Reference Include="Spartacus">
+      <HintPath>..\packages\Spartacus.0.44.1\lib\net40\Spartacus.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControleRequisicoes.cs" />

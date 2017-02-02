@@ -141,7 +141,7 @@ namespace DotCEP.Localidades
 			Spartacus.Database.Generic database;
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugare());
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugares());
 				tabelaSaida = database.Query(p_Query, "Resultado");
 			}
 			catch (Spartacus.Database.Exception ex)

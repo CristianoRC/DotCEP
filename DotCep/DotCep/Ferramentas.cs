@@ -18,7 +18,7 @@ namespace DotCEP
 			}
 		}
 
-		internal static string ObterCaminhoBancoLugare()
+		internal static string ObterCaminhoBancoLugares()
 		{
 			if (((int)Environment.OSVersion.Platform) < 4)
 			{

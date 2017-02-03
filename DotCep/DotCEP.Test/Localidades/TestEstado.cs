@@ -11,7 +11,7 @@ namespace DotCEP.Test
 		{
 			String Resultado = DotCEP.Localidades.Estado.ObterCodigoDoEstado("RS");
 
-			Assert.AreEqual(Resultado, "43");
+			Assert.AreEqual("43", Resultado);
 		}
 
 		[Test]
@@ -19,7 +19,7 @@ namespace DotCEP.Test
 		{
 			String Resultado = DotCEP.Localidades.Estado.ObterNomeDoEstado("RS");
 
-			Assert.AreEqual(Resultado, "Rio Grande do Sul");
+			Assert.AreEqual("Rio Grande do Sul", Resultado);
 		}
 
 		[Test]
@@ -27,7 +27,7 @@ namespace DotCEP.Test
 		{
 			String Resultado = DotCEP.Localidades.Estado.ObterNomeDoEstado(43);
 
-			Assert.AreEqual(Resultado, "Rio Grande do Sul");
+			Assert.AreEqual("Rio Grande do Sul", Resultado);
 		}
 
 		[Test]
@@ -35,7 +35,7 @@ namespace DotCEP.Test
 		{
 			String Resultado = DotCEP.Localidades.Estado.ObterSiglaDoEstado(43);
 
-			Assert.AreEqual(Resultado, "RS");
+			Assert.AreEqual("RS",Resultado);
 		}
 
 		[Test]
@@ -43,7 +43,7 @@ namespace DotCEP.Test
 		{
 			String Resultado = DotCEP.Localidades.Estado.ObterSiglaDoEstado("Rio Grande do Sul");
 
-			Assert.AreEqual(Resultado, "RS");
+			Assert.AreEqual("RS",Resultado);
 		}
 
 		[Test]
@@ -55,7 +55,7 @@ namespace DotCEP.Test
 			Assert.AreEqual(11, EstadoNumeroZero.Codigo);
 			Assert.AreEqual("RO", EstadoNumeroZero.Sigla);
 			Assert.AreEqual("Rondonia", EstadoNumeroZero.Nome);
-			Assert.AreEqual(NumeroDeResultados, 27);
+			Assert.AreEqual(27,NumeroDeResultados);
 		}
 	}
 }

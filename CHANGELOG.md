@@ -1,6 +1,7 @@
-T License (MIT)
+MIT License
 
-Copyright (c) 2015-2017 Cristiano Raffi Cunha
+Copyright (c) 2015-2017 [Cristiano Raffi Cunha](https://github.com/CristianoRC)
+and [contributors](https://github.com/CristianoRC/DotCEP/graphs/contributors)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -21,4 +22,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-1.2.1: Utilização do método Spartacus.Utils.Convert.DataTableToList para mapear Localidade - Município e Estado.
+
+1.2.1: Utilização do método QueryList da [Spartacus](https://github.com/wind39/spartacus) para efetuar buscas nas classes Localidades - Município e Estado.

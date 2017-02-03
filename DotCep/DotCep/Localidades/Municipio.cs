@@ -12,43 +12,29 @@ namespace DotCEP.Localidades
 		public string Nome { get; set; }
 		#endregion
 
-		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
+		public static List<Municipio> ObterListaDeMunicipio()
 		{
-			Municipio municipioBase = new Municipio();
+			List<Municipio> listaDeMunicipios = new List<Municipio>();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-			DataTable tabelaResultado = new DataTable();
 
-			cmd.v_text = "Select * from Municipios m where m.nome = #nome# and m.codigoestado = #codigo#";
-			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.v_text = "select t.* from Municipios t";
+			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
 
-			cmd.SetValue("nome", NomeMunicipio);
-			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
-
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
-
-			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
-			municipioBase = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado)[0];
-
-			return municipioBase;
+			return listaDeMunicipios;
 		}
 
-		public static Municipio ObterInformacoesDoMunicipio(uint CodigoMunicipio)
+		public static List<Municipio> ObterListaDeMunicipio(UF SiglaEstado)
 		{
-			Municipio municipioBase = new Municipio();
+			List<Municipio> listaDeMunicipios = new List<Municipio>();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-			DataTable tabelaResultado = new DataTable();
 
-			cmd.v_text = "Select * from Municipios m where m.Codigo = #codigo#";
+			cmd.v_text = "select t.* from Municipios t where t.CodigoEstado = #codigo#";
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
-			cmd.SetValue("codigo", CodigoMunicipio.ToString());
+			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
 
-			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
-			municipioBase = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado)[0];
-
-			return municipioBase;
+			return listaDeMunicipios;
 		}
 
 		public static string ObterNomeDoMunicipio(uint CodigoMunicipio)
@@ -61,7 +47,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", CodigoMunicipio.ToString());
 
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -84,7 +70,7 @@ namespace DotCEP.Localidades
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -94,41 +80,39 @@ namespace DotCEP.Localidades
 			return saida;
 		}
 
-		public static List<Municipio> ObterListaDeMunicipio()
+		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
-			List<Municipio> listaDeMunicipios = new List<Municipio>();
-			DataTable tabelaResultado;
+			Municipio municipioBase = new Municipio();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.* from Municipios t";
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
-
-			listaDeMunicipios = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado);
-
-			return listaDeMunicipios;
-		}
-
-		public static List<Municipio> ObterListaDeMunicipio(UF SiglaEstado)
-		{
-			List<Municipio> listaDeMunicipios = new List<Municipio>();
-			DataTable tabelaResultado;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-
-			cmd.v_text = "select t.* from Municipios t where t.CodigoEstado = #codigo#";
+			cmd.v_text = "Select * from Municipios m where m.nome = #nome# and m.codigoestado = #codigo#";
+			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+
+			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
 
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
+			municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];
 
-			foreach (DataRow item in tabelaResultado.Rows)
-			{
-				listaDeMunicipios = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado);
-			}
-
-			return listaDeMunicipios;
+			return municipioBase;
 		}
 
-		private static DataTable ObterInformacoesDoBanco(string p_Query)
+		public static Municipio ObterInformacoesDoMunicipio(uint CodigoMunicipio)
+		{
+			Municipio municipioBase = new Municipio();
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "Select * from Municipios m where m.Codigo = #codigo#";
+			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.SetValue("codigo", CodigoMunicipio.ToString());
+
+			municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];
+
+			return municipioBase;
+		}
+
+		private static DataTable ObterTabelaDoBanco(string p_Query)
 		{
 			DataTable tabelaSaida = new DataTable();
 			Spartacus.Database.Generic database;
@@ -143,6 +127,25 @@ namespace DotCEP.Localidades
 			}
 
 			return tabelaSaida;
+		}
+
+		private static List<Municipio> ObterListaDoBanco(string p_Query)
+		{
+			Spartacus.Database.Generic database;
+			List<Municipio> ListaDeMunicipios = new List<Municipio>();
+
+			try
+			{
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugares());
+
+				ListaDeMunicipios = database.QueryList<Municipio>(p_Query);
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception(ex.v_message);
+			}
+
+			return ListaDeMunicipios;
 		}
 	}
 }

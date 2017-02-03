@@ -15,13 +15,19 @@ namespace DotCEP.Localidades
 		public static List<Estado> ObterListaDeEstados()
 		{
 			List<Estado> listaDeEstados = new List<Estado>();
-			DataTable tabelaResultado;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 
 			cmd.v_text = "select t.* from ESTADOS t";
-			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
-			listaDeEstados = Spartacus.Utils.Convert.DataTableToList<Estado>(tabelaResultado);
+			try
+			{
+
+				listaDeEstados = ObterListaDoBanco(cmd.GetUpdatedText());
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception(ex.v_message);
+			}
 
 			return listaDeEstados;
 		}
@@ -35,7 +41,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
-			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -54,7 +60,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
 			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
-			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -73,7 +79,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
-			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -92,7 +98,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
 			cmd.SetValue("nome", p_Nome);
 
-			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -111,7 +117,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
 			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
-			DataTable tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -121,7 +127,7 @@ namespace DotCEP.Localidades
 			return Saida;
 		}
 
-		private static DataTable ObterInformacoesDoBanco(string p_Query)
+		private static DataTable ObterTabelaDoBanco(string p_Query)
 		{
 			DataTable tabelaSaida = new DataTable();
 			Spartacus.Database.Generic database;
@@ -136,6 +142,25 @@ namespace DotCEP.Localidades
 			}
 
 			return tabelaSaida;
+		}
+
+		private static List<Estado> ObterListaDoBanco(string p_Query)
+		{
+			Spartacus.Database.Generic database;
+			List<Estado> ListaDeEstados = new List<Estado>();
+
+			try
+			{
+				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugares());
+
+				ListaDeEstados = database.QueryList<Estado>(p_Query);
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception(ex.v_message);
+			}
+
+			return ListaDeEstados;
 		}
 	}
 }

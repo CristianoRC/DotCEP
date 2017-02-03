@@ -36,15 +36,15 @@ namespace DotCEP
 
 		public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
 		{
-			List<Endereco> Enderecos = new List<Endereco>();
+			List<Endereco> enderecosDeRetorno = new List<Endereco>();
 
-			List<string> EnderecosJSON = Cache.ObterJsonDoCacheLocal(UF, Cidade, Logradouro);
+			List<string> EnderecosDoCache = Cache.ObterJsonDoCacheLocal(UF, Cidade, Logradouro);
 
-			if (EnderecosJSON.Count != 0)
+			if (EnderecosDoCache.Count != 0)
 			{
-				foreach (string item in EnderecosJSON)
+				foreach (string item in EnderecosDoCache)
 				{
-					Enderecos.Add(JsonConvert.DeserializeObject<Endereco>(item));
+					enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
 				}
 			}
 			else
@@ -52,12 +52,12 @@ namespace DotCEP
 				String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
 				String StrJSON = ControleRequisicoes.ObterStringJSONS(url);
 
-				Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
+				enderecosDeRetorno = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
 
 				Cache.Criar(UF, Cidade, Logradouro, StrJSON);
 			}
 
-			return Enderecos;
+			return enderecosDeRetorno;
 		}
 	}
 }

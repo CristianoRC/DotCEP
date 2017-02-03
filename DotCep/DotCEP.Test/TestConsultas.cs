@@ -32,7 +32,6 @@ namespace DotCEP.Test
 			System.Collections.Generic.List<Endereco> ListaEnderecos = DotCEP.Consultas.ObterListaDeEnderecos(UF.RS, "Pelotas", "Ferreira");
 
 			Assert.AreEqual(11, ListaEnderecos.Count);
-			Assert.AreEqual("Fragata", ListaEnderecos[6].bairro);
 		}
 
 		[TearDown]

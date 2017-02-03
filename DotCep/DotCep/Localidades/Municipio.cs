@@ -27,11 +27,8 @@ namespace DotCEP.Localidades
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
-			if (tabelaResultado.Rows.Count != 0)
-			{
-				municipioBase = ConverterRowParaEntidade(tabelaResultado.Rows[0]);
-			}
-
+			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
+			municipioBase = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado)[0];
 
 			return municipioBase;
 		}
@@ -48,10 +45,8 @@ namespace DotCEP.Localidades
 
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
-			if (tabelaResultado.Rows.Count != 0)
-			{
-				municipioBase = ConverterRowParaEntidade(tabelaResultado.Rows[0]);
-			}
+			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
+			municipioBase = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado)[0];
 
 			return municipioBase;
 		}
@@ -108,10 +103,7 @@ namespace DotCEP.Localidades
 			cmd.v_text = "select t.* from Municipios t";
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
-			foreach (DataRow item in tabelaResultado.Rows)
-			{
-				listaDeMunicipios.Add(ConverterRowParaEntidade(item));
-			}
+			listaDeMunicipios = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado);
 
 			return listaDeMunicipios;
 		}
@@ -130,21 +122,10 @@ namespace DotCEP.Localidades
 
 			foreach (DataRow item in tabelaResultado.Rows)
 			{
-				listaDeMunicipios.Add(ConverterRowParaEntidade(item));
+				listaDeMunicipios = Spartacus.Utils.Convert.DataTableToList<Municipio>(tabelaResultado);
 			}
 
 			return listaDeMunicipios;
-		}
-
-		private static Municipio ConverterRowParaEntidade(DataRow LinhaDaTabela)
-		{
-			Municipio municipioBase = new Municipio();
-
-			municipioBase.Codigo = Convert.ToInt32(LinhaDaTabela["Codigo"]);
-			municipioBase.CodigoEstado = Convert.ToInt16(LinhaDaTabela["CodigoEstado"]);
-			municipioBase.Nome = LinhaDaTabela["Nome"].ToString();
-
-			return municipioBase;
 		}
 
 		private static DataTable ObterInformacoesDoBanco(string p_Query)

@@ -21,10 +21,7 @@ namespace DotCEP.Localidades
 			cmd.v_text = "select t.* from ESTADOS t";
 			tabelaResultado = ObterInformacoesDoBanco(cmd.GetUpdatedText());
 
-			foreach (DataRow item in tabelaResultado.Rows)
-			{
-				listaDeEstados.Add(ConverterRowParaEntidade(item));
-			}
+			listaDeEstados = Spartacus.Utils.Convert.DataTableToList<Estado>(tabelaResultado);
 
 			return listaDeEstados;
 		}
@@ -122,17 +119,6 @@ namespace DotCEP.Localidades
 			}
 
 			return Saida;
-		}
-
-		private static Estado ConverterRowParaEntidade(DataRow LinhaDaTabela)
-		{
-			Estado estadoBase = new Estado();
-
-			estadoBase.Codigo = Convert.ToInt16(LinhaDaTabela["Codigo"]);
-			estadoBase.Sigla = LinhaDaTabela["Sigla"].ToString();
-			estadoBase.Nome = LinhaDaTabela["Nome"].ToString();
-
-			return estadoBase;
 		}
 
 		private static DataTable ObterInformacoesDoBanco(string p_Query)

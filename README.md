@@ -12,7 +12,7 @@ Utiliza um sistema de cache local com SQLite para uma melhor performance e econo
 
 Desenvolvida utilizando o Webservice da <a href="https://viacep.com.br/" target="_blank" >Via Cep.</a>
 
-O Webservice contém uma pequena limitação na questão de requisições: Acima de 300 requisições em menos de 15 minutos pelo mesmo IP, poderá haver temporariamente o bloqueio do mesmo.
+O Webservice contém uma pequena limitação na questão de requisições: Acima de 300 requisições em menos de 15 minutos com o mesmo IP, poderá haver temporariamente o bloqueio do mesmo.
 
 <h1> Dependências </h1>
 

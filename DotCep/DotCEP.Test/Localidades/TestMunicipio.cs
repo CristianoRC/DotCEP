@@ -39,11 +39,19 @@ namespace DotCEP.Test
 			Assert.AreEqual(5570, numeroDeTodosRegistros);
 		}
 
+
 		[Test]
 		public void TestListaDeMunicipiosPorEstado()
 		{
 			int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio(UF.RS).Count;
 			Assert.AreEqual(497, numeroDeTodosRegistrosDoRS);
+		}
+
+		[Test]
+		public void TestListaDeMunicipiosPorEstadoString()
+		{
+			int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("SP").Count;
+			Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
 		}
 	}
 }

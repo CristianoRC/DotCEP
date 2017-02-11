@@ -52,9 +52,9 @@ namespace DotCEP.Test
 			int NumeroDeResultados = DotCEP.Localidades.Estado.ObterListaDeEstados().Count;
 			DotCEP.Localidades.Estado EstadoNumeroZero = DotCEP.Localidades.Estado.ObterListaDeEstados()[0];
 
-			Assert.AreEqual(11, EstadoNumeroZero.Codigo);
-			Assert.AreEqual("RO", EstadoNumeroZero.Sigla);
-			Assert.AreEqual("Rondonia", EstadoNumeroZero.Nome);
+			Assert.AreEqual(12, EstadoNumeroZero.Codigo);
+			Assert.AreEqual("AC", EstadoNumeroZero.Sigla);
+			Assert.AreEqual("Acre", EstadoNumeroZero.Nome);
 			Assert.AreEqual(27,NumeroDeResultados);
 		}
 	}

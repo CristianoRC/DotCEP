@@ -17,7 +17,7 @@ namespace DotCEP.Localidades
 			List<Estado> listaDeEstados = new List<Estado>();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.* from ESTADOS t";
+			cmd.v_text = "select t.* from ESTADOS t order by t.Nome";
 
 			try
 			{

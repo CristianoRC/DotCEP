@@ -32,7 +32,7 @@
 
 				if (StrJSON == string.Empty)
 				{
-					StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+					StrJSON = ControleRequisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
 					Cache.Criar(CEP, StrJSON);
 				}

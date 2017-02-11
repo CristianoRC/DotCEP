@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DotCEP
 {
-	internal static class ControleRequisicoes
+	public static class ControleRequisicoes
 	{
-		internal static string ObterStringJSONS(string url)
+		internal static string ObterJSON(string url)
 		{
 			try
 			{

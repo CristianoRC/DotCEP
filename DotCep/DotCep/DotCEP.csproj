@@ -56,6 +56,7 @@
     <Reference Include="Spartacus">
       <HintPath>..\packages\Spartacus.0.44.1\lib\net40\Spartacus.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControleRequisicoes.cs" />

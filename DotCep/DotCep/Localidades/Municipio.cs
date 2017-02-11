@@ -30,7 +30,27 @@ namespace DotCEP.Localidades
 
 			cmd.v_text = "select t.* from Municipios t where t.CodigoEstado = #codigo#";
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
-			cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
+			cmd.SetValue("codigo", Convert.ToInt16(SiglaEstado).ToString());
+
+			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
+
+			return listaDeMunicipios;
+		}
+
+		public static List<Municipio> ObterListaDeMunicipio(string SiglaEstado)
+		{
+			List<Municipio> listaDeMunicipios = new List<Municipio>();
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "select m.* from Municipios m  " +
+				"inner join Estados e " +
+				"on e.codigo = m.codigoestado" +
+				"  where e.sigla = #sigla#";
+
+
+			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
+
+			cmd.SetValue("sigla", SiglaEstado);
 
 			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
 

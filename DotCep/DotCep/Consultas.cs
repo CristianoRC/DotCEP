@@ -23,7 +23,7 @@ namespace DotCEP
 				}
 				else
 				{
-					StrJSON = ControleRequisicoes.ObterStringJSONS(ControleDeUrl.GerarURLDaPesquisa(CEP));
+					StrJSON = ControleRequisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
 					enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
 
@@ -50,7 +50,7 @@ namespace DotCEP
 			else
 			{
 				String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
-				String StrJSON = ControleRequisicoes.ObterStringJSONS(url);
+				String StrJSON = ControleRequisicoes.ObterJSON(url);
 
 				enderecosDeRetorno = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
 

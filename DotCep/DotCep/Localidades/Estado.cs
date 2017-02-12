@@ -133,7 +133,7 @@ namespace DotCEP.Localidades
 			Spartacus.Database.Generic database;
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugares());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
 				tabelaSaida = database.Query(p_Query, "Resultado");
 			}
 			catch (Spartacus.Database.Exception ex)
@@ -151,7 +151,7 @@ namespace DotCEP.Localidades
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoLugares());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
 
 				ListaDeEstados = database.QueryList<Estado>(p_Query);
 			}

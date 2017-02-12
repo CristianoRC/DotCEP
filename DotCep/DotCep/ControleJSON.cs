@@ -17,7 +17,7 @@ namespace DotCEP
 		}
 
 		/// <summary>
-		/// Separa o array JSON em objetos.
+		/// Separa o array JSON em objetos e logo após converte novamente para um objeto em JSON.
 		/// </summary>
 		/// <param name="strJSON">String json.</param>
 		internal static List<string> SepararArrayJSON(string strJSON)

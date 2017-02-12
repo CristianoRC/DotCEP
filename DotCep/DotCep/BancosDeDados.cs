@@ -2,9 +2,9 @@
 
 namespace DotCEP
 {
-	internal static class Ferramentas
+	internal static class BancosDeDados
 	{
-		static String caminhoexecutavel = System.AppDomain.CurrentDomain.BaseDirectory;
+		static String caminhoexecutavel = AppDomain.CurrentDomain.BaseDirectory;
 
 		internal static string ObterCaminhoBancoCache()
 		{

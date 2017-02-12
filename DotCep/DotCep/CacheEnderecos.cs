@@ -21,7 +21,7 @@ namespace DotCEP
 			cmd.SetValue("dataconsulta", Datas.ObterDataFormatada(), false);
 			cmd.SetValue("parametros", parametros, false);
 
-			database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+			database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 			try
 			{
@@ -29,7 +29,7 @@ namespace DotCEP
 
 				database.Open();
 
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				database.Execute(cmd.GetUpdatedText());
@@ -74,7 +74,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.Execute(cmd.GetUpdatedText());
 
@@ -105,7 +105,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
@@ -147,7 +147,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.Execute(cmd.GetUpdatedText());
 
@@ -165,7 +165,7 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(Ferramentas.ObterCaminhoBancoCache());
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				tabela = database.Query("select MAX(id) from ConsultaEndereco", "UltimoRegistro");
 

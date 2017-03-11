@@ -16,7 +16,7 @@ O Webservice contém uma pequena limitação na questão de requisições: Acima
 
 <h1> Dependências </h1>
 
-<a href="https://www.nuget.org/packages/Newtonsoft.Json/" target="_blank" > <b>Json.NET</b> </a>
+<a href="https://www.nuget.org/packages/Newtonsoft.Json/" target="_blank" > <b>Newtonsoft.Json</b> </a>
 
 <a href="https://github.com/wind39/spartacus" target="_blank" > <b>Spartacus</b> </a>
 

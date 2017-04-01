@@ -11,7 +11,7 @@ namespace DotCEP.Test
 		{
 			String CEPFormatado = DotCEP.Formatacao.FormatarCEP("9 6 0 8 5 0 0 0");
 
-			Assert.AreEqual("96085-000", CEPFormatado);
+			Assert.That(CEPFormatado, Is.EqualTo("96085-000"));
 		}
 
 		[Test]
@@ -19,7 +19,7 @@ namespace DotCEP.Test
 		{
 			String CEPFormatado = DotCEP.Formatacao.FormatarCEP("96-085 000");
 
-			Assert.AreEqual("96085-000", CEPFormatado);
+			Assert.That(CEPFormatado,Is.EqualTo("96085-000"));
 		}
 
 		[TestCase("960850000")]
@@ -28,7 +28,7 @@ namespace DotCEP.Test
 		{
 			String CEPFormatado = DotCEP.Formatacao.FormatarCEP(CEPparaVerificar);
 
-			Assert.AreEqual(String.Empty, CEPFormatado);
+			Assert.That(CEPFormatado, Is.Empty);
 		}
 	}
 }

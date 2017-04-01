@@ -8,7 +8,7 @@ namespace DotCEP.Test
 		[Test]
 		public void TestSiglaEstado()
 		{
-			Assert.AreEqual("RS", UF.RS.ToString());
+			Assert.That(UF.RS.ToString(), Is.EqualTo("RS"));
 		}
 
 		[Test]
@@ -16,7 +16,7 @@ namespace DotCEP.Test
 		{
 			int codigoEstado = (int)UF.RS;
 
-			Assert.AreEqual(43, codigoEstado);
+			Assert.That(codigoEstado, Is.EqualTo(43));
 		}
 	}
 }

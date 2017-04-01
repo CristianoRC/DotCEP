@@ -6,32 +6,42 @@ namespace DotCEP.Test
 	[TestFixture]
 	public class TestConsultas
 	{
+
+		private DotCEP.Endereco enderecoBase;
+
 		[Test]
 		public void TestConsultaEnderecoCompletoValido()
 		{
-			DotCEP.Endereco enderecoBase = DotCEP.Consultas.ObterEnderecoCompleto("96085000");
+			enderecoBase = DotCEP.Consultas.ObterEnderecoCompleto("96085000");
 
-			Assert.AreEqual("Pelotas", enderecoBase.localidade);
-			Assert.AreEqual("Areal", enderecoBase.bairro);
-			Assert.AreEqual("Avenida Ferreira Viana", enderecoBase.logradouro);
+			Assert.That(enderecoBase.localidade, Is.EqualTo("Pelotas"));
+			Assert.That(enderecoBase.bairro, Is.EqualTo("Areal"));
+			Assert.That(enderecoBase.logradouro, Is.EqualTo("Avenida Ferreira Viana"));
+
 		}
 
 		[Test]
 		public void TestConsultaEnderecoCompletoInvalido()
 		{
-			DotCEP.Endereco enderecoBase = DotCEP.Consultas.ObterEnderecoCompleto("960850000");
+			enderecoBase = DotCEP.Consultas.ObterEnderecoCompleto("960850000");
 
-			Assert.AreEqual(null, enderecoBase.localidade);
-			Assert.AreEqual(null, enderecoBase.bairro);
-			Assert.AreEqual(null, enderecoBase.logradouro);
+			Assert.That(enderecoBase.localidade, Is.Null);
+			Assert.That(enderecoBase.bairro, Is.Null);
+			Assert.That(enderecoBase.logradouro, Is.Null);
 		}
 
 		[Test]
 		public void TestConsultaListaEnderecos()
 		{
-			System.Collections.Generic.List<Endereco> ListaEnderecos = DotCEP.Consultas.ObterListaDeEnderecos(UF.RS, "Pelotas", "Ferreira");
+			System.Collections.Generic.List<Endereco> listaEnderecos = DotCEP.Consultas.ObterListaDeEnderecos(UF.RS, "Pelotas", "Ferreira");
 
-			Assert.AreEqual(11, ListaEnderecos.Count);
+			Assert.That(listaEnderecos.Count, Is.EqualTo(11));
+		}
+
+		[Test]
+		public void TestDatas()
+		{
+			
 		}
 
 		[TearDown]

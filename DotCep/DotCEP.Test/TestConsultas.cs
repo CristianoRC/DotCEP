@@ -38,12 +38,6 @@ namespace DotCEP.Test
 			Assert.That(listaEnderecos.Count, Is.EqualTo(11));
 		}
 
-		[Test]
-		public void TestDatas()
-		{
-			
-		}
-
 		[TearDown]
 		public void ApagarCache()
 		{

@@ -18,7 +18,7 @@ namespace DotCEP
 			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("dataconsulta", Spartacus.Database.Type.STRING);
 
-			cmd.SetValue("dataconsulta", Datas.ObterDataFormatada(), false);
+			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada(), false);
 			cmd.SetValue("parametros", parametros, false);
 
 			database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
@@ -112,7 +112,7 @@ namespace DotCEP
 
 				if (tabela.Rows.Count != 0)
 				{
-					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
+					if (DateTime.Now.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
 					{
 						foreach (DataRow item in tabela.Rows)
 						{

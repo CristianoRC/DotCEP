@@ -18,7 +18,7 @@ namespace DotCEP
 
 			cmd.SetValue("cep", CEP);
 			cmd.SetValue("retorno", Resultado, false);
-			cmd.SetValue("dataconsulta", Datas.ObterDataFormatada());
+			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada());
 
 			try
 			{
@@ -48,7 +48,7 @@ namespace DotCEP
 
 			cmd.SetValue("cep", CEP);
 			cmd.SetValue("retorno", Resultado, false);
-			cmd.SetValue("dataconsulta", Datas.ObterDataFormatada());
+			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada());
 			cmd.SetValue("idconsultandereco", IDConsulta);
 
 			try
@@ -114,7 +114,7 @@ namespace DotCEP
 
 				if (tabela.Rows.Count != 0)
 				{
-					if (Datas.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
+					if (DateTime.Now.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
 					{
 						strJSON = tabela.Rows[0]["Retorno"].ToString();
 					}

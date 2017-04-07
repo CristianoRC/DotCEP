@@ -3,13 +3,13 @@ using System.Globalization;
 
 namespace DotCEP
 {
-	internal static class Datas
+	public static class Datas
 	{
 		/// <summary>
 		/// Gera a data no formatado certo para salvar no banco.
 		/// </summary>
 		/// <returns>A data formatada.</returns>
-		internal static string ObterDataFormatada()
+		public static string ObterDataFormatada(this DateTime data)
 		{
 			return DateTime.Now.ToString("yyyyMMdd HHmmss");
 		}
@@ -19,7 +19,7 @@ namespace DotCEP
 		/// </summary>
 		/// <returns><c>true</c>, se a data for menor que 30 dias, <c>false</c> mais que 30 dias.</returns>
 		/// <param name="p_DataConsulta">Data consulta.</param>
-		internal static bool ValidarIntervaloDeTempo(string p_DataConsulta)
+		public static bool ValidarIntervaloDeTempo(this DateTime data, string p_DataConsulta)
 		{
 			bool resultado = false;
 

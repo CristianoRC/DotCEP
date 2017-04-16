@@ -30,7 +30,7 @@ namespace DotCEP
 			}
 			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.v_message);
+				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace DotCEP
 			}
 			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.v_message);
+				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace DotCEP
 			}
 			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.v_message);
+				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
 		}
 
@@ -128,7 +128,7 @@ namespace DotCEP
 			}
 			catch (Spartacus.Database.Exception ex)
 			{
-				throw new Exception("Erro no banco: " + ex.v_message);
+				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
 
 

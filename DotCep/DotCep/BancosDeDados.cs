@@ -4,17 +4,17 @@ namespace DotCEP
 {
 	internal static class BancosDeDados
 	{
-		static String caminhoexecutavel = AppDomain.CurrentDomain.BaseDirectory;
+		static string caminhoexecutavel = AppDomain.CurrentDomain.BaseDirectory;
 
 		internal static string ObterCaminhoBancoCache()
 		{
 			if (((int)Environment.OSVersion.Platform) < 4)
 			{
-				return string.Format(@"{0}\\Cache\\Cache.db", caminhoexecutavel); // Windows
+				return $"{caminhoexecutavel}\\Cache\\Cache.db";// Windows
 			}
 			else
 			{
-				return String.Format(@"{0}/Cache/Cache.db", caminhoexecutavel); // Linux e MacOSX
+				return $"{caminhoexecutavel}/Cache/Cache.db";// Linux e MacOSX			
 			}
 		}
 
@@ -22,11 +22,11 @@ namespace DotCEP
 		{
 			if (((int)Environment.OSVersion.Platform) < 4)
 			{
-				return string.Format(@"{0}\\Cache\\Lugares.db", caminhoexecutavel); // Windows
+				return $"{caminhoexecutavel}\\Cache\\Lugares.db";// Windows
 			}
 			else
 			{
-				return String.Format(@"{0}/Cache/Lugares.db", caminhoexecutavel); // Linux e MacOSX
+				return $"{caminhoexecutavel}/Cache/Lugares.db";// Linux e MacOSX
 			}
 		}
 	}

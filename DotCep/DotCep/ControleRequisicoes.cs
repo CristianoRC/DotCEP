@@ -1,5 +1,5 @@
-﻿using System.Net;
-using System.IO;
+﻿using System.IO;
+using System.Net;
 using System.Text;
 
 namespace DotCEP
@@ -23,7 +23,7 @@ namespace DotCEP
 			}
 			catch (System.Exception ex)
 			{
-				throw new System.Exception(string.Format("Erro ao tentar fazer a requisição: {0}", ex.Message));
+				throw new System.Exception($"Erro ao tentar fazer a requisição: {ex.Message}");
 			}
 		}
 	}

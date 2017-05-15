@@ -8,11 +8,11 @@ namespace DotCEP.Localidades
 	{
 		#region Propriedades
 
-		public int Codigo { get; set; }
+		public int Codigo { get; private set; }
 
-		public string Sigla { get; set; }
+		public string Sigla { get; private set; }
 
-		public string Nome { get; set; }
+		public string Nome { get; private set; }
 
 		#endregion
 

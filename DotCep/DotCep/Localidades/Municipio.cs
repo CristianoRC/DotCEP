@@ -92,7 +92,7 @@ namespace DotCEP.Localidades
             cmd.AddParameter("estado", Spartacus.Database.Type.INTEGER);
 
             cmd.SetValue("nome", NomeMunicipio);
-            cmd.SetValue("estado", Convert.ToInt16(DotCEP.UF.RS).ToString());
+            cmd.SetValue("estado", Convert.ToInt16(SiglaEstado).ToString());
 
             tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
 
@@ -114,7 +114,7 @@ namespace DotCEP.Localidades
             cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 
             cmd.SetValue("nome", NomeMunicipio);
-            cmd.SetValue("codigo", Convert.ToInt16(DotCEP.UF.RS).ToString());
+			cmd.SetValue("codigo", Convert.ToInt16(SiglaEstado).ToString());
 
             //E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
             municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];

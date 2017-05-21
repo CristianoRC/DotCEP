@@ -16,6 +16,7 @@ namespace DotCEP.Localidades
 
 		#endregion
 
+		#region Lista
 		public static List<Estado> ObterListaDeEstados()
 		{
 			List<Estado> listaDeEstados = new List<Estado>();
@@ -36,6 +37,9 @@ namespace DotCEP.Localidades
 			return listaDeEstados;
 		}
 
+		#endregion
+
+		#region Nome
 		public static string ObterNomeDoEstado(int p_Codigo)
 		{
 			String Saida = "Estado não encontrado, verifique o codigo";
@@ -75,6 +79,41 @@ namespace DotCEP.Localidades
 			return Saida;
 		}
 
+		#endregion
+
+		#region Codigo
+		public static string ObterCodigoDoEstado(string p_SiglaOuNome)
+		{
+			String Saida = "Código não encontrado, verifique o nome!";
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			if (p_SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
+			{
+				cmd.v_text = "select t.codigo from ESTADOS t where t.sigla = #parametro#";
+
+				p_SiglaOuNome = p_SiglaOuNome.ToUpper();
+			}
+			else
+			{
+				cmd.v_text = "select t.codigo from ESTADOS t where t.Nome = #parametro#";
+			}
+
+			cmd.AddParameter("parametro", Spartacus.Database.Type.STRING);
+			cmd.SetValue("parametro", p_SiglaOuNome);
+
+			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+
+			if (tabelaResultado.Rows.Count != 0)
+			{
+				Saida = tabelaResultado.Rows[0]["Codigo"].ToString();
+			}
+
+			return Saida;
+		}
+
+		#endregion
+
+		#region Sigla
 		public static string ObterSiglaDoEstado(int p_Codigo)
 		{
 			String Saida = "Estado não encontrado, verifique o codigo";
@@ -113,34 +152,7 @@ namespace DotCEP.Localidades
 			return Saida;
 		}
 
-		public static string ObterCodigoDoEstado(string p_SiglaOuNome)
-		{
-			String Saida = "Código não encontrado, verifique o nome!";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-
-			if (p_SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
-			{
-				cmd.v_text = "select t.codigo from ESTADOS t where t.sigla = #parametro#";
-
-				p_SiglaOuNome = p_SiglaOuNome.ToUpper();
-			}
-			else
-			{
-				cmd.v_text = "select t.codigo from ESTADOS t where t.Nome = #parametro#";
-			}
-
-			cmd.AddParameter("parametro", Spartacus.Database.Type.STRING);
-			cmd.SetValue("parametro", p_SiglaOuNome);
-
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-			if (tabelaResultado.Rows.Count != 0)
-			{
-				Saida = tabelaResultado.Rows[0]["Codigo"].ToString();
-			}
-
-			return Saida;
-		}
+		#endregion
 
 		private static DataTable ObterTabelaDoBanco(string p_Query)
 		{

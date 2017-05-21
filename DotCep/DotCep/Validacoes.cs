@@ -21,32 +21,49 @@
 
 		public static bool VerificarExistenciaDoCEP(string CEP)
 		{
-			string StrJSON;
+			var enderecoBase = new Endereco();
+			var requisicaoJSON = string.Empty;
 
 			if (VerificarValidadeDoCep(CEP))
 			{
 
 				CEP = CEP.Replace("-", "").Trim();
-				StrJSON = Cache.ObterJsonDoCacheLocal(CEP);
+				enderecoBase = Cache.ObterCache(CEP);
 
 
-				if (StrJSON == string.Empty)
+				if (enderecoBase.cep == string.Empty)
 				{
-					StrJSON = ControleRequisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(CEP));
+					requisicaoJSON = Requisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(CEP));
 
-					Cache.Criar(CEP, StrJSON);
-				}
-
-
-				if (!StrJSON.Contains("\"erro\": true"))
-				{
-					return true;
+					Cache.Criar(CEP, requisicaoJSON);
 				}
 				else
 				{
-					return false;
+					return true;
 				}
 
+
+				if (verificarProblemasNaRequisicao(requisicaoJSON))
+				{
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		private static bool verificarProblemasNaRequisicao(string strJSON)
+		{
+			if (strJSON.Contains("\"erro\": true"))
+			{
+				return true;
 			}
 			else
 			{

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DotCEP
 {
-	internal static class ControleRequisicoes
+	internal static class Requisicoes
 	{
 		internal static string ObterJSON(string url)
 		{

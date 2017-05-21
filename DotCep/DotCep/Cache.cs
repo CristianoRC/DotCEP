@@ -5,6 +5,8 @@ namespace DotCEP
 {
 	internal static partial class Cache
 	{
+		//TODO: Verificar o porquê do cache não estar sendo salvo.
+
 		internal static void Criar(string CEP, string Resultado)
 		{
 			Spartacus.Database.Generic database;
@@ -90,13 +92,12 @@ namespace DotCEP
 			}
 		}
 
-		internal static string ObterJsonDoCacheLocal(string CEP)
+		internal static Endereco ObterCache(string CEP)
 		{
-			string strJSON = string.Empty;
+			var enderecoBase = new Endereco();
 
 			Spartacus.Database.Generic database;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-			DataTable tabela = new DataTable();
 
 			cmd.v_text = "select * from cache where CEP = #cep#";
 
@@ -110,29 +111,19 @@ namespace DotCEP
 				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
-				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
+				var listaResultante = database.QueryList<Endereco>(cmd.GetUpdatedText());
 
-				if (tabela.Rows.Count != 0)
+				if (listaResultante.Count != 0)
 				{
-					if (DateTime.Now.ValidarIntervaloDeTempo(tabela.Rows[0]["DataConsulta"].ToString()))
-					{
-						strJSON = tabela.Rows[0]["Retorno"].ToString();
-					}
-					else
-					{
-						Cache.Deletar(CEP);
-					}
+					enderecoBase = listaResultante[0];
 				}
-
-
 			}
 			catch (Spartacus.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
 
-
-			return strJSON;
+			return enderecoBase;
 		}
 	}
 }

@@ -16,6 +16,7 @@ namespace DotCEP.Localidades
 
 		#endregion
 
+		#region Lista
 		public static List<Municipio> ObterListaDeMunicipio()
 		{
 			List<Municipio> listaDeMunicipios = new List<Municipio>();
@@ -61,6 +62,9 @@ namespace DotCEP.Localidades
 			return listaDeMunicipios;
 		}
 
+		#endregion
+
+		#region Nome
 		public static string ObterNomeDoMunicipio(uint CodigoMunicipio)
 		{
 			String saida = String.Empty;
@@ -80,7 +84,9 @@ namespace DotCEP.Localidades
 
 			return saida;
 		}
+		#endregion
 
+		#region Codigo
 		public static int ObterCodigoDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			int saida = 0;
@@ -103,7 +109,9 @@ namespace DotCEP.Localidades
 
 			return saida;
 		}
+		#endregion
 
+		#region Informacoes
 		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			Municipio municipioBase = new Municipio();
@@ -135,6 +143,8 @@ namespace DotCEP.Localidades
 
 			return municipioBase;
 		}
+
+		#endregion
 
 		private static DataTable ObterTabelaDoBanco(string p_Query)
 		{

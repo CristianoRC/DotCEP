@@ -9,25 +9,26 @@ namespace DotCEP
 		public static Endereco ObterEnderecoCompleto(string CEP)
 		{
 			Endereco enderecoBase = new Endereco();
-			String StrJSON = String.Empty;
 
 			if (Validacoes.VerificarValidadeDoCep(CEP))
 			{
 				CEP = CEP.Replace("-", "").Trim();
 
-				StrJSON = Cache.ObterJsonDoCacheLocal(CEP);
+				enderecoBase = Cache.ObterCache(CEP);
 
-				if (StrJSON != String.Empty)
+				if (enderecoBase.cep != null)
 				{
-					enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
+					return enderecoBase;
 				}
 				else
 				{
-					StrJSON = ControleRequisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(CEP));
+					var url = ControleDeUrl.GerarURLDaPesquisa(CEP);
 
-					enderecoBase = JsonConvert.DeserializeObject<Endereco>(StrJSON);
+					var requisicaoJSON = Requisicoes.ObterJSON(url);
 
-					Cache.Criar(CEP, StrJSON);
+					Cache.Criar(CEP, requisicaoJSON);
+
+					return JsonConvert.DeserializeObject<Endereco>(requisicaoJSON);
 				}
 			}
 
@@ -36,28 +37,22 @@ namespace DotCEP
 
 		public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
 		{
-			List<Endereco> enderecosDeRetorno = new List<Endereco>();
 
-			List<string> EnderecosDoCache = Cache.ObterJsonDoCacheLocal(UF, Cidade, Logradouro);
+			var enderecosDoCache = Cache.ObterCache(UF, Cidade, Logradouro);
 
-			if (EnderecosDoCache.Count != 0)
+			if (enderecosDoCache.Count != 0)
 			{
-				foreach (string item in EnderecosDoCache)
-				{
-					enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
-				}
+				return enderecosDoCache;
 			}
 			else
 			{
-				String url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
-				String StrJSON = ControleRequisicoes.ObterJSON(url);
-
-				enderecosDeRetorno = JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
+				var url = ControleDeUrl.GerarURLDaPesquisa(UF, Cidade, Logradouro);
+				var StrJSON = Requisicoes.ObterJSON(url);
 
 				Cache.Criar(UF, Cidade, Logradouro, StrJSON);
-			}
 
-			return enderecosDeRetorno;
+				return JsonConvert.DeserializeObject<List<Endereco>>(StrJSON);
+			}
 		}
 	}
 }

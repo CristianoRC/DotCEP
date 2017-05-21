@@ -38,13 +38,13 @@ namespace DotCEP
 
 				#region Formatando e inserindo enderecos no banco
 
-				List<string> EnderecosJSON = ControleJSON.SepararArrayJSON(p_ResultadoJSON);
+				List<string> EnderecosJSON = ManipulacaoJSON.SepararArrayJSON(p_ResultadoJSON);
 				string IDInsercao = ObterIDultimaInsercao();
 
 
 				foreach (string item in EnderecosJSON)
 				{
-					Criar(ControleJSON.ObterCEPdaStrJSON(item), item, IDInsercao);
+					Criar(ManipulacaoJSON.ObterCEPdaStrJSON(item), item, IDInsercao);
 				}
 
 				#endregion
@@ -87,9 +87,10 @@ namespace DotCEP
 			}
 		}
 
-		internal static List<string> ObterJsonDoCacheLocal(UF p_UF, string Localidade, string Logradouro)
+		internal static List<Endereco> ObterCache(UF p_UF, string Localidade, string Logradouro)
 		{
-			List<string> strJSON = new List<string>();
+			List<string> listaCaheJSON = new List<string>();
+			List<Endereco> listaEnderecos = new List<Endereco>();
 
 			Spartacus.Database.Generic database;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
@@ -116,8 +117,10 @@ namespace DotCEP
 					{
 						foreach (DataRow item in tabela.Rows)
 						{
-							strJSON.Add(item[0].ToString());
+							listaCaheJSON.Add(item[0].ToString());
 						}
+
+						listaEnderecos = ManipulacaoJSON.ObterEnderecos(listaCaheJSON);
 					}
 					else
 					{
@@ -132,7 +135,7 @@ namespace DotCEP
 			}
 
 
-			return strJSON;
+			return listaEnderecos;
 		}
 
 		private static void deletarConsulta(int IDConsulta)

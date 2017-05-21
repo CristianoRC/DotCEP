@@ -3,7 +3,7 @@
 
 <br>
 
-[![Versao](https://img.shields.io/badge/Vers%C3%A3o-1.2.0-blue.svg?style=flat-square)](https://www.nuget.org/packages/DotCEP/)
+[![Versao](https://img.shields.io/badge/Vers%C3%A3o-1.2.3-blue.svg?style=flat-square)](https://www.nuget.org/packages/DotCEP/)
 [![license](https://img.shields.io/badge/Licence-MIT-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/blob/master/LICENSE)
 ![TestesUnitarios](https://img.shields.io/badge/TestesUnitários-100%25-blue.svg?style=flat-square)
 [![Wiki](https://img.shields.io/badge/Wiki-Ajuda-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/wiki)

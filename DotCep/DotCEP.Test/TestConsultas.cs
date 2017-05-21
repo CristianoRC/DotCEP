@@ -38,6 +38,7 @@ namespace DotCEP.Test
 			Assert.That(listaEnderecos.Count, Is.EqualTo(11));
 		}
 
+		/*
 		[TearDown]
 		public void ApagarCache()
 		{
@@ -50,6 +51,7 @@ namespace DotCEP.Test
 			cmd.v_text = "Delete from ConsultaEndereco";
 			database.Execute(cmd.GetUpdatedText());
 		}
+*/
 
 		private static string ObterCaminhoBancoCache()
 		{

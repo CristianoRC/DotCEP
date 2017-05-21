@@ -30,6 +30,11 @@ namespace DotCEP
 			return enderecosDeRetorno;
 		}
 
+		internal static Endereco ObterEndereco(string enderecoJSON)
+		{
+			return JsonConvert.DeserializeObject<Endereco>(enderecoJSON);
+		}
+
 		/// <summary>
 		/// Separa o array JSON em objetos e logo após converte novamente para um objeto em JSON.
 		/// </summary>

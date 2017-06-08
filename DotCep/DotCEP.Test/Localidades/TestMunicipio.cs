@@ -60,6 +60,27 @@ namespace DotCEP.Test
 			Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
 		}
 
+		[Test]
+		public void TestObtendoInformacoesDoMunicipioSiglaEstado()
+		{
+			Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio("Pelotas", "RS");
+
+			//Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
+			//Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
+			Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
+		}
+
+
+		[Test]
+		public void TestObtendoInformacoesDoMunicipioNomeEstado()
+		{
+			Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio("Pelotas", "Rio Grande do Sul");
+
+			//Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
+			//Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
+			Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
+		}
+
 
 		[Test]
 		public void TestObtendoNomeDoMunicipio()

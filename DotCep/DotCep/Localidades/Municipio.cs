@@ -176,17 +176,61 @@ namespace DotCEP.Localidades
 		#endregion
 
 		#region Informacoes
+
 		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			Municipio municipioBase = new Municipio();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "Select * from Municipios m where m.nome = #nome# and m.codigoestado = #codigo#";
+			cmd.v_text = "select m.* from estados e " +
+					"inner join municipios m " +
+					"on m.codigoestado = e.codigo " +
+					"where m.nome = #nome# and e.codigo = #codigo#";
+
+
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("codigo", Convert.ToInt16(SiglaEstado).ToString());
+
+			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
+			municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];
+
+			return municipioBase;
+		}
+
+		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, string Estado)
+		{
+			Municipio municipioBase = new Municipio();
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			if (Estado.Length == 2)
+			{
+				cmd.v_text = "select m.* from estados e " +
+					"inner join municipios m " +
+					"on m.codigoestado = e.codigo " +
+					"where m.nome = #nome# and e.sigla = #sigla#";
+
+				cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
+
+				cmd.SetValue("nome", NomeMunicipio);
+				cmd.SetValue("sigla", Estado);
+			}
+			else
+			{
+				cmd.v_text = "select m.* from estados e " +
+					"inner join municipios m " +
+					"on m.codigoestado = e.codigo " +
+					"where m.nome = #nomemunicipio# and e.nome = #nomeestado#";
+
+				cmd.AddParameter("nomemunicipio", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("nomeestado", Spartacus.Database.Type.STRING);
+
+				cmd.SetValue("nomemunicipio", NomeMunicipio);
+				cmd.SetValue("nomeestado", Estado);
+			}
 
 			//E retornado apenas o primeiro valor da lista caso ele tenha mais de um.
 			municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];

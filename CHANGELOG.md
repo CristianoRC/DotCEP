@@ -24,3 +24,9 @@ SOFTWARE.
 
 
 1.2.1: Utilização do método QueryList da [Spartacus](https://github.com/wind39/spartacus) para efetuar buscas nas classes Localidades - Município e Estado.
+
+1.2.2: Correção do método de busca de município por estados e passagem de string como parâmetro para o mesmo.
+
+1.2.3: Correção na busca de municípios, e alteração no nível de acesso de métodos, classes e propriedades.
+
+1.2.4: Buscando lista de municipios por Nome / Sigla do estado

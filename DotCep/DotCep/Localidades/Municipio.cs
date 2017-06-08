@@ -101,11 +101,10 @@ namespace DotCEP.Localidades
 		#endregion
 
 		#region Codigo
+
 		public static int ObterCodigoDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
-			int saida = 0;
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-			DataTable tabelaResultado;
 
 			cmd.v_text = "select t.Codigo from Municipios t where t.nome = #nome# and t.CodigoEstado = #estado#";
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
@@ -114,7 +113,57 @@ namespace DotCEP.Localidades
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", Convert.ToInt16(SiglaEstado).ToString());
 
-			tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
+			return BuscarCodigoNoBanco(cmd.GetUpdatedText());
+		}
+
+		public static int ObterCodigoDoMunicipio(string NomeMunicipio, string Estado)
+		{
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			if (Estado.Length == 2)
+			{
+				cmd.v_text = "select t.Codigo from Municipios t " +
+				"inner join estados e " +
+				"on e.codigo = t.codigoestado " +
+				"where t.nome = #nome# and e.sigla = #estado#";
+			}
+			else
+			{
+				cmd.v_text = "select t.Codigo from Municipios t " +
+				"inner join estados e " +
+				"on e.codigo = t.codigoestado " +
+				"where t.nome = #nome# and e.nome = #estado#";
+			}
+
+			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("estado", Spartacus.Database.Type.STRING);
+
+			cmd.SetValue("nome", NomeMunicipio);
+			cmd.SetValue("estado", Estado);
+
+			return BuscarCodigoNoBanco(cmd.GetUpdatedText());
+		}
+
+		public static int ObterCodigoDoMunicipio(string NomeMunicipio, int CodigoEstado)
+		{
+			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+
+			cmd.v_text = "select t.Codigo from Municipios t where t.nome = #nome# and t.CodigoEstado = #estado#";
+			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("estado", Spartacus.Database.Type.INTEGER);
+
+			cmd.SetValue("nome", NomeMunicipio);
+			cmd.SetValue("estado", CodigoEstado.ToString());
+
+			return BuscarCodigoNoBanco(cmd.GetUpdatedText());
+		}
+
+		private static int BuscarCodigoNoBanco(string query)
+		{
+			int saida = 0;
+			DataTable tabelaResultado;
+
+			tabelaResultado = BancosDeDados.ObterTabelaDoBanco(query);
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -123,6 +172,7 @@ namespace DotCEP.Localidades
 
 			return saida;
 		}
+
 		#endregion
 
 		#region Informacoes

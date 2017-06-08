@@ -30,3 +30,4 @@ SOFTWARE.
 1.2.3: Correção na busca de municípios, e alteração no nível de acesso de métodos, classes e propriedades.
 
 1.2.4: Buscando lista de municipios por Nome / Sigla do estado
+       Busca de código de municipio por Sigla do estado / UF / Codigo Estado

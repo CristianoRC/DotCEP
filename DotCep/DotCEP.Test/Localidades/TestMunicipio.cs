@@ -15,6 +15,31 @@ namespace DotCEP.Test
 		}
 
 		[Test]
+		public void TestObtendoCodigoDoMunicipioSiglaEstado()
+		{
+			int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", "RS");
+
+			Assert.AreEqual(4314407, Resultado);
+		}
+
+		[Test]
+		public void TestObtendoCodigoDoMunicipioNomeEstado()
+		{
+			int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", "Rio Grande do Sul");
+
+			Assert.AreEqual(4314407, Resultado);
+		}
+
+
+		[Test]
+		public void TestObtendoCodigoDoMunicipioCodigoEstado()
+		{
+			int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", 43);
+
+			Assert.AreEqual(4314407, Resultado);
+		}
+
+		[Test]
 		public void TestObtendoInformacoesDoMunicipioCodigo()
 		{
 			Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio(4314407);

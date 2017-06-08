@@ -3,6 +3,9 @@ using System.Data;
 
 namespace DotCEP
 {
+	/// <summary>
+	/// Manipulação do cache de consulta de endereço 
+	/// </summary>
 	internal static partial class Cache
 	{
 		internal static void Criar(string CEP, string Resultado)

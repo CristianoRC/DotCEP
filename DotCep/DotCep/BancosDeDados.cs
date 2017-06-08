@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace DotCEP
 {
@@ -28,6 +29,23 @@ namespace DotCEP
 			{
 				return $"{caminhoexecutavel}/Cache/Lugares.db";// Linux e MacOSX
 			}
+		}
+
+		internal static DataTable ObterTabelaDoBanco(string p_Query)
+		{
+			DataTable tabelaSaida = new DataTable();
+			Spartacus.Database.Generic database;
+			try
+			{
+				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
+				tabelaSaida = database.Query(p_Query, "Resultado");
+			}
+			catch (Spartacus.Database.Exception ex)
+			{
+				throw new Exception(ex.v_message);
+			}
+
+			return tabelaSaida;
 		}
 	}
 }

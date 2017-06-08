@@ -53,7 +53,7 @@ namespace DotCEP.Test
 
 
 		[Test]
-		public void TestListaDeMunicipiosPorEstado()
+		public void TestListaDeMunicipiosPorUF()
 		{
 			int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio(UF.RS).Count;
 			Assert.AreEqual(497, numeroDeTodosRegistrosDoRS);
@@ -63,6 +63,13 @@ namespace DotCEP.Test
 		public void TestListaDeMunicipiosPorEstadoSigla()
 		{
 			int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("SP").Count;
+			Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
+		}
+
+		[Test]
+		public void TestListaDeMunicipiosPorEstado()
+		{
+			int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("São Paulo").Count;
 			Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
 		}
 	}

@@ -5,8 +5,6 @@ namespace DotCEP
 {
 	internal static class ManipulacaoJSON
 	{
-
-
 		internal static string ObterCEPdaStrJSON(string strJSON)
 		{
 			Endereco enderecobase = new Endereco();

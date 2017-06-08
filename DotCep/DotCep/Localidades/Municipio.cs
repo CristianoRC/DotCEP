@@ -42,21 +42,35 @@ namespace DotCEP.Localidades
 			return listaDeMunicipios;
 		}
 
-		public static List<Municipio> ObterListaDeMunicipio(string SiglaEstado)
+		public static List<Municipio> ObterListaDeMunicipio(string Estado)
 		{
 			List<Municipio> listaDeMunicipios = new List<Municipio>();
 			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select m.* from Municipios m  " +
-			"inner join Estados e " +
-			"on e.codigo = m.codigoestado" +
-			"  where e.sigla = #sigla#";
+			if (Estado.Length == 2)
+			{
+				cmd.v_text = "select m.* from Municipios m  " +
+				"inner join Estados e " +
+				"on e.codigo = m.codigoestado" +
+				"  where e.sigla = #sigla#";
 
 
-			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
 
-			cmd.SetValue("sigla", SiglaEstado);
+				cmd.SetValue("sigla", Estado);
+			}
+			else
+			{
+				cmd.v_text = "select m.* from Municipios m  " +
+				"inner join Estados e " +
+				"on e.codigo = m.codigoestado" +
+				" where e.nome = #nome#";
 
+				cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+
+				cmd.SetValue("nome", Estado);
+
+			}
 			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
 
 			return listaDeMunicipios;
@@ -75,7 +89,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", CodigoMunicipio.ToString());
 
-			tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -100,7 +114,7 @@ namespace DotCEP.Localidades
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", Convert.ToInt16(SiglaEstado).ToString());
 
-			tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -145,23 +159,6 @@ namespace DotCEP.Localidades
 		}
 
 		#endregion
-
-		private static DataTable ObterTabelaDoBanco(string p_Query)
-		{
-			DataTable tabelaSaida = new DataTable();
-			Spartacus.Database.Generic database;
-			try
-			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
-				tabelaSaida = database.Query(p_Query, "Resultado");
-			}
-			catch (Spartacus.Database.Exception ex)
-			{
-				throw new Exception(ex.v_message);
-			}
-
-			return tabelaSaida;
-		}
 
 		private static List<Municipio> ObterListaDoBanco(string p_Query)
 		{

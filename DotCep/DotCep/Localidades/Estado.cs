@@ -36,7 +36,6 @@ namespace DotCEP.Localidades
 
 			return listaDeEstados;
 		}
-
 		#endregion
 
 		#region Nome
@@ -50,7 +49,7 @@ namespace DotCEP.Localidades
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
 
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -69,7 +68,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
 			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -101,7 +100,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("parametro", Spartacus.Database.Type.STRING);
 			cmd.SetValue("parametro", p_SiglaOuNome);
 
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -123,7 +122,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -142,7 +141,7 @@ namespace DotCEP.Localidades
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
 			cmd.SetValue("nome", p_Nome);
 
-			DataTable tabelaResultado = ObterTabelaDoBanco(cmd.GetUpdatedText());
+			var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
@@ -153,23 +152,6 @@ namespace DotCEP.Localidades
 		}
 
 		#endregion
-
-		private static DataTable ObterTabelaDoBanco(string p_Query)
-		{
-			DataTable tabelaSaida = new DataTable();
-			Spartacus.Database.Generic database;
-			try
-			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
-				tabelaSaida = database.Query(p_Query, "Resultado");
-			}
-			catch (Spartacus.Database.Exception ex)
-			{
-				throw new Exception(ex.v_message);
-			}
-
-			return tabelaSaida;
-		}
 
 		private static List<Estado> ObterListaDoBanco(string p_Query)
 		{

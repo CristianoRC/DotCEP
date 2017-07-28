@@ -11,12 +11,12 @@ namespace DotCEP
 	{
 		internal static void Criar(UF p_UF, string p_Localidade, string p_Logradouro, string p_ResultadoJSON)
 		{
-			string parametros = Formatacao.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
+			var parametros = Formatacao.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
 
-			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+            Spartacus.Database.Generic database;
+			var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "insert into ConsultaEndereco (Parametros,DataConsulta) values(#parametros#,#dataconsulta#)";
+            cmd.v_text = "insert into ConsultaEndereco (Parametros,DataConsulta) values(#parametros#,#dataconsulta#)";
 
 			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("dataconsulta", Spartacus.Database.Type.STRING);
@@ -42,7 +42,7 @@ namespace DotCEP
 				#region Formatando e inserindo enderecos no banco
 
 				List<string> EnderecosJSON = ManipulacaoJSON.SepararArrayJSON(p_ResultadoJSON);
-				string IDInsercao = ObterIDultimaInsercao();
+				var IDInsercao = ObterIDultimaInsercao();
 
 
 				foreach (string item in EnderecosJSON)

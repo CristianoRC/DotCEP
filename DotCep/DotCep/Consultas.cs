@@ -8,9 +8,9 @@ namespace DotCEP
 	{
 		public static Endereco ObterEnderecoCompleto(string CEP)
 		{
-			Endereco enderecoBase = new Endereco();
+			var enderecoBase = new Endereco();
 
-			if (Validacoes.VerificarValidadeDoCep(CEP))
+            if (Validacoes.VerificarValidadeDoCep(CEP))
 			{
 				CEP = CEP.Replace("-", "").Trim();
 

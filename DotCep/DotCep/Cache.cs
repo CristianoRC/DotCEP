@@ -11,9 +11,9 @@ namespace DotCEP
 		internal static void Criar(string CEP, string Resultado)
 		{
 			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "insert into cache (cep,retorno,dataconsulta) values(#cep#,#retorno#,#dataconsulta#)";
+            cmd.v_text = "insert into cache (cep,retorno,dataconsulta) values(#cep#,#retorno#,#dataconsulta#)";
 
 			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("retorno", Spartacus.Database.Type.STRING);
@@ -40,9 +40,9 @@ namespace DotCEP
 		internal static void Criar(string CEP, string Resultado, string IDConsulta)
 		{
 			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "insert into cache values(#cep#,#retorno#,#dataconsulta#,#idconsultandereco#)";
+            cmd.v_text = "insert into cache values(#cep#,#retorno#,#dataconsulta#,#idconsultandereco#)";
 
 			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
 			cmd.AddParameter("retorno", Spartacus.Database.Type.STRING);
@@ -71,9 +71,9 @@ namespace DotCEP
 		internal static void Deletar(string CEP)
 		{
 			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "delete from cache where CEP = #cep#";
+            cmd.v_text = "delete from cache where CEP = #cep#";
 
 			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
 
@@ -98,10 +98,10 @@ namespace DotCEP
 			var enderecoBase = new Endereco();
 
 			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
-			DataTable tabela = new DataTable();
+			var cmd = new Spartacus.Database.Command();
+            var tabela = new DataTable();
 
-			cmd.v_text = "select * from cache where CEP = #cep#";
+            cmd.v_text = "select * from cache where CEP = #cep#";
 
 			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
 

@@ -9,7 +9,7 @@ namespace DotCEP
 		{
 			Endereco enderecobase = new Endereco();
 
-			enderecobase = Newtonsoft.Json.JsonConvert.DeserializeObject<Endereco>(strJSON);
+			enderecobase = JsonConvert.DeserializeObject<Endereco>(strJSON);
 
 			string CEPtemp = enderecobase.cep.Replace("-", "");
 
@@ -43,12 +43,12 @@ namespace DotCEP
 
 			List<Endereco> Enderecos = new List<Endereco>();
 
-			Enderecos = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
+			Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
 
 
 			foreach (Endereco item in Enderecos)
 			{
-				EnderecosJSON.Add(Newtonsoft.Json.JsonConvert.SerializeObject(item));
+				EnderecosJSON.Add(JsonConvert.SerializeObject(item));
 			}
 
 			return EnderecosJSON;

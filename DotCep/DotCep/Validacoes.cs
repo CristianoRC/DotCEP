@@ -61,15 +61,8 @@
 
 		private static bool verificarProblemasNaRequisicao(string strJSON)
 		{
-			if (strJSON.Contains("\"erro\": true"))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+            return strJSON.Contains("\"erro\": true");
+        }
 	}
 }
 

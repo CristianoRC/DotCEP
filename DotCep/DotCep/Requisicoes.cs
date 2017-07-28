@@ -10,15 +10,15 @@ namespace DotCEP
 		{
 			try
 			{
-				HttpWebRequest request =
+				var request =
 				(HttpWebRequest)WebRequest.Create(url);
 
-				WebResponse response = request.GetResponse();
+                var response = request.GetResponse();
 
-				using (Stream stream = response.GetResponseStream())
+                using (Stream stream = response.GetResponseStream())
 				{
-					StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-					return reader.ReadToEnd();
+					var reader = new StreamReader(stream, Encoding.UTF8);
+                    return reader.ReadToEnd();
 				}
 			}
 			catch (System.Exception ex)

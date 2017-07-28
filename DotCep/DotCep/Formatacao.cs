@@ -27,7 +27,7 @@ namespace DotCEP
 			}
 			catch
 			{
-				return String.Empty;
+				return "";
 			}
 		}
 	}

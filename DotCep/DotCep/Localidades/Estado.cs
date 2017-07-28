@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 
 namespace DotCEP.Localidades
@@ -7,7 +6,6 @@ namespace DotCEP.Localidades
 	public class Estado
 	{
 		#region Propriedades
-
 		public int Codigo { get; private set; }
 
 		public string Sigla { get; private set; }
@@ -19,10 +17,10 @@ namespace DotCEP.Localidades
 		#region Lista
 		public static List<Estado> ObterListaDeEstados()
 		{
-			List<Estado> listaDeEstados = new List<Estado>();
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var listaDeEstados = new List<Estado>();
+            var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.* from ESTADOS t order by t.Nome";
+            cmd.v_text = "select t.* from ESTADOS t order by t.Nome";
 
 			try
 			{
@@ -41,10 +39,10 @@ namespace DotCEP.Localidades
 		#region Nome
 		public static string ObterNomeDoEstado(int p_Codigo)
 		{
-			String Saida = "Estado não encontrado, verifique o codigo";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var Saida = "Estado não encontrado, verifique o codigo";
+            var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.nome from ESTADOS t where t.codigo = #codigo#";
+            cmd.v_text = "select t.nome from ESTADOS t where t.codigo = #codigo#";
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
@@ -62,9 +60,9 @@ namespace DotCEP.Localidades
 		public static string ObterNomeDoEstado(string p_Sigla)
 		{
 			String Saida = "Estado não encontrado, verifique a sigla";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.nome from ESTADOS t where t.sigla = #sigla#";
+            cmd.v_text = "select t.nome from ESTADOS t where t.sigla = #sigla#";
 			cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
 			cmd.SetValue("sigla", p_Sigla.ToUpper());
 
@@ -83,10 +81,10 @@ namespace DotCEP.Localidades
 		#region Codigo
 		public static string ObterCodigoDoEstado(string p_SiglaOuNome)
 		{
-			String Saida = "Código não encontrado, verifique o nome!";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var saida = "Código não encontrado, verifique o nome!";
+			var cmd = new Spartacus.Database.Command();
 
-			if (p_SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
+            if (p_SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
 			{
 				cmd.v_text = "select t.codigo from ESTADOS t where t.sigla = #parametro#";
 
@@ -104,10 +102,10 @@ namespace DotCEP.Localidades
 
 			if (tabelaResultado.Rows.Count != 0)
 			{
-				Saida = tabelaResultado.Rows[0]["Codigo"].ToString();
+				saida = tabelaResultado.Rows[0]["Codigo"].ToString();
 			}
 
-			return Saida;
+			return saida;
 		}
 
 		#endregion
@@ -115,10 +113,10 @@ namespace DotCEP.Localidades
 		#region Sigla
 		public static string ObterSiglaDoEstado(int p_Codigo)
 		{
-			String Saida = "Estado não encontrado, verifique o codigo";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var Saida = "Estado não encontrado, verifique o codigo";
+            var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.Sigla from ESTADOS t where t.codigo = #codigo#";
+            cmd.v_text = "select t.Sigla from ESTADOS t where t.codigo = #codigo#";
 			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
 			cmd.SetValue("codigo", p_Codigo.ToString());
 
@@ -134,10 +132,10 @@ namespace DotCEP.Localidades
 
 		public static string ObterSiglaDoEstado(string p_Nome)
 		{
-			String Saida = "Estado não encontrado, verifique a sigla";
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			var Saida = "Estado não encontrado, verifique a sigla";
+            var cmd = new Spartacus.Database.Command();
 
-			cmd.v_text = "select t.Sigla from ESTADOS t where t.Nome = #nome#";
+            cmd.v_text = "select t.Sigla from ESTADOS t where t.Nome = #nome#";
 			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
 			cmd.SetValue("nome", p_Nome);
 
@@ -156,9 +154,9 @@ namespace DotCEP.Localidades
 		private static List<Estado> ObterListaDoBanco(string p_Query)
 		{
 			Spartacus.Database.Generic database;
-			List<Estado> ListaDeEstados = new List<Estado>();
+			var ListaDeEstados = new List<Estado>();
 
-			try
+            try
 			{
 				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
 

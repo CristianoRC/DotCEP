@@ -10,14 +10,14 @@ namespace DotCEP
 	{
 		internal static void Criar(string CEP, string Resultado)
 		{
-			Spartacus.Database.Generic database;
-			var cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "insert into cache (cep,retorno,dataconsulta) values(#cep#,#retorno#,#dataconsulta#)";
 
-			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("retorno", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("dataconsulta", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("retorno", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("dataconsulta", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("cep", CEP);
 			cmd.SetValue("retorno", Resultado, false);
@@ -25,13 +25,13 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.SetExecuteSecurity(false);
 
 				database.Execute(cmd.GetUpdatedText());
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -39,15 +39,15 @@ namespace DotCEP
 
 		internal static void Criar(string CEP, string Resultado, string IDConsulta)
 		{
-			Spartacus.Database.Generic database;
-			var cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "insert into cache values(#cep#,#retorno#,#dataconsulta#,#idconsultandereco#)";
 
-			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("retorno", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("dataconsulta", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("idconsultandereco", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("retorno", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("dataconsulta", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("idconsultandereco", SpartacusMin.Database.Type.INTEGER);
 
 			cmd.SetValue("cep", CEP);
 			cmd.SetValue("retorno", Resultado, false);
@@ -56,13 +56,13 @@ namespace DotCEP
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.SetExecuteSecurity(false);
 
 				database.Execute(cmd.GetUpdatedText());
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -70,24 +70,24 @@ namespace DotCEP
 
 		internal static void Deletar(string CEP)
 		{
-			Spartacus.Database.Generic database;
-			var cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "delete from cache where CEP = #cep#";
 
-			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("cep", CEP);
 
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.Execute(cmd.GetUpdatedText());
 
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -97,20 +97,20 @@ namespace DotCEP
 		{
 			var enderecoBase = new Endereco();
 
-			Spartacus.Database.Generic database;
-			var cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			var cmd = new SpartacusMin.Database.Command();
             var tabela = new DataTable();
 
             cmd.v_text = "select * from cache where CEP = #cep#";
 
-			cmd.AddParameter("cep", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("cep", CEP);
 
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				tabela = database.Query(cmd.GetUpdatedText(), "Saida");
@@ -122,7 +122,7 @@ namespace DotCEP
 					enderecoBase = ManipulacaoJSON.ObterEndereco(strJSON);
 				}
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}

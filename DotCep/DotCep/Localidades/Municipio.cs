@@ -20,7 +20,7 @@ namespace DotCEP.Localidades
 		public static List<Municipio> ObterListaDeMunicipio()
 		{
 			var listaDeMunicipios = new List<Municipio>();
-            var cmd = new Spartacus.Database.Command();
+            var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "select t.* from Municipios t";
 			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
@@ -31,10 +31,10 @@ namespace DotCEP.Localidades
 		public static List<Municipio> ObterListaDeMunicipio(UF SiglaEstado)
 		{
 			var listaDeMunicipios = new List<Municipio>();
-            var cmd = new Spartacus.Database.Command();
+            var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "select t.* from Municipios t where t.CodigoEstado = #codigo#";
-			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
 			cmd.SetValue("codigo", Convert.ToInt16(SiglaEstado).ToString());
 
 			listaDeMunicipios = ObterListaDoBanco(cmd.GetUpdatedText());
@@ -45,7 +45,7 @@ namespace DotCEP.Localidades
 		public static List<Municipio> ObterListaDeMunicipio(string Estado)
 		{
 			var listaDeMunicipios = new List<Municipio>();
-            var cmd = new Spartacus.Database.Command();
+            var cmd = new SpartacusMin.Database.Command();
 
             if (Estado.Length == 2)
 			{
@@ -55,7 +55,7 @@ namespace DotCEP.Localidades
 				"  where e.sigla = #sigla#";
 
 
-				cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("sigla", SpartacusMin.Database.Type.STRING);
 
 				cmd.SetValue("sigla", Estado);
 			}
@@ -66,7 +66,7 @@ namespace DotCEP.Localidades
 				"on e.codigo = m.codigoestado" +
 				" where e.nome = #nome#";
 
-				cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
 
 				cmd.SetValue("nome", Estado);
 
@@ -82,11 +82,11 @@ namespace DotCEP.Localidades
 		public static string ObterNomeDoMunicipio(uint CodigoMunicipio)
 		{
 			var saida = String.Empty;
-            var cmd = new Spartacus.Database.Command();
+            var cmd = new SpartacusMin.Database.Command();
             DataTable tabelaResultado;
 
 			cmd.v_text = "select t.nome from Municipios t where t.codigo = #codigo#";
-			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
 			cmd.SetValue("codigo", CodigoMunicipio.ToString());
 
 			tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
@@ -104,11 +104,11 @@ namespace DotCEP.Localidades
 
 		public static int ObterCodigoDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
-			var cmd = new Spartacus.Database.Command();
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "select t.Codigo from Municipios t where t.nome = #nome# and t.CodigoEstado = #estado#";
-			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("estado", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("estado", SpartacusMin.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", Convert.ToInt16(SiglaEstado).ToString());
@@ -118,7 +118,7 @@ namespace DotCEP.Localidades
 
 		public static int ObterCodigoDoMunicipio(string NomeMunicipio, string Estado)
 		{
-			var cmd = new Spartacus.Database.Command();
+			var cmd = new SpartacusMin.Database.Command();
 
             if (Estado.Length == 2)
 			{
@@ -135,8 +135,8 @@ namespace DotCEP.Localidades
 				"where t.nome = #nome# and e.nome = #estado#";
 			}
 
-			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("estado", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("estado", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", Estado);
@@ -146,11 +146,11 @@ namespace DotCEP.Localidades
 
 		public static int ObterCodigoDoMunicipio(string NomeMunicipio, int CodigoEstado)
 		{
-			var cmd = new Spartacus.Database.Command();
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "select t.Codigo from Municipios t where t.nome = #nome# and t.CodigoEstado = #estado#";
-			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("estado", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("estado", SpartacusMin.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("estado", CodigoEstado.ToString());
@@ -180,7 +180,7 @@ namespace DotCEP.Localidades
 		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, UF SiglaEstado)
 		{
 			Municipio municipioBase = new Municipio();
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 
 			cmd.v_text = "select m.* from estados e " +
 					"inner join municipios m " +
@@ -188,8 +188,8 @@ namespace DotCEP.Localidades
 					"where m.nome = #nome# and e.codigo = #codigo#";
 
 
-			cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
 
 			cmd.SetValue("nome", NomeMunicipio);
 			cmd.SetValue("codigo", Convert.ToInt16(SiglaEstado).ToString());
@@ -203,7 +203,7 @@ namespace DotCEP.Localidades
 		public static Municipio ObterInformacoesDoMunicipio(string NomeMunicipio, string Estado)
 		{
 			Municipio municipioBase = new Municipio();
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 
 			if (Estado.Length == 2)
 			{
@@ -212,8 +212,8 @@ namespace DotCEP.Localidades
 					"on m.codigoestado = e.codigo " +
 					"where m.nome = #nome# and e.sigla = #sigla#";
 
-				cmd.AddParameter("nome", Spartacus.Database.Type.STRING);
-				cmd.AddParameter("sigla", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
+				cmd.AddParameter("sigla", SpartacusMin.Database.Type.STRING);
 
 				cmd.SetValue("nome", NomeMunicipio);
 				cmd.SetValue("sigla", Estado);
@@ -225,8 +225,8 @@ namespace DotCEP.Localidades
 					"on m.codigoestado = e.codigo " +
 					"where m.nome = #nomemunicipio# and e.nome = #nomeestado#";
 
-				cmd.AddParameter("nomemunicipio", Spartacus.Database.Type.STRING);
-				cmd.AddParameter("nomeestado", Spartacus.Database.Type.STRING);
+				cmd.AddParameter("nomemunicipio", SpartacusMin.Database.Type.STRING);
+				cmd.AddParameter("nomeestado", SpartacusMin.Database.Type.STRING);
 
 				cmd.SetValue("nomemunicipio", NomeMunicipio);
 				cmd.SetValue("nomeestado", Estado);
@@ -241,10 +241,10 @@ namespace DotCEP.Localidades
 		public static Municipio ObterInformacoesDoMunicipio(uint CodigoMunicipio)
 		{
 			Municipio municipioBase = new Municipio();
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 
 			cmd.v_text = "Select * from Municipios m where m.Codigo = #codigo#";
-			cmd.AddParameter("codigo", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
 			cmd.SetValue("codigo", CodigoMunicipio.ToString());
 
 			municipioBase = ObterListaDoBanco(cmd.GetUpdatedText())[0];
@@ -256,16 +256,16 @@ namespace DotCEP.Localidades
 
 		private static List<Municipio> ObterListaDoBanco(string p_Query)
 		{
-			Spartacus.Database.Generic database;
+			SpartacusMin.Database.Generic database;
 			var ListaDeMunicipios = new List<Municipio>();
 
             try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
 
 				ListaDeMunicipios = database.QueryList<Municipio>(p_Query);
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception(ex.v_message);
 			}

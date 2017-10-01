@@ -32,3 +32,4 @@ SOFTWARE.
 1.2.4: Buscando lista de municipios por Nome / Sigla do estado
        Busca de código de municipio por Sigla do estado / UF / Codigo Estado
        Busca de informações de municipio por Sigla do estado / UF / Codigo Estado
+       Troca da biblioteca Spartacus para SpartacusMin

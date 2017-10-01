@@ -57,15 +57,15 @@
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SpartacusMin, Version=0.44.1.5922, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\SpartacusMin.0.44.1\lib\net40\SpartacusMin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
-    <Reference Include="Spartacus">
-      <HintPath>..\packages\Spartacus.0.44.1\lib\net40\Spartacus.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Requisicoes.cs" />

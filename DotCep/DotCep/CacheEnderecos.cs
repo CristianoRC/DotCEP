@@ -13,18 +13,18 @@ namespace DotCEP
 		{
 			var parametros = Formatacao.FormatarStrParametros(p_UF, p_Localidade, p_Logradouro);
 
-            Spartacus.Database.Generic database;
-			var cmd = new Spartacus.Database.Command();
+            SpartacusMin.Database.Generic database;
+			var cmd = new SpartacusMin.Database.Command();
 
             cmd.v_text = "insert into ConsultaEndereco (Parametros,DataConsulta) values(#parametros#,#dataconsulta#)";
 
-			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
-			cmd.AddParameter("dataconsulta", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("parametros", SpartacusMin.Database.Type.STRING);
+			cmd.AddParameter("dataconsulta", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada(), false);
 			cmd.SetValue("parametros", parametros, false);
 
-			database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+			database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 			try
 			{
@@ -32,7 +32,7 @@ namespace DotCEP
 
 				database.Open();
 
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				database.Execute(cmd.GetUpdatedText());
@@ -52,7 +52,7 @@ namespace DotCEP
 
 				#endregion
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro:{ex.v_message} ");
 			}
@@ -66,25 +66,25 @@ namespace DotCEP
 		internal static void Deletar(int IDConsulta)
 		{
 
-			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 
 			cmd.v_text = "delete from cache "
 			+ "where IDconsultaEndereco = #idconsulta#";
 
-			cmd.AddParameter("idconsulta", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("idconsulta", SpartacusMin.Database.Type.INTEGER);
 			cmd.SetValue("idconsulta", IDConsulta.ToString());
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.Execute(cmd.GetUpdatedText());
 
 				deletarConsulta(IDConsulta);
 
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -95,21 +95,21 @@ namespace DotCEP
 			List<string> listaCaheJSON = new List<string>();
 			List<Endereco> listaEnderecos = new List<Endereco>();
 
-			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 			DataTable tabela = new DataTable();
 
 			cmd.v_text = @"select c.retorno, x.DataConsulta, c.idconsultaendereco from cache c 
 						  inner join ConsultaEndereco x on x.ID = c.idconsultaendereco 
 			              where x.Parametros = #parametros#";
 
-			cmd.AddParameter("parametros", Spartacus.Database.Type.STRING);
+			cmd.AddParameter("parametros", SpartacusMin.Database.Type.STRING);
 
 			cmd.SetValue("parametros", Formatacao.FormatarStrParametros(p_UF, Localidade, Logradouro), false);
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 				database.SetExecuteSecurity(false);
 
 				tabela = database.Query(cmd.GetUpdatedText(), "Resultado");
@@ -132,7 +132,7 @@ namespace DotCEP
 				}
 
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -143,22 +143,22 @@ namespace DotCEP
 
 		private static void deletarConsulta(int IDConsulta)
 		{
-			Spartacus.Database.Generic database;
-			Spartacus.Database.Command cmd = new Spartacus.Database.Command();
+			SpartacusMin.Database.Generic database;
+			SpartacusMin.Database.Command cmd = new SpartacusMin.Database.Command();
 
 			cmd.v_text = "delete from ConsultaEndereco where Id = #id#";
 
-			cmd.AddParameter("id", Spartacus.Database.Type.INTEGER);
+			cmd.AddParameter("id", SpartacusMin.Database.Type.INTEGER);
 			cmd.SetValue("id", IDConsulta.ToString());
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				database.Execute(cmd.GetUpdatedText());
 
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro no banco: {ex.v_message}");
 			}
@@ -166,18 +166,18 @@ namespace DotCEP
 
 		private static string ObterIDultimaInsercao()
 		{
-			Spartacus.Database.Generic database;
+			SpartacusMin.Database.Generic database;
 			DataTable tabela;
 
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
 
 				tabela = database.Query("select MAX(id) from ConsultaEndereco", "UltimoRegistro");
 
 				return tabela.Rows[0][0].ToString();
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception($"Erro: {ex.v_message}");
 			}

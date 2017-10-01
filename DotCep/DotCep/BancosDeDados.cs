@@ -34,13 +34,13 @@ namespace DotCEP
 		internal static DataTable ObterTabelaDoBanco(string p_Query)
 		{
 			var tabelaSaida = new DataTable();
-            Spartacus.Database.Generic database;
+            SpartacusMin.Database.Generic database;
 			try
 			{
-				database = new Spartacus.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
+				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
 				tabelaSaida = database.Query(p_Query, "Resultado");
 			}
-			catch (Spartacus.Database.Exception ex)
+			catch (SpartacusMin.Database.Exception ex)
 			{
 				throw new Exception(ex.v_message);
 			}

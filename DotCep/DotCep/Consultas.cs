@@ -35,6 +35,7 @@ namespace DotCEP
 			return enderecoBase;
 		}
 
+		//TODO: Busca por sigla.
 		public static List<Endereco> ObterListaDeEnderecos(UF UF, String Cidade, String Logradouro)
 		{
 

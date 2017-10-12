@@ -53,4 +53,4 @@ Se você está com dúvidas sobre a instalação ou a utilização da biblioteca
 
 <b>Site:</b> http://cristianoprogramador.com/
 
-<b>Blog:</b> http://blog.cristianoprogramador.com/
+<b>Blog:</b> https://medium.com/cristiano-cunha

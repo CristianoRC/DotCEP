@@ -1,133 +1,83 @@
 ﻿using System;
 using System.Data;
+using Dapper;
 
 namespace DotCEP
 {
-	/// <summary>
-	/// Manipulação do cache de consulta de endereço 
-	/// </summary>
-	internal static partial class Cache
-	{
-		internal static void Criar(string CEP, string Resultado)
-		{
-			SpartacusMin.Database.Generic database;
-			var cmd = new SpartacusMin.Database.Command();
+    /// <summary>
+    /// Manipulação do cache de consulta de endereço 
+    /// </summary>
+    internal partial class Cache
+    {
+        private BancosDeDados bancoDeDados = new BancosDeDados(EBancoDeDados.cache);
 
-            cmd.v_text = "insert into cache (cep,retorno,dataconsulta) values(#cep#,#retorno#,#dataconsulta#)";
+        internal void Criar(string CEP, string Resultado)
+        {
 
-			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
-			cmd.AddParameter("retorno", SpartacusMin.Database.Type.STRING);
-			cmd.AddParameter("dataconsulta", SpartacusMin.Database.Type.STRING);
+            var sql = "insert into cache (cep,retorno,dataconsulta) values(@cep,@retorno,@dataconsulta)";
 
-			cmd.SetValue("cep", CEP);
-			cmd.SetValue("retorno", Resultado, false);
-			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada());
+            try
+            {
+                bancoDeDados.Conexao.Execute(sql,
+                new { cep = CEP, retorno = Resultado, dataconsulta = DateTime.Now.ObterDataFormatada() });
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Erro no banco: {ex.Message}");
+            }
+        }
 
-			try
-			{
-				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+        internal void Criar(string CEP, string Resultado, string IDConsulta)
+        {
+            var sql = "insert into cache values(@cep,@retorno,@dataconsulta,@idconsultandereco)";
 
-				database.SetExecuteSecurity(false);
+            try
+            {
+                bancoDeDados.Conexao.Execute(sql,
+                new { cep = CEP, retorno = Resultado, dataconsulta = DateTime.Now.ObterDataFormatada(), idconsultandereco = IDConsulta })
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Erro no banco: {ex.Message}");
+            }
+        }
 
-				database.Execute(cmd.GetUpdatedText());
-			}
-			catch (SpartacusMin.Database.Exception ex)
-			{
-				throw new Exception($"Erro no banco: {ex.v_message}");
-			}
-		}
+        internal void Deletar(string CEP)
+        {
 
-		internal static void Criar(string CEP, string Resultado, string IDConsulta)
-		{
-			SpartacusMin.Database.Generic database;
-			var cmd = new SpartacusMin.Database.Command();
+            var sql = "delete from cache where CEP = @cep";
 
-            cmd.v_text = "insert into cache values(#cep#,#retorno#,#dataconsulta#,#idconsultandereco#)";
+            try
+            {
+                bancoDeDados.Conexao.Execute(sql, new { cep = CEP });
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Erro no banco: {ex.Message}");
+            }
+        }
 
-			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
-			cmd.AddParameter("retorno", SpartacusMin.Database.Type.STRING);
-			cmd.AddParameter("dataconsulta", SpartacusMin.Database.Type.STRING);
-			cmd.AddParameter("idconsultandereco", SpartacusMin.Database.Type.INTEGER);
+        internal Endereco ObterCache(string CEP)
+        {
 
-			cmd.SetValue("cep", CEP);
-			cmd.SetValue("retorno", Resultado, false);
-			cmd.SetValue("dataconsulta", DateTime.Now.ObterDataFormatada());
-			cmd.SetValue("idconsultandereco", IDConsulta);
+            var sql = "select * from cache where CEP = #cep#";
 
-			try
-			{
-				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
+            try
+            {
 
-				database.SetExecuteSecurity(false);
+                var listaDeCEP = bancoDeDados.Conexao
 
-				database.Execute(cmd.GetUpdatedText());
-			}
-			catch (SpartacusMin.Database.Exception ex)
-			{
-				throw new Exception($"Erro no banco: {ex.v_message}");
-			}
-		}
+                if (tabela.Rows.Count != 0)
+                {
+                    var strJSON = tabela.Rows[0]["Retorno"].ToString();
 
-		internal static void Deletar(string CEP)
-		{
-			SpartacusMin.Database.Generic database;
-			var cmd = new SpartacusMin.Database.Command();
-
-            cmd.v_text = "delete from cache where CEP = #cep#";
-
-			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
-
-			cmd.SetValue("cep", CEP);
-
-
-			try
-			{
-				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
-
-				database.Execute(cmd.GetUpdatedText());
-
-			}
-			catch (SpartacusMin.Database.Exception ex)
-			{
-				throw new Exception($"Erro no banco: {ex.v_message}");
-			}
-		}
-
-		internal static Endereco ObterCache(string CEP)
-		{
-			var enderecoBase = new Endereco();
-
-			SpartacusMin.Database.Generic database;
-			var cmd = new SpartacusMin.Database.Command();
-            var tabela = new DataTable();
-
-            cmd.v_text = "select * from cache where CEP = #cep#";
-
-			cmd.AddParameter("cep", SpartacusMin.Database.Type.STRING);
-
-			cmd.SetValue("cep", CEP);
-
-
-			try
-			{
-				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoCache());
-				database.SetExecuteSecurity(false);
-
-				tabela = database.Query(cmd.GetUpdatedText(), "Saida");
-
-				if (tabela.Rows.Count != 0)
-				{
-					var strJSON = tabela.Rows[0]["Retorno"].ToString();
-
-					enderecoBase = ManipulacaoJSON.ObterEndereco(strJSON);
-				}
-			}
-			catch (SpartacusMin.Database.Exception ex)
-			{
-				throw new Exception($"Erro no banco: {ex.v_message}");
-			}
-
-			return enderecoBase;
-		}
-	}
+                    enderecoBase = ManipulacaoJSON.ObterEndereco(strJSON);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception($"Erro no banco: {ex.Message}");
+            }
+        }
+    }
 }

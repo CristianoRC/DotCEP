@@ -7,6 +7,7 @@
 [![license](https://img.shields.io/badge/Licence-MIT-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/blob/master/LICENSE)
 ![TestesUnitarios](https://img.shields.io/badge/TestesUnitários-100%25-blue.svg?style=flat-square)
 [![Wiki](https://img.shields.io/badge/Wiki-Ajuda-blue.svg?style=flat-square)](https://github.com/CristianoRC/DotCEP/wiki)
+[![Codeship](https://img.shields.io/codeship/d6c1ddd0-16a3-0132-5f85-2e35c05e22b1.svg?style=flat-square)]()
 
 <br>
 

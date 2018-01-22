@@ -1,51 +1,46 @@
 ﻿using System;
-using System.Data;
+using Microsoft.Data.Sqlite;
 
 namespace DotCEP
 {
-	internal static class BancosDeDados
-	{
-		static string caminhoexecutavel = AppDomain.CurrentDomain.BaseDirectory;
+    internal class BancosDeDados
+    {
+        internal SqliteConnection Conexao { get; private set; }
+        internal BancosDeDados(EBancoDeDados banco)
+        {
+            if (banco == EBancoDeDados.cache)
+                Conexao = new SqliteConnection(StrConnBancoCache());
+            else
+                Conexao = new SqliteConnection(StrConnBancoLugares());
+        }
 
-		internal static string ObterCaminhoBancoCache()
-		{
-			if (((int)Environment.OSVersion.Platform) < 4)
-			{
-				return $"{caminhoexecutavel}\\Cache\\Cache.db";// Windows
-			}
-			else
-			{
-				return $"{caminhoexecutavel}/Cache/Cache.db";// Linux e MacOSX			
-			}
-		}
+        #region String de Conexão
+        string caminhoexecutavel = AppDomain.CurrentDomain.BaseDirectory;
+        string strconnBase = "Data Source=#;Version=3;Synchronous=Full;Journal Mode=Off";
 
-		internal static string ObterCaminhoBancoLugares()
-		{
-			if (((int)Environment.OSVersion.Platform) < 4)
-			{
-				return $"{caminhoexecutavel}\\Cache\\Lugares.db";// Windows
-			}
-			else
-			{
-				return $"{caminhoexecutavel}/Cache/Lugares.db";// Linux e MacOSX
-			}
-		}
+        private string StrConnBancoCache()
+        {
+            if (((int)Environment.OSVersion.Platform) < 4)
+            {
+                return strconnBase.Replace("#", $"{caminhoexecutavel}\\Cache\\Cache.db");// Windows
+            }
+            else
+            {
+                return strconnBase.Replace("#", $"{caminhoexecutavel}/Cache/Cache.db");// Linux e MacOSX
+            }
+        }
 
-		internal static DataTable ObterTabelaDoBanco(string p_Query)
-		{
-			var tabelaSaida = new DataTable();
-            SpartacusMin.Database.Generic database;
-			try
-			{
-				database = new SpartacusMin.Database.Sqlite(BancosDeDados.ObterCaminhoBancoLugares());
-				tabelaSaida = database.Query(p_Query, "Resultado");
-			}
-			catch (SpartacusMin.Database.Exception ex)
-			{
-				throw new Exception(ex.v_message);
-			}
-
-			return tabelaSaida;
-		}
-	}
+        private string StrConnBancoLugares()
+        {
+            if (((int)Environment.OSVersion.Platform) < 4)
+            {
+                return strconnBase.Replace("#", $"{caminhoexecutavel}\\Cache\\Lugares.db");// Windows
+            }
+            else
+            {
+                return strconnBase.Replace("#", $"{caminhoexecutavel}/Lugares/Cache.db");// Linux e MacOSX
+            }
+        }
+        #endregion
+    }
 }

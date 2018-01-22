@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace DotCEP
 {
+	
 	/// <summary>
 	/// Manipulação do cache de consulta de vários endereços
 	/// </summary>
-	internal static partial class Cache
+	internal partial class Cache
 	{
 		internal static void Criar(UF p_UF, string p_Localidade, string p_Logradouro, string p_ResultadoJSON)
 		{

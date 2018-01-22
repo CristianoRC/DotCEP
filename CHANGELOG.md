@@ -33,3 +33,6 @@ SOFTWARE.
        Busca de código de municipio por Sigla do estado / UF / Codigo Estado
        Busca de informações de municipio por Sigla do estado / UF / Codigo Estado
        Troca da biblioteca Spartacus para SpartacusMin
+
+1.2.5: Usando Dapper como ferramenta de persistência de dados.
+       Ajustando a ferramenta para o uso do .NET standard.

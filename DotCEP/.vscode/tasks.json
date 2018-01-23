@@ -10,6 +10,16 @@
                 "${workspaceFolder}/DotCEP.Test/DotCEP.Test.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "taskName": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/DotCEP.Test/DotCEP.Test.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

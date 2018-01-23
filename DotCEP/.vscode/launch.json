@@ -8,7 +8,7 @@
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "test",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/DotCEP.Test/bin/Debug/netcoreapp2.0/DotCEP.Test.dll",
             "args": [],

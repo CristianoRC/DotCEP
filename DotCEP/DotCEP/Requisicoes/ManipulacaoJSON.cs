@@ -11,7 +11,7 @@ namespace DotCEP
 
 			enderecobase = JsonConvert.DeserializeObject<Endereco>(strJSON);
 
-			string CEPtemp = enderecobase.cep.Replace("-", "");
+			string CEPtemp = enderecobase.CEP.Valor.Replace("-", "");
 
 			return CEPtemp;
 		}

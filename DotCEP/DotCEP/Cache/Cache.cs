@@ -34,7 +34,13 @@ namespace DotCEP
             try
             {
                 bancoDeDados.Conexao.Execute(sql,
-                new { cep = CEP, retorno = Resultado, dataconsulta = DateTime.Now.ObterDataFormatada(), idconsultandereco = IDConsulta })
+                new
+                {
+                    cep = CEP,
+                    retorno = Resultado,
+                    dataconsulta = DateTime.Now.ObterDataFormatada(),
+                    idconsultandereco = IDConsulta
+                });
             }
             catch (System.Exception ex)
             {

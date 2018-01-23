@@ -5,33 +5,34 @@ namespace DotCEP
     public class CEP
     {
 
-        public string Valor { get; private set; }
+        public string Valor { get; set; }
         public bool Valido { get; private set; }
 
         public CEP(string valor)
         {
-            Atualizar(valor);
+            AtualizarValores(valor);
         }
 
-        public void Atualizar(string valor)
+        public void AtualizarValores(string Novovalor)
         {
-            Valor = Valor;
+            Valor = Novovalor;
             Validar();
         }
-        
-        public void Formatar()
+
+        public string Formatar()
         {
-            Valor = Valor.Replace(" ", "");
-            Valor = Valor.Replace("-", "");
+            var valorTemp = Valor.Replace(" ", "").Replace("-", "");
 
             try
             {
-                Valor = Convert.ToUInt64(Valor).ToString(@"00000\-000");
+                Valor = Convert.ToUInt64(valorTemp).ToString(@"00000\-000");
             }
-            catch (System.Exception ex)
+            catch
             {
-                throw new Exception($"Não foi possívl formatar o CEP {this.Valor}\n{ex.Message}");
+                throw new Exception($"Não foi possívl formatar o CEP {this.Valor}");
             }
+
+            return Valor;
         }
 
         private void Validar()
@@ -48,6 +49,45 @@ namespace DotCEP
             else
             {
                 Valido = false;
+            }
+        }
+
+        public bool VerificarExistencia()
+        {
+            var requisicaoJSON = string.Empty;
+
+            if (Valido)
+            {
+                //var cache = new Cache();
+                //enderecoBase = cache.ObterCache(CEP.Valor);
+
+
+                if (Valor == string.Empty)//TODO: Validar se o valor do cache é != string.Empty
+                {
+                    var valorTemp = Valor.Replace("-", "").Trim();
+                    requisicaoJSON = Requisicoes.ObterJSON(ControleDeUrl.GerarURLDaPesquisa(valorTemp));
+
+                    //cache.Criar(CEP.Valor, requisicaoJSON);
+                }
+                else
+                {
+                    return true;
+                }
+
+
+                if (Requisicoes.VerificarProblemas(requisicaoJSON))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+
+            }
+            else
+            {
+                return false;
             }
         }
     }

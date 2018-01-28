@@ -1,6 +1,6 @@
 ﻿namespace DotCEP
 {
-	public enum UF
+	public enum UF : byte
 	{
 		AC = 12,// Acre
 		AL = 27,// Alagoas

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotCEP.Test
@@ -6,20 +7,21 @@ namespace DotCEP.Test
     [TestClass]
     public class TestEstado
     {
+
         [TestMethod]
         public void TestObtendoCodigoDoEstadoAtravesDaSigla()
         {
-            String Resultado = DotCEP.Localidades.Estado.ObterCodigoDoEstado("rs");
+            var Resultado = DotCEP.Localidades.Estado.ObterCodigoDoEstado("rs");
 
-            Assert.AreEqual("43", Resultado);
+            Assert.AreEqual(43, Resultado);
         }
 
         [TestMethod]
         public void TestObtendoCodigoDoEstadoAtravesDoNome()
         {
-            String Resultado = DotCEP.Localidades.Estado.ObterCodigoDoEstado("Rio Grande do Sul");
+            var Resultado = DotCEP.Localidades.Estado.ObterCodigoDoEstado("Rio Grande do Sul");
 
-            Assert.AreEqual("43", Resultado);
+            Assert.AreEqual(43, Resultado);
         }
 
         [TestMethod]
@@ -58,8 +60,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestListaDeEstados()
         {
-            int NumeroDeResultados = DotCEP.Localidades.Estado.ObterListaDeEstados().Count;
-            DotCEP.Localidades.Estado EstadoNumeroZero = DotCEP.Localidades.Estado.ObterListaDeEstados()[0];
+            var listaEstados = DotCEP.Localidades.Estado.ObterListaDeEstados().ToList();
+
+            int NumeroDeResultados = listaEstados.Count;
+            DotCEP.Localidades.Estado EstadoNumeroZero = listaEstados[0];
 
             Assert.AreEqual(12, EstadoNumeroZero.Codigo);
             Assert.AreEqual("AC", EstadoNumeroZero.Sigla);

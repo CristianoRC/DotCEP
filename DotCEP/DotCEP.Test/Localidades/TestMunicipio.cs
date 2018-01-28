@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DotCEP.Test
@@ -42,7 +43,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioCodigo()
         {
-            Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio(4314407);
+            Localidades.Municipio informacoesMunicipio = new Localidades.Municipio(4314407);
 
             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
@@ -53,7 +54,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioUF()
         {
-            Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio("Pelotas", UF.RS);
+            Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", UF.RS);
 
             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
@@ -63,10 +64,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioSiglaEstado()
         {
-            Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio("Pelotas", "RS");
+            Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", "RS");
 
-            //Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-            //Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
+            Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
         }
 
@@ -74,10 +75,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioNomeEstado()
         {
-            Localidades.Municipio informacoesMunicipio = Localidades.Municipio.ObterInformacoesDoMunicipio("Pelotas", "Rio Grande do Sul");
+            Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", "Rio Grande do Sul");
 
-            //Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-            //Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
+            Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
         }
 
@@ -93,7 +94,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestListaDeTodosMunicipios()
         {
-            int numeroDeTodosRegistros = Localidades.Municipio.ObterListaDeMunicipio().Count;
+            int numeroDeTodosRegistros = Localidades.Municipio.ObterListaDeMunicipio().ToList().Count;
             Assert.AreEqual(5570, numeroDeTodosRegistros);
         }
 
@@ -101,21 +102,21 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestListaDeMunicipiosPorUF()
         {
-            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio(UF.RS).Count;
+            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio(UF.RS).ToList().Count;
             Assert.AreEqual(497, numeroDeTodosRegistrosDoRS);
         }
 
         [TestMethod]
         public void TestListaDeMunicipiosPorEstadoSigla()
         {
-            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("SP").Count;
+            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("SP").ToList().Count;
             Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
         }
 
         [TestMethod]
         public void TestListaDeMunicipiosPorEstado()
         {
-            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("São Paulo").Count;
+            int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("São Paulo").ToList().Count;
             Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
         }
     }

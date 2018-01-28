@@ -1,151 +1,199 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dapper;
-using Microsoft.Data.Sqlite;
 
 namespace DotCEP.Localidades
 {
     public class Estado
     {
+
         #region Propriedades
-        public int Codigo { get; private set; }
 
-        public string Sigla { get; private set; }
+        public SByte Codigo { get; private set; }
 
-        public string Nome { get; private set; }
+        public String Sigla { get; private set; }
+
+        public String Nome { get; private set; }
+
+        #endregion
+
+        #region Construtores
+        public Estado() { }
+        public Estado(string SiglaOuNome)
+        {
+            string sql = string.Empty;
+
+            if (SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
+            {
+                sql = "select * from ESTADOS t where t.sigla = @parametro";
+
+                SiglaOuNome = SiglaOuNome.ToUpper();
+            }
+            else
+            {
+                sql = "select * from ESTADOS t where t.Nome = @parametro";
+            }
+
+            try
+            {
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
+
+                var estadoTemp = banco.Conexao.QueryFirst<Estado>(sql, new { parametro = SiglaOuNome });
+
+                this.Codigo = estadoTemp.Codigo;
+                this.Nome = estadoTemp.Nome;
+                this.Sigla = estadoTemp.Sigla;
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public Estado(sbyte codigo)
+        {
+            var sql = "select * from estados where codigo = codigo";
+            try
+            {
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
+
+                var estadoTemp = banco.Conexao.QueryFirst<Estado>(sql, new { codigo = codigo });
+
+                this.Codigo = estadoTemp.Codigo;
+                this.Nome = estadoTemp.Nome;
+                this.Sigla = estadoTemp.Sigla;
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public Estado(SByte codigo, String sigla, String nome)
+        {
+            this.Codigo = codigo;
+            this.Sigla = sigla;
+            this.Nome = nome;
+
+        }
 
         #endregion
 
         #region Lista
-        public static List<Estado> ObterListaDeEstados()
+        public static IEnumerable<Estado> ObterListaDeEstados()
         {
-            var listaDeEstados = new List<Estado>();
             var sql = "select t.* from ESTADOS t order by t.Nome";
-            
+
             try
             {
-            
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
+
+                return banco.Conexao.Query<Estado>(sql);
             }
             catch (System.Exception ex)
             {
-                throw new Exception(ex.v_message);
+                throw new Exception(ex.Message);
             }
-
-            return listaDeEstados;
         }
         #endregion
 
         #region Nome
-        public static string ObterNomeDoEstado(int p_Codigo)
+        public static string ObterNomeDoEstado(SByte Codigo)
         {
-            var Saida = "Estado não encontrado, verifique o codigo";
-            var cmd = new SpartacusMin.Database.Command();
+            var sql = "select t.nome from ESTADOS t where t.codigo = @codigo";
 
-            cmd.v_text = "select t.nome from ESTADOS t where t.codigo = #codigo#";
-            cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
-            cmd.SetValue("codigo", p_Codigo.ToString());
-
-
-            var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-            if (tabelaResultado.Rows.Count != 0)
+            try
             {
-                Saida = tabelaResultado.Rows[0]["Nome"].ToString();
-            }
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
 
-            return Saida;
+                return banco.Conexao.QueryFirst<string>(sql, new { codigo = Codigo });
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public static string ObterNomeDoEstado(string p_Sigla)
+        public static string ObterNomeDoEstado(string Sigla)
         {
-            String Saida = "Estado não encontrado, verifique a sigla";
-            var cmd = new SpartacusMin.Database.Command();
+            var sql = "select t.nome from ESTADOS t where t.sigla = @sigla";
 
-            cmd.v_text = "select t.nome from ESTADOS t where t.sigla = #sigla#";
-            cmd.AddParameter("sigla", SpartacusMin.Database.Type.STRING);
-            cmd.SetValue("sigla", p_Sigla.ToUpper());
-
-            var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-            if (tabelaResultado.Rows.Count != 0)
+            try
             {
-                Saida = tabelaResultado.Rows[0]["Nome"].ToString();
-            }
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
 
-            return Saida;
+                return banco.Conexao.QueryFirst<string>(sql, new { sigla = Sigla });
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         #endregion
 
         #region Codigo
-        public static string ObterCodigoDoEstado(string p_SiglaOuNome)
+        public static SByte ObterCodigoDoEstado(string SiglaOuNome)
         {
-            var saida = "Código não encontrado, verifique o nome!";
-            var cmd = new SpartacusMin.Database.Command();
+            string sql = string.Empty;
 
-            if (p_SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
+            if (SiglaOuNome.Length == 2) //Se tiver 2 caracteres é uma sigla
             {
-                cmd.v_text = "select t.codigo from ESTADOS t where t.sigla = #parametro#";
+                sql = "select t.codigo from ESTADOS t where t.sigla = @parametro";
 
-                p_SiglaOuNome = p_SiglaOuNome.ToUpper();
+                SiglaOuNome = SiglaOuNome.ToUpper();
             }
             else
             {
-                cmd.v_text = "select t.codigo from ESTADOS t where t.Nome = #parametro#";
+                sql = "select t.codigo from ESTADOS t where t.Nome = @parametro";
             }
 
-            cmd.AddParameter("parametro", SpartacusMin.Database.Type.STRING);
-            cmd.SetValue("parametro", p_SiglaOuNome);
-
-            var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-            if (tabelaResultado.Rows.Count != 0)
+            try
             {
-                saida = tabelaResultado.Rows[0]["Codigo"].ToString();
-            }
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
 
-            return saida;
+                return banco.Conexao.QueryFirst<SByte>(sql, new { parametro = SiglaOuNome });
+            }
+            catch (System.Exception e)
+            {
+
+                throw new Exception($"Não foi possível efetuar a busca: {e.Message}");
+            }
         }
 
         #endregion
 
         #region Sigla
-        public static string ObterSiglaDoEstado(int p_Codigo)
+        public static string ObterSiglaDoEstado(int Codigo)
         {
-            var Saida = "Estado não encontrado, verifique o codigo";
-            var cmd = new SpartacusMin.Database.Command();
 
-            cmd.v_text = "select t.Sigla from ESTADOS t where t.codigo = #codigo#";
-            cmd.AddParameter("codigo", SpartacusMin.Database.Type.INTEGER);
-            cmd.SetValue("codigo", p_Codigo.ToString());
+            var sql = "select t.Sigla from ESTADOS t where t.codigo = @codigo";
 
-            var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-            if (tabelaResultado.Rows.Count != 0)
+            try
             {
-                Saida = tabelaResultado.Rows[0]["Sigla"].ToString();
-            }
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
 
-            return Saida;
+                return banco.Conexao.QueryFirst<string>(sql, new { codigo = Codigo });
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception($"Não foi possível efetuar a busca: {e.Message}");
+            }
         }
 
-        public static string ObterSiglaDoEstado(string p_Nome)
+        public static string ObterSiglaDoEstado(string Nome)
         {
-            var Saida = "Estado não encontrado, verifique a sigla";
-            var cmd = new SpartacusMin.Database.Command();
 
-            cmd.v_text = "select t.Sigla from ESTADOS t where t.Nome = #nome#";
-            cmd.AddParameter("nome", SpartacusMin.Database.Type.STRING);
-            cmd.SetValue("nome", p_Nome);
-
-            var tabelaResultado = BancosDeDados.ObterTabelaDoBanco(cmd.GetUpdatedText());
-
-            if (tabelaResultado.Rows.Count != 0)
+            var sql = "select t.Sigla from ESTADOS t where t.Nome = @nome";
+            try
             {
-                Saida = tabelaResultado.Rows[0]["Sigla"].ToString();
-            }
+                var banco = new BancosDeDados(EBancoDeDados.localidades);
 
-            return Saida;
+                return banco.Conexao.QueryFirst<string>(sql, new { nome = Nome });
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception($"Não foi possível efetuar a busca: {e.Message}");
+            }
         }
 
         #endregion

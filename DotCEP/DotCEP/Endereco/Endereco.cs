@@ -6,6 +6,7 @@ namespace DotCEP
 {
     public class Endereco
     {
+        #region Propriedades
         public CEP CEP { get; set; }
         public string Logradouro { get; set; }
         public string Complemento { get; set; }
@@ -15,9 +16,13 @@ namespace DotCEP
         public string Unidade { get; set; }
         public string Ibge { get; set; }
         public string Gia { get; set; }
+        #endregion
 
 
-        public static Endereco Buscar(CEP cep)
+        #region Construtores
+
+        public Endereco() { }
+        public Endereco(CEP cep)
         {
             var enderecoBase = new Endereco();
 
@@ -42,9 +47,9 @@ namespace DotCEP
                     return JsonConvert.DeserializeObject<Endereco>(requisicaoJSON);
                 }
             }
-
-            return enderecoBase;
         }
+
+        #endregion
 
         //TODO: Busca por sigla.
         public static List<Endereco> Buscar(UF UF, String Cidade, String Logradouro)

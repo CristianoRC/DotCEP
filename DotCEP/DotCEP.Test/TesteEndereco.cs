@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace DotCEP.Test
 {
     [TestClass]
-    public class TestConsultas
+    public class TesteEndereco
     {
 
         private DotCEP.Endereco enderecoBase;

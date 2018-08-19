@@ -1,4 +1,4 @@
-namespace DotCEP
+namespace DotCEP.Enumeradores
 {
     internal enum EBancoDeDados : byte
     {

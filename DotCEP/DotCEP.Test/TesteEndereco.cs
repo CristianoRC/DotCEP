@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DotCEP.Localidades;
 
 namespace DotCEP.Test
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using DotCEP.Enumeradores;
 namespace DotCEP.Test
 {
     [TestClass]

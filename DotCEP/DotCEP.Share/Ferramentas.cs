@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace DotCEP
+namespace System
 {
     public static class Ferramentas
     {

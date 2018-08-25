@@ -13,8 +13,16 @@ namespace DotCEP.Localidades
 
         public string Nome { get; private set; }
 
-        public UF Estado { get; private set; }
+        public UF Estado
+        {
+            get { return (UF) codigoEstado; }
+        }
 
+        private byte codigoEstado { get; set; }
+
+        public Municipio()
+        {
+        }
 
         public Municipio(uint codigo)
         {
@@ -24,7 +32,7 @@ namespace DotCEP.Localidades
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(codigo);
 
                 this.Codigo = municipioTemp.Codigo;
-                this.Estado = municipioTemp.Estado;
+                this.codigoEstado = municipioTemp.codigoEstado;
                 this.Nome = municipioTemp.Nome;
             }
             catch (Exception ex)
@@ -41,7 +49,7 @@ namespace DotCEP.Localidades
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, siglaEstado);
 
                 this.Codigo = municipioTemp.Codigo;
-                this.Estado = municipioTemp.Estado;
+                this.codigoEstado = municipioTemp.codigoEstado;
                 this.Nome = municipioTemp.Nome;
             }
             catch (Exception ex)
@@ -59,7 +67,7 @@ namespace DotCEP.Localidades
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, nomeEstado);
 
                 this.Codigo = municipioTemp.Codigo;
-                this.Estado = municipioTemp.Estado;
+                this.codigoEstado = municipioTemp.codigoEstado;
                 this.Nome = municipioTemp.Nome;
             }
             catch (Exception ex)

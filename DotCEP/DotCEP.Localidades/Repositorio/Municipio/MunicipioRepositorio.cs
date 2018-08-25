@@ -5,7 +5,7 @@ using DotCEP.Enumeradores;
 
 namespace DotCEP.Localidades.Repositorio.Municipio
 {
-    public class MunicipioRepositorio : IMunicipioRepositorio
+    internal class MunicipioRepositorio : IMunicipioRepositorio
     {
         private readonly BancosDeDados _bancoDeDados;
 

@@ -2,7 +2,7 @@
 
 namespace DotCEP.Localidades.Repositorio.Estado
 {
-    public interface IEstadoRepositorio
+    internal interface IEstadoRepositorio
     {
         DotCEP.Localidades.Estado ObterPorCodigo(sbyte codigo);
         DotCEP.Localidades.Estado ObterPorSiglaOuNome(string siglaOuNome);

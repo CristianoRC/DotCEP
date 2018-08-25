@@ -3,7 +3,7 @@ using DotCEP.Enumeradores;
 
 namespace DotCEP.Localidades.Repositorio.Municipio
 {
-    public interface IMunicipioRepositorio
+    internal interface IMunicipioRepositorio
     {
         Localidades.Municipio ObterMunicipio(uint codigo);
         Localidades.Municipio ObterMunicipio(string nomeMunicipio, string nomeEstado);

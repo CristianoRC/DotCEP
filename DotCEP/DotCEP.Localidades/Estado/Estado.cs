@@ -8,6 +8,16 @@ namespace DotCEP.Localidades
     {
         private readonly IEstadoRepositorio _estadoRepositorio;
 
+        public SByte Codigo { get; private set; }
+
+        public String Sigla { get; private set; }
+
+        public String Nome { get; private set; }
+
+
+        public Estado()
+        {
+        }
 
         public Estado(string SiglaOuNome)
         {
@@ -49,13 +59,6 @@ namespace DotCEP.Localidades
                 throw new Exception(ex.Message);
             }
         }
-
-
-        public SByte Codigo { get; private set; }
-
-        public String Sigla { get; private set; }
-
-        public String Nome { get; private set; }
 
 
         public static IEnumerable<Estado> ObterListaDeEstados()

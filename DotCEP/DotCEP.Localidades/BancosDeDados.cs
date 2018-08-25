@@ -1,6 +1,7 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System;
+using Microsoft.Data.Sqlite;
 
-namespace DotCEP
+namespace DotCEP.Localidades
 {
     internal class BancosDeDados
     {
@@ -8,7 +9,9 @@ namespace DotCEP
 
         internal BancosDeDados()
         {
-            Conexao = new SqliteConnection(@"Data Source=./Cache/Lugares.db");
+            Conexao = new SqliteConnection($@"Data Source={System.AppDomain.CurrentDomain.BaseDirectory.ToString()}/Lugares.db");
+            Console.WriteLine(Conexao.ConnectionString);
+                
         }
     }
 }

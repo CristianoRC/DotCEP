@@ -4,7 +4,7 @@ using Dapper;
 
 namespace DotCEP.Localidades.Repositorio.Estado
 {
-    public class EstadoRepositorio : IEstadoRepositorio
+    internal class EstadoRepositorio : IEstadoRepositorio
     {
         private readonly BancosDeDados _bancoDeDados;
 

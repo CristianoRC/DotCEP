@@ -15,7 +15,7 @@
 
 <h1>Sobre</h1>
 
-<b>*A biblioteca está sendo reescrita com .net standard, e utilizará um sistema de cache opicional com redis.</b>
+<b>*A biblioteca está sendo reescrita com .net standard, e utilizará um sistema de cache opcional.</b>
 
 Biblioteca para facilitar o trabalho com CEP em sofwares <b>desktop</b>, utilizando .NET C#, pode ser utilizada no Windows e  Linux, utilizando o Mono(Windows Forms/ Console Application).
 Utiliza um sistema de cache local com SQLite para uma melhor performance e economia do uso de rede.

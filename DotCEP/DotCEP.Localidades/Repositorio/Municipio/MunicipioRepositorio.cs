@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Dapper;
 using DotCEP.Enumeradores;
-using DotCEP;
 
 namespace DotCEP.Localidades.Repositorio.Municipio
 {

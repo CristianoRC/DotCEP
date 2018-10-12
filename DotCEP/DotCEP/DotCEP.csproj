@@ -8,6 +8,6 @@
     <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Localidades" />
+    <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />
   </ItemGroup>
 </Project>

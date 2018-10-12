@@ -6,18 +6,26 @@ namespace DotCEP
     {
         private readonly IEnderecoCache _enderecoCache;
 
+        private string _valor;
+
         public string Valor
         {
-            get => Valor;
+            get => _valor;
             set
             {
-                Valor = value;
+                _valor = value;
                 Formatar();
                 Validar();
             }
         }
 
-        public bool Valido { get; private set; }
+        public bool Valido { get; set; }
+
+
+        public CEP(string valor)
+        {
+            Valor = valor;
+        }
 
         public CEP(IEnderecoCache enderecoCache)
         {
@@ -32,11 +40,11 @@ namespace DotCEP
 
         private void Formatar()
         {
-            var valorTemp = Valor.Trim().Replace("-", "");
+            var valorTemp = Valor.Replace(" ", "").Replace("-", "");
 
             try
             {
-                Valor = Convert.ToUInt64(valorTemp).ToString(@"00000\-000");
+                _valor = Convert.ToUInt64(valorTemp).ToString(@"00000\-000");
             }
             catch
             {

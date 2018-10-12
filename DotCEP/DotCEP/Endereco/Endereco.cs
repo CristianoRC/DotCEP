@@ -12,27 +12,46 @@ namespace DotCEP
 
         #region Propriedades
 
-        public CEP CEP { get; private set; }
-        public string Logradouro { get; private set; }
-        public string Complemento { get; private set; }
-        public string Bairro { get; private set; }
-        public string Localidade { get; private set; }
-        public UF UF { get; private set; }
-        public string Unidade { get; private set; }
-        public string Ibge { get; private set; }
-        public string Gia { get; private set; }
+        public string CEP { get; set; }
+        public string Logradouro { get; set; }
+        public string Complemento { get; set; }
+        public string Bairro { get; set; }
+        public string Localidade { get; set; }
+        public UF UF { get; set; }
+        public string Unidade { get; set; }
+        public string Ibge { get; set; }
+        public string Gia { get; set; }
 
         #endregion
 
         #region Construtores
 
+        public Endereco()
+        {
+        }
+
         public Endereco(CEP cep)
         {
+            Endereco endereco;
+
             if (cep.Valido)
             {
-                //TODO: Verificar se o código funciona como o esperado
-                var endereco = this;
                 endereco = ObterEndereco(cep);
+                AtualziarPropriedades(endereco);
+            }
+        }
+
+        public Endereco(string cep)
+        {
+            Endereco endereco;
+
+            var cepTemp = new CEP(cep);
+
+            if (cepTemp.Valido)
+            {
+                endereco = ObterEndereco(cepTemp);
+
+                AtualziarPropriedades(endereco);
             }
         }
 
@@ -40,19 +59,42 @@ namespace DotCEP
         {
             _enderecoCache = enderecoCache;
 
-            var endereco = this;
+            Endereco endereco;
 
             if (cep.Valido)
             {
                 var enderecoBase = _enderecoCache.ObterCache(cep);
 
-                if (enderecoBase.CEP.Valor != null)
+                if (!string.IsNullOrEmpty(enderecoBase.CEP))
                 {
                     endereco = enderecoBase;
                 }
                 else
                 {
                     endereco = ObterEndereco(cep);
+                    _enderecoCache.CriarCache(endereco);
+                }
+            }
+        }
+
+        public Endereco(string cep, IEnderecoCache enderecoCache)
+        {
+            _enderecoCache = enderecoCache;
+
+            var cepTemp = new CEP(cep);
+            var endereco = this;
+
+            if (cepTemp.Valido)
+            {
+                var enderecoBase = _enderecoCache.ObterCache(cepTemp);
+
+                if (string.IsNullOrEmpty(enderecoBase.CEP))
+                {
+                    endereco = enderecoBase;
+                }
+                else
+                {
+                    endereco = ObterEndereco(cepTemp);
                     _enderecoCache.CriarCache(endereco);
                 }
             }
@@ -78,7 +120,7 @@ namespace DotCEP
 
         private Endereco ObterEndereco(CEP cep)
         {
-            var enderecoBase = _enderecoCache.ObterCache(cep);
+            Endereco enderecoBase;
 
             var url = ControleDeUrl.GerarURLDaPesquisa(cep.Valor);
 
@@ -86,6 +128,19 @@ namespace DotCEP
 
             enderecoBase = JsonConvert.DeserializeObject<Endereco>(requisicaoJSON);
             return enderecoBase;
+        }
+
+        private void AtualziarPropriedades(Endereco endereco)
+        {
+            Bairro = endereco.Bairro;
+            Complemento = endereco.Complemento;
+            Gia = endereco.Gia;
+            Ibge = endereco.Ibge;
+            Localidade = endereco.Localidade;
+            Logradouro = endereco.Logradouro;
+            Unidade = endereco.Unidade;
+            UF = endereco.UF;
+            CEP = endereco.CEP;
         }
 
         private static IEnumerable<Endereco> ObterEnderecos(UF UF, String cidade, String logradouro)

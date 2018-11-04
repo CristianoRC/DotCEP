@@ -16,109 +16,79 @@ namespace DotCEP.Test
             Assert.AreEqual((uint)4314407, Resultado);
         }
 
-        //         [TestMethod]
-        //         public void TestObtendoCodigoDoMunicipioSiglaEstado()
-        //         {
-        //             int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", "RS");
 
-        //             Assert.AreEqual(4314407, Resultado);
-        //         }
+        [TestMethod]
+        public void TestObtendoCodigoDoMunicipioNomeEstado()
+        {
+            var Resultado = new Municipio("Pelotas", "Rio Grande do Sul").Codigo;
 
-        //         [TestMethod]
-        //         public void TestObtendoCodigoDoMunicipioNomeEstado()
-        //         {
-        //             int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", "Rio Grande do Sul");
-
-        //             Assert.AreEqual(4314407, Resultado);
-        //         }
+            Assert.AreEqual((uint)4314407, Resultado);
+        }
+        //TODO: Implementar busca do município com a sigla do estado
+        //TODO: Implementar busca do município com o código do estado
 
 
-        //         [TestMethod]
-        //         public void TestObtendoCodigoDoMunicipioCodigoEstado()
-        //         {
-        //             int Resultado = DotCEP.Localidades.Municipio.ObterCodigoDoMunicipio("Pelotas", 43);
+        [TestMethod]
+        public void TestObtendoInformacoesDoMunicipioCodigo()
+        {
+            var informacoesMunicipio = new Municipio(4314407);
 
-        //             Assert.AreEqual(4314407, Resultado);
-        //         }
-
-        //         [TestMethod]
-        //         public void TestObtendoInformacoesDoMunicipioCodigo()
-        //         {
-        //             Localidades.Municipio informacoesMunicipio = new Localidades.Municipio(4314407);
-
-        //             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-        //             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
-        //             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
-        //         }
+            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
+        }
 
 
-        //         [TestMethod]
-        //         public void TestObtendoInformacoesDoMunicipioUF()
-        //         {
-        //             Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", UF.RS);
+        [TestMethod]
+        public void TestObtendoInformacoesDoMunicipioUF()
+        {
+            var informacoesMunicipio = new Localidades.Municipio("Pelotas", UF.RS);
 
-        //             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-        //             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
-        //             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
-        //         }
-
-        //         [TestMethod]
-        //         public void TestObtendoInformacoesDoMunicipioSiglaEstado()
-        //         {
-        //             Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", "RS");
-
-        //             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-        //             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
-        //             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
-        //         }
+            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
+        }
 
 
-        //         [TestMethod]
-        //         public void TestObtendoInformacoesDoMunicipioNomeEstado()
-        //         {
-        //             Localidades.Municipio informacoesMunicipio = new Localidades.Municipio("Pelotas", "Rio Grande do Sul");
+        [TestMethod]
+        public void TestObtendoInformacoesDoMunicipioNomeEstado()
+        {
+            var informacoesMunicipio = new Localidades.Municipio("Pelotas", "Rio Grande do Sul");
 
-        //             Assert.AreEqual(4314407, informacoesMunicipio.Codigo);
-        //             Assert.AreEqual(43, informacoesMunicipio.CodigoEstado);
-        //             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
-        //         }
-
-
-        //         [TestMethod]
-        //         public void TestObtendoNomeDoMunicipio()
-        //         {
-        //             String Resultado = Localidades.Municipio.ObterNomeDoMunicipio(4314407);
-
-        //             Assert.AreEqual("Pelotas", Resultado);
-        //         }
-
-        //         [TestMethod]
-        //         public void TestListaDeTodosMunicipios()
-        //         {
-        //             int numeroDeTodosRegistros = Localidades.Municipio.ObterListaDeMunicipio().ToList().Count;
-        //             Assert.AreEqual(5570, numeroDeTodosRegistros);
-        //         }
+            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
+        }
 
 
-        //         [TestMethod]
-        //         public void TestListaDeMunicipiosPorUF()
-        //         {
-        //             int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio(UF.RS).ToList().Count;
-        //             Assert.AreEqual(497, numeroDeTodosRegistrosDoRS);
-        //         }
+        [TestMethod]
+        public void TestObtendoNomeDoMunicipio()
+        {
+            var resultado = new Municipio(4314407).Nome;
 
-        //         [TestMethod]
-        //         public void TestListaDeMunicipiosPorEstadoSigla()
-        //         {
-        //             int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("SP").ToList().Count;
-        //             Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
-        //         }
+            Assert.AreEqual("Pelotas", resultado);
+        }
 
-        //         [TestMethod]
-        //         public void TestListaDeMunicipiosPorEstado()
-        //         {
-        //             int numeroDeTodosRegistrosDoRS = Localidades.Municipio.ObterListaDeMunicipio("São Paulo").ToList().Count;
-        //             Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
-        //         }
+        [TestMethod]
+        public void TestListaDeTodosMunicipios()
+        {
+            var numeroDeTodosRegistros = Municipio.ListarTodos().Count();
+            Assert.AreEqual(5570, numeroDeTodosRegistros);
+        }
+
+
+        [TestMethod]
+        public void TestListaDeMunicipiosPorUF()
+        {
+            var numeroDeTodosRegistrosDoRS = Municipio.ListarPorEstado(UF.RS).Count();
+            Assert.AreEqual(497, numeroDeTodosRegistrosDoRS);
+        }
+
+        [TestMethod]
+        public void TestListaDeMunicipiosPorEstado()
+        {
+            var numeroDeTodosRegistrosDoRS = Municipio.ListarPorEstado("São Paulo").Count();
+            Assert.AreEqual(645, numeroDeTodosRegistrosDoRS);
+        }
     }
 }

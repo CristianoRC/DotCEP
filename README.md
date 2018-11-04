@@ -40,9 +40,6 @@ Se você está com dúvidas sobre a instalação ou a utilização da biblioteca
 <h1> Dependências </h1>
 
 <a href="https://www.nuget.org/packages/Newtonsoft.Json/" target="_blank" > <b>Newtonsoft.Json</b> </a>
-
-<a href="https://github.com/wind39/spartacus" target="_blank" > <b>Spartacus</b> </a>
-
 <br>
 
 <h1> Agradecimentos </h1>

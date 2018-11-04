@@ -15,7 +15,7 @@ namespace DotCEP.Localidades.Repositorio.Estado
 
         public Localidades.Estado ObterPorCodigo(sbyte codigo)
         {
-            var sql = "select * from estados where codigo = codigo";
+            var sql = "select * from estados where codigo = @codigo";
             try
             {
                 return _bancoDeDados.Conexao.QueryFirst<Localidades.Estado>(sql, new {codigo = codigo});

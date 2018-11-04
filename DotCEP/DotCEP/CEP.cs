@@ -14,8 +14,8 @@ namespace DotCEP
             set
             {
                 _valor = value;
-                Formatar();
                 Validar();
+                Formatar();
             }
         }
 
@@ -73,17 +73,7 @@ namespace DotCEP
         {
             if (!Valido) return false;
 
-            try
-            {
-                if (_enderecoCache.ObterCache(this) != null)
-                    return true;
-            }
-            catch (NotImplementedException)
-            {
-                return false;
-            }
-
-            return false;
+            return Requisicoes.ExistenciaDoCEP(this);
         }
     }
 }

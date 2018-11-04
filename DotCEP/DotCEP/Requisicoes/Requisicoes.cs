@@ -1,25 +1,44 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 
 namespace DotCEP
 {
     internal static class Requisicoes
     {
+
+        internal static bool ExistenciaDoCEP(CEP cep)
+        {
+            try
+            {
+                var url = ControleDeUrl.GerarURLDaPesquisa(cep.Valor);
+
+                var json = ObterJSON(url);
+
+                return !VerificarProblemas(json);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
+
         internal static string ObterJSON(string url)
         {
             try
             {
-                var request =
-                (HttpWebRequest)WebRequest.Create(url);
+                var request = new HttpClient();
 
-                var response = request.GetResponse();
+                var response = request.GetAsync(url).Result;
 
-                using (Stream stream = response.GetResponseStream())
-                {
-                    var reader = new StreamReader(stream, Encoding.UTF8);
-                    return reader.ReadToEnd();
-                }
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                    throw new ArgumentException();
+
+                return response.Content.ReadAsStringAsync().Result;
+
             }
             catch (System.Exception ex)
             {
@@ -31,6 +50,7 @@ namespace DotCEP
         {
             return strJSON.Contains("\"erro\": true");
         }
+
     }
 }
 

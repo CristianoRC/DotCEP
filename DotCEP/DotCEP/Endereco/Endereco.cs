@@ -112,11 +112,20 @@ namespace DotCEP
                 return enderecosDoCache;
             }
 
-            var enderecos = ObterEnderecos(UF, Cidade, Logradouro);
+            var enderecos = Buscar(UF, Cidade, Logradouro);
 
             enderecoCache.CriarCache(enderecos);
             return enderecos;
         }
+
+        public static IEnumerable<Endereco> Buscar(UF UF, string cidade, string logradouro)
+        {
+            var url = ControleDeUrl.GerarURLDaPesquisa(UF, cidade, logradouro);
+            var strJSON = Requisicoes.ObterJSON(url);
+
+            return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
+        }
+
 
         private Endereco ObterEndereco(CEP cep)
         {
@@ -141,14 +150,6 @@ namespace DotCEP
             Unidade = endereco.Unidade;
             UF = endereco.UF;
             CEP = endereco.CEP;
-        }
-
-        private static IEnumerable<Endereco> ObterEnderecos(UF UF, String cidade, String logradouro)
-        {
-            var url = ControleDeUrl.GerarURLDaPesquisa(UF, cidade, logradouro);
-            var strJSON = Requisicoes.ObterJSON(url);
-
-            return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
         }
     }
 }

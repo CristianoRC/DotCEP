@@ -1,5 +1,4 @@
 ﻿using System;
-using DotCEP.Enumeradores;
 
 namespace DotCEP
 {

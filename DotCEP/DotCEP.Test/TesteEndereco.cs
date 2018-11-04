@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DotCEP.Localidades;
-using DotCEP.Enumeradores;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DotCEP.Enumeradores;
 using Newtonsoft.Json;
 
 namespace DotCEP

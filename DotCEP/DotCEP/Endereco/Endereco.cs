@@ -73,6 +73,8 @@ namespace DotCEP
                     endereco = ObterEndereco(cep);
                     _enderecoCache.CriarCache(endereco);
                 }
+
+                AtualziarPropriedades(endereco);
             }
         }
 
@@ -87,7 +89,7 @@ namespace DotCEP
             {
                 var enderecoBase = _enderecoCache.ObterCache(cepTemp);
 
-                if (string.IsNullOrEmpty(enderecoBase.CEP))
+                if (enderecoBase != null)
                 {
                     endereco = enderecoBase;
                 }
@@ -96,6 +98,8 @@ namespace DotCEP
                     endereco = ObterEndereco(cepTemp);
                     _enderecoCache.CriarCache(endereco);
                 }
+
+                AtualziarPropriedades(endereco);
             }
         }
 
@@ -135,6 +139,8 @@ namespace DotCEP
             var requisicaoJSON = Requisicoes.ObterJSON(url);
 
             enderecoBase = JsonConvert.DeserializeObject<Endereco>(requisicaoJSON);
+
+            AtualziarPropriedades(enderecoBase);
             return enderecoBase;
         }
 

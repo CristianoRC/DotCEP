@@ -15,7 +15,9 @@ namespace DotCEP
             {
                 _valor = value;
                 Validar();
-                Formatar();
+
+                if (this.Valido)
+                    Formatar();
             }
         }
 

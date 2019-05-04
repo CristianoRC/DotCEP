@@ -9,19 +9,16 @@ namespace DotCEP
         {
             var enderecoBase = JsonConvert.DeserializeObject<Endereco>(strJSON);
 
-            string CEPtemp = enderecoBase.CEP.Replace("-", "");
+            var CEPtemp = enderecoBase.CEP.Replace("-", "");
 
             return CEPtemp;
         }
 
         internal static List<Endereco> ObterEnderecos(List<string> enderecosJSON)
         {
-            List<Endereco> enderecosDeRetorno = new List<Endereco>();
+            var enderecosDeRetorno = new List<Endereco>();
 
-            foreach (var item in enderecosJSON)
-            {
-                enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
-            }
+            foreach (var item in enderecosJSON) enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
 
             return enderecosDeRetorno;
         }
@@ -32,22 +29,19 @@ namespace DotCEP
         }
 
         /// <summary>
-        /// Separa o array JSON em objetos e logo após converte novamente para um objeto em JSON.
+        ///     Separa o array JSON em objetos e logo após converte novamente para um objeto em JSON.
         /// </summary>
         /// <param name="strJSON">String json.</param>
         internal static List<string> SepararArrayJSON(string strJSON)
         {
-            List<string> EnderecosJSON = new List<string>();
+            var EnderecosJSON = new List<string>();
 
-            List<Endereco> Enderecos = new List<Endereco>();
+            var Enderecos = new List<Endereco>();
 
             Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
 
 
-            foreach (Endereco item in Enderecos)
-            {
-                EnderecosJSON.Add(JsonConvert.SerializeObject(item));
-            }
+            foreach (var item in Enderecos) EnderecosJSON.Add(JsonConvert.SerializeObject(item));
 
             return EnderecosJSON;
         }

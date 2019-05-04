@@ -9,7 +9,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
         Localidades.Municipio ObterMunicipio(string nomeMunicipio, UF Estado);
 
         IEnumerable<Localidades.Municipio> ListarTodos();
-        
+
         IEnumerable<Localidades.Municipio> ListarPorEstado(UF estado);
         IEnumerable<Localidades.Municipio> ListarPorEstado(string nomeEstado);
     }

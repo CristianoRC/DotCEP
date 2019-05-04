@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.50.5" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="1.50.5" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
+    </ItemGroup>
 </Project>

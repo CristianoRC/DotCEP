@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace DotCEP
 {
@@ -8,6 +9,11 @@ namespace DotCEP
 
         private string _valor;
 
+        public CEP(string valor)
+        {
+            Valor = valor;
+        }
+
         public string Valor
         {
             get => _valor;
@@ -15,30 +21,11 @@ namespace DotCEP
             {
                 _valor = value;
                 Validar();
-
-                if (this.Valido)
-                    Formatar();
+                Formatar();
             }
         }
 
-        public bool Valido { get; set; }
-
-
-        public CEP(string valor)
-        {
-            Valor = valor;
-        }
-
-        public CEP(IEnderecoCache enderecoCache)
-        {
-            _enderecoCache = enderecoCache;
-        }
-
-        public CEP(string valor, IEnderecoCache enderecoCache)
-        {
-            _enderecoCache = enderecoCache;
-            Valor = valor;
-        }
+        public bool Valido { get; private set; }
 
         private void Formatar()
         {
@@ -58,12 +45,12 @@ namespace DotCEP
         {
             if (Valor.Trim().Length == 9)
             {
-                Valido = System.Text.RegularExpressions.Regex.IsMatch(Valor, ("[0-9]{5}-[0-9]{3}"));
+                Valido = Regex.IsMatch(Valor, "[0-9]{5}-[0-9]{3}");
             }
             else if (Valor.Trim().Length == 8)
             {
                 Formatar();
-                Valido = System.Text.RegularExpressions.Regex.IsMatch(Valor, ("[0-9]{5}-[0-9]{3}"));
+                Valido = Regex.IsMatch(Valor, "[0-9]{5}-[0-9]{3}");
             }
             else
             {

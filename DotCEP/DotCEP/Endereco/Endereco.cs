@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
-
-namespace DotCEP
+﻿namespace DotCEP
 {
     public class Endereco
     {
-        private readonly IEnderecoCache _enderecoCache;
+        public Endereco()
+        {
+        }
 
-        #region Propriedades
+        public Endereco(string cep, string logradouro, string complemento, string bairro, string localidade, UF uf,
+            string unidade, string ibge, string gia)
+        {
+            CEP = cep;
+            Logradouro = logradouro;
+            Complemento = complemento;
+            Bairro = bairro;
+            Localidade = localidade;
+            UF = uf;
+            Unidade = unidade;
+            Ibge = ibge;
+            Gia = gia;
+        }
 
         public string CEP { get; set; }
         public string Logradouro { get; set; }
@@ -20,141 +29,5 @@ namespace DotCEP
         public string Unidade { get; set; }
         public string Ibge { get; set; }
         public string Gia { get; set; }
-
-        #endregion
-
-        #region Construtores
-
-        public Endereco()
-        {
-        }
-
-        public Endereco(CEP cep)
-        {
-            Endereco endereco;
-
-            if (cep.Valido)
-            {
-                endereco = ObterEndereco(cep);
-                AtualziarPropriedades(endereco);
-            }
-        }
-
-        public Endereco(string cep)
-        {
-            Endereco endereco;
-
-            var cepTemp = new CEP(cep);
-
-            if (cepTemp.Valido)
-            {
-                endereco = ObterEndereco(cepTemp);
-
-                AtualziarPropriedades(endereco);
-            }
-        }
-
-        public Endereco(CEP cep, IEnderecoCache enderecoCache)
-        {
-            _enderecoCache = enderecoCache;
-
-            Endereco endereco;
-
-            if (cep.Valido)
-            {
-                var enderecoBase = _enderecoCache.ObterCache(cep);
-
-                if (!string.IsNullOrEmpty(enderecoBase.CEP))
-                {
-                    endereco = enderecoBase;
-                }
-                else
-                {
-                    endereco = ObterEndereco(cep);
-                    _enderecoCache.CriarCache(endereco);
-                }
-
-                AtualziarPropriedades(endereco);
-            }
-        }
-
-        public Endereco(string cep, IEnderecoCache enderecoCache)
-        {
-            _enderecoCache = enderecoCache;
-
-            var cepTemp = new CEP(cep);
-            var endereco = this;
-
-            if (cepTemp.Valido)
-            {
-                var enderecoBase = _enderecoCache.ObterCache(cepTemp);
-
-                if (enderecoBase != null)
-                {
-                    endereco = enderecoBase;
-                }
-                else
-                {
-                    endereco = ObterEndereco(cepTemp);
-                    _enderecoCache.CriarCache(endereco);
-                }
-
-                AtualziarPropriedades(endereco);
-            }
-        }
-
-        #endregion
-
-        public static IEnumerable<Endereco> Buscar(UF UF, string Cidade, string Logradouro,
-            IEnderecoCache enderecoCache)
-        {
-            var enderecosDoCache = enderecoCache.ObterCache(UF, Cidade, Logradouro);
-
-            if (enderecosDoCache.ToList().Count != 0)
-            {
-                return enderecosDoCache;
-            }
-
-            var enderecos = Buscar(UF, Cidade, Logradouro);
-
-            enderecoCache.CriarCache(enderecos);
-            return enderecos;
-        }
-
-        public static IEnumerable<Endereco> Buscar(UF UF, string cidade, string logradouro)
-        {
-            var url = ControleDeUrl.GerarURLDaPesquisa(UF, cidade, logradouro);
-            var strJSON = Requisicoes.ObterJSON(url);
-
-            return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
-        }
-
-
-        private Endereco ObterEndereco(CEP cep)
-        {
-            Endereco enderecoBase;
-
-            var url = ControleDeUrl.GerarURLDaPesquisa(cep.Valor);
-
-            var requisicaoJSON = Requisicoes.ObterJSON(url);
-
-            enderecoBase = JsonConvert.DeserializeObject<Endereco>(requisicaoJSON);
-
-            AtualziarPropriedades(enderecoBase);
-            return enderecoBase;
-        }
-
-        private void AtualziarPropriedades(Endereco endereco)
-        {
-            Bairro = endereco.Bairro;
-            Complemento = endereco.Complemento;
-            Gia = endereco.Gia;
-            Ibge = endereco.Ibge;
-            Localidade = endereco.Localidade;
-            Logradouro = endereco.Logradouro;
-            Unidade = endereco.Unidade;
-            UF = endereco.UF;
-            CEP = endereco.CEP;
-        }
     }
 }

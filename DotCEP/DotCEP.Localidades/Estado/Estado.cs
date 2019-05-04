@@ -8,12 +8,6 @@ namespace DotCEP.Localidades
     {
         private readonly IEstadoRepositorio _estadoRepositorio;
 
-        public SByte Codigo { get; private set; }
-
-        public String Sigla { get; private set; }
-
-        public String Nome { get; private set; }
-
 
         public Estado()
         {
@@ -23,18 +17,15 @@ namespace DotCEP.Localidades
         {
             _estadoRepositorio = new EstadoRepositorio();
 
-            if (SiglaOuNome.Trim().Length == 2)
-            {
-                SiglaOuNome = SiglaOuNome.Trim().ToUpper();
-            }
+            if (SiglaOuNome.Trim().Length == 2) SiglaOuNome = SiglaOuNome.Trim().ToUpper();
 
             try
             {
                 var estadoTemp = _estadoRepositorio.ObterPorSiglaOuNome(SiglaOuNome);
 
-                this.Codigo = estadoTemp.Codigo;
-                this.Nome = estadoTemp.Nome;
-                this.Sigla = estadoTemp.Sigla;
+                Codigo = estadoTemp.Codigo;
+                Nome = estadoTemp.Nome;
+                Sigla = estadoTemp.Sigla;
             }
             catch (Exception ex)
             {
@@ -50,15 +41,21 @@ namespace DotCEP.Localidades
             {
                 var estadoTemp = _estadoRepositorio.ObterPorCodigo(codigo);
 
-                this.Codigo = estadoTemp.Codigo;
-                this.Nome = estadoTemp.Nome;
-                this.Sigla = estadoTemp.Sigla;
+                Codigo = estadoTemp.Codigo;
+                Nome = estadoTemp.Nome;
+                Sigla = estadoTemp.Sigla;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        public sbyte Codigo { get; }
+
+        public string Sigla { get; }
+
+        public string Nome { get; }
 
 
         public static IEnumerable<Estado> ObterListaDeEstados()

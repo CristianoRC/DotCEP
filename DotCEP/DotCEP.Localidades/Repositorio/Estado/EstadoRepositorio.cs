@@ -18,7 +18,7 @@ namespace DotCEP.Localidades.Repositorio.Estado
             var sql = "select * from estados where codigo = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Estado>(sql, new {codigo = codigo});
+                return _bancoDeDados.Conexao.QueryFirst<Localidades.Estado>(sql, new {codigo});
             }
             catch (Exception ex)
             {

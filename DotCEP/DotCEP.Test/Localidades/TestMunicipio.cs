@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DotCEP.Localidades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -13,7 +12,7 @@ namespace DotCEP.Test
         {
             var Resultado = new Municipio("Pelotas", UF.RS).Codigo;
 
-            Assert.AreEqual((uint)4314407, Resultado);
+            Assert.AreEqual((uint) 4314407, Resultado);
         }
 
 
@@ -22,7 +21,7 @@ namespace DotCEP.Test
         {
             var Resultado = new Municipio("Pelotas", "Rio Grande do Sul").Codigo;
 
-            Assert.AreEqual((uint)4314407, Resultado);
+            Assert.AreEqual((uint) 4314407, Resultado);
         }
         //TODO: Implementar busca do município com a sigla do estado
         //TODO: Implementar busca do município com o código do estado
@@ -33,8 +32,8 @@ namespace DotCEP.Test
         {
             var informacoesMunicipio = new Municipio(4314407);
 
-            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
-            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual((uint) 4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte) informacoesMunicipio.Estado);
             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
         }
 
@@ -42,10 +41,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioUF()
         {
-            var informacoesMunicipio = new Localidades.Municipio("Pelotas", UF.RS);
+            var informacoesMunicipio = new Municipio("Pelotas", UF.RS);
 
-            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
-            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual((uint) 4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte) informacoesMunicipio.Estado);
             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
         }
 
@@ -53,10 +52,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoInformacoesDoMunicipioNomeEstado()
         {
-            var informacoesMunicipio = new Localidades.Municipio("Pelotas", "Rio Grande do Sul");
+            var informacoesMunicipio = new Municipio("Pelotas", "Rio Grande do Sul");
 
-            Assert.AreEqual((uint)4314407, informacoesMunicipio.Codigo);
-            Assert.AreEqual(43, (byte)informacoesMunicipio.Estado);
+            Assert.AreEqual((uint) 4314407, informacoesMunicipio.Codigo);
+            Assert.AreEqual(43, (byte) informacoesMunicipio.Estado);
             Assert.AreEqual("Pelotas", informacoesMunicipio.Nome);
         }
 

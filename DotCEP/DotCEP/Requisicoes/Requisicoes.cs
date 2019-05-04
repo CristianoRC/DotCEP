@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 
 namespace DotCEP
 {
     internal static class Requisicoes
     {
-
         internal static bool ExistenciaDoCEP(CEP cep)
         {
             try
@@ -17,7 +14,7 @@ namespace DotCEP
 
                 var json = ObterJSON(url);
 
-                return !VerificarProblemas(json);
+                return !ContemErros(json);
             }
             catch (ArgumentException)
             {
@@ -33,24 +30,20 @@ namespace DotCEP
 
                 var response = request.GetAsync(url).Result;
 
-
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                     throw new ArgumentException();
 
                 return response.Content.ReadAsStringAsync().Result;
-
             }
-            catch (System.Exception ex)
+            catch (ArgumentException ex)
             {
-                throw new System.Exception($"Erro ao tentar fazer a requisição: {ex.Message}");
+                throw new Exception($"Erro ao tentar fazer a requisição: {ex.Message}");
             }
         }
 
-        internal static bool VerificarProblemas(string strJSON)
+        internal static bool ContemErros(string strJSON)
         {
             return strJSON.Contains("\"erro\": true");
         }
-
     }
 }
-

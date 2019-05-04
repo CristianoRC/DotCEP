@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace DotCEP.Test
 {
     [TestClass]
@@ -13,7 +14,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestCodigoEstado()
         {
-            int codigoEstado = (int)UF.RS;
+            int codigoEstado = (int) UF.RS;
 
             Assert.AreEqual(43, codigoEstado);
         }

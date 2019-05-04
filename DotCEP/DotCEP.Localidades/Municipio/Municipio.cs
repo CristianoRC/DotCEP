@@ -8,17 +8,6 @@ namespace DotCEP.Localidades
     {
         private readonly IMunicipioRepositorio _municipioRepositorio;
 
-        public uint Codigo { get; private set; }
-
-        public string Nome { get; private set; }
-
-        public UF Estado
-        {
-            get { return (UF) codigoEstado; }
-        }
-
-        private byte codigoEstado { get; set; }
-
         public Municipio()
         {
         }
@@ -30,9 +19,9 @@ namespace DotCEP.Localidades
             {
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(codigo);
 
-                this.Codigo = municipioTemp.Codigo;
-                this.codigoEstado = municipioTemp.codigoEstado;
-                this.Nome = municipioTemp.Nome;
+                Codigo = municipioTemp.Codigo;
+                codigoEstado = municipioTemp.codigoEstado;
+                Nome = municipioTemp.Nome;
             }
             catch (Exception ex)
             {
@@ -47,9 +36,9 @@ namespace DotCEP.Localidades
             {
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, siglaEstado);
 
-                this.Codigo = municipioTemp.Codigo;
-                this.codigoEstado = municipioTemp.codigoEstado;
-                this.Nome = municipioTemp.Nome;
+                Codigo = municipioTemp.Codigo;
+                codigoEstado = municipioTemp.codigoEstado;
+                Nome = municipioTemp.Nome;
             }
             catch (Exception ex)
             {
@@ -65,15 +54,23 @@ namespace DotCEP.Localidades
             {
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, nomeEstado);
 
-                this.Codigo = municipioTemp.Codigo;
-                this.codigoEstado = municipioTemp.codigoEstado;
-                this.Nome = municipioTemp.Nome;
+                Codigo = municipioTemp.Codigo;
+                codigoEstado = municipioTemp.codigoEstado;
+                Nome = municipioTemp.Nome;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+
+        public uint Codigo { get; }
+
+        public string Nome { get; }
+
+        public UF Estado => (UF) codigoEstado;
+
+        private byte codigoEstado { get; }
 
 
         public static IEnumerable<Municipio> ListarTodos()

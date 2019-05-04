@@ -18,7 +18,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             var sql = "Select * from Municipios m where m.Codigo = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Municipio>(sql, new {codigo = codigo});
+                return _bancoDeDados.Conexao.QueryFirst<Localidades.Municipio>(sql, new {codigo});
             }
             catch (Exception ex)
             {

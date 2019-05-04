@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotCEP
+﻿namespace DotCEP
 {
     internal static class ControleDeUrl
     {
@@ -11,7 +9,7 @@ namespace DotCEP
             return $"https://viacep.com.br/ws/{CEP}/json/";
         }
 
-        internal static string GerarURLDaPesquisa(UF UF, string Cidade, String Logradouro)
+        internal static string GerarURLDaPesquisa(UF UF, string Cidade, string Logradouro)
         {
             return $"https://viacep.com.br/ws/{UF.ToString()}/{Cidade}/{Logradouro}/json/";
         }

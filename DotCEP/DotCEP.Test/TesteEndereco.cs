@@ -1,32 +1,32 @@
-﻿using System;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DotCEP.Localidades;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DotCEP.Test
 {
     [TestClass]
     public class TesteEndereco
     {
-
-        private DotCEP.Endereco enderecoBase;
+        private Endereco enderecoBase;
 
         [TestMethod]
-        public void TestConsultaEnderecoCompletoValido()
+        public void TesteConsultaEnderecoCompletoValido()
         {
-            enderecoBase = new Endereco("96085000");
+            var servicos = new ServicoEnderecos();
+
+            enderecoBase = servicos.ObterEndereco(new CEP("96085000"));
 
             Assert.AreEqual("Pelotas", enderecoBase.Localidade);
             Assert.AreEqual("Areal", enderecoBase.Bairro);
             Assert.AreEqual("Avenida Ferreira Viana", enderecoBase.Logradouro);
-
         }
 
+
         [TestMethod]
-        public void TestConsultaEnderecoCompletoInvalido()
+        public void TesteConsultaEnderecoCompletoInvalido()
         {
-            enderecoBase = new Endereco("960850000");
+            var servicos = new ServicoEnderecos();
+
+            enderecoBase = servicos.ObterEndereco(new CEP("960850000"));
 
             Assert.IsNull(enderecoBase.Localidade);
             Assert.IsNull(enderecoBase.Bairro);
@@ -34,17 +34,45 @@ namespace DotCEP.Test
         }
 
         [TestMethod]
-        public void TestConsultaListaEnderecos()
+        public void TesteConsultaEnderecoCompletoValidoComString()
         {
-            IEnumerable<Endereco> listaEnderecos = Endereco.Buscar(UF.RS, "Pelotas", "Ferreira");
+            var servicos = new ServicoEnderecos();
+
+            enderecoBase = servicos.ObterEndereco("96085000");
+
+            Assert.AreEqual("Pelotas", enderecoBase.Localidade);
+            Assert.AreEqual("Areal", enderecoBase.Bairro);
+            Assert.AreEqual("Avenida Ferreira Viana", enderecoBase.Logradouro);
+        }
+
+        [TestMethod]
+        public void TesteConsultaEnderecoCompletoInvalidoComString()
+        {
+            var servicos = new ServicoEnderecos();
+
+            enderecoBase = servicos.ObterEndereco("960850000");
+
+            Assert.IsNull(enderecoBase.Localidade);
+            Assert.IsNull(enderecoBase.Bairro);
+            Assert.IsNull(enderecoBase.Logradouro);
+        }
+
+        [TestMethod]
+        public void TesteConsultaListaEnderecos()
+        {
+            var servicos = new ServicoEnderecos();
+
+            var listaEnderecos = servicos.Buscar(UF.RS, "Pelotas", "Ferreira");
 
             Assert.AreEqual(11, listaEnderecos.ToList().Count);
         }
 
-         [TestMethod]
-        public void TestConsultaListaInvalidos()
+        [TestMethod]
+        public void TesteConsultaListaInvalidos()
         {
-            IEnumerable<Endereco> listaEnderecos = Endereco.Buscar(UF.RS, "Test", "Ferreira");
+            var servicos = new ServicoEnderecos();
+
+            var listaEnderecos = servicos.Buscar(UF.RS, "Test", "Ferreira");
 
             Assert.AreEqual(0, listaEnderecos.ToList().Count);
         }

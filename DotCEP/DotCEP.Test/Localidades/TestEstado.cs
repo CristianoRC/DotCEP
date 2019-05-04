@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DotCEP.Localidades;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,7 +7,6 @@ namespace DotCEP.Test
     [TestClass]
     public class TestEstado
     {
-
         [TestMethod]
         public void TestObtendoCodigoDoEstadoAtravesDaSigla()
         {
@@ -28,7 +26,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoNomeDoEstadoAtravesDaSigla()
         {
-            string Resultado = new Estado("RS").Nome;
+            var Resultado = new Estado("RS").Nome;
 
             Assert.AreEqual("Rio Grande do Sul", Resultado);
         }
@@ -37,7 +35,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoNomeDoEstadoAtravesDoID()
         {
-            string Resultado = new Estado(43).Nome;
+            var Resultado = new Estado(43).Nome;
 
             Assert.AreEqual("Rio Grande do Sul", Resultado);
         }
@@ -45,7 +43,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoSiglaDoEstadoAtravesDoID()
         {
-            string Resultado = new Estado(43).Sigla;
+            var Resultado = new Estado(43).Sigla;
 
             Assert.AreEqual("RS", Resultado);
         }
@@ -53,7 +51,7 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestObtendoSiglaDoEstadoAtravesDoNome()
         {
-            string Resultado = new Estado("Rio Grande do Sul").Sigla;
+            var Resultado = new Estado("Rio Grande do Sul").Sigla;
 
             Assert.AreEqual("RS", Resultado);
         }
@@ -61,10 +59,10 @@ namespace DotCEP.Test
         [TestMethod]
         public void TestListaDeEstados()
         {
-            var listaEstados = DotCEP.Localidades.Estado.ObterListaDeEstados().ToList();
+            var listaEstados = Estado.ObterListaDeEstados().ToList();
 
-            int NumeroDeResultados = listaEstados.Count;
-            DotCEP.Localidades.Estado EstadoNumeroZero = listaEstados[0];
+            var NumeroDeResultados = listaEstados.Count;
+            var EstadoNumeroZero = listaEstados[0];
 
             Assert.AreEqual(12, EstadoNumeroZero.Codigo);
             Assert.AreEqual("AC", EstadoNumeroZero.Sigla);

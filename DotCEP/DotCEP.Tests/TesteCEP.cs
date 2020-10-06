@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 
-namespace DotCEP.Test
+namespace DotCEP.Tests
 {
-    public class TesteCEP
+    public class TesteCep
     {
         [Theory]
         [InlineData("96085-000")]

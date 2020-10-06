@@ -1,8 +1,8 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
+using DotCEP.Compartilhado.Enumeradores;
 using Xunit;
 
-namespace DotCEP.Test
+namespace DotCEP.Tests
 {
     public class TesteEndereco
     {

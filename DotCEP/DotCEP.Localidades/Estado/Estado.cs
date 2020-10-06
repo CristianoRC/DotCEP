@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DotCEP.Localidades.Repositorio.Estado;
+﻿using System.Collections.Generic;
 
 namespace DotCEP.Localidades
 {

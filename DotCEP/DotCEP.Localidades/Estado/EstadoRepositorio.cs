@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Dapper;
 
-namespace DotCEP.Localidades.Repositorio.Estado
+namespace DotCEP.Localidades
 {
     internal class EstadoRepositorio : IEstadoRepositorio
     {
@@ -13,12 +13,12 @@ namespace DotCEP.Localidades.Repositorio.Estado
             _bancoDeDados = new BancosDeDados();
         }
 
-        public Localidades.Estado ObterPorCodigo(sbyte codigo)
+        public Estado ObterPorCodigo(sbyte codigo)
         {
             var sql = "select * from estados where codigo = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Estado>(sql, new {codigo});
+                return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {codigo});
             }
             catch (Exception ex)
             {
@@ -26,7 +26,7 @@ namespace DotCEP.Localidades.Repositorio.Estado
             }
         }
 
-        public Localidades.Estado ObterPorSiglaOuNome(string siglaOuNome)
+        public Estado ObterPorSiglaOuNome(string siglaOuNome)
         {
             var sql = string.Empty;
 
@@ -42,7 +42,7 @@ namespace DotCEP.Localidades.Repositorio.Estado
 
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Estado>(sql, new {parametro = siglaOuNome});
+                return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {parametro = siglaOuNome});
             }
             catch (Exception ex)
             {
@@ -50,12 +50,12 @@ namespace DotCEP.Localidades.Repositorio.Estado
             }
         }
 
-        public IEnumerable<Localidades.Estado> Listar()
+        public IEnumerable<Estado> Listar()
         {
             var sql = "select t.* from ESTADOS t order by t.Nome";
             try
             {
-                return _bancoDeDados.Conexao.Query<Localidades.Estado>(sql);
+                return _bancoDeDados.Conexao.Query<Estado>(sql);
             }
             catch (Exception ex)
             {

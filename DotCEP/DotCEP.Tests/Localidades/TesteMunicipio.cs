@@ -1,4 +1,5 @@
 using System.Linq;
+using DotCEP.Compartilhado.Enumeradores;
 using DotCEP.Localidades;
 using Xunit;
 

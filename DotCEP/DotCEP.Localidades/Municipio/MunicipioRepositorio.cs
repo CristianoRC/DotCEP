@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dapper;
+using DotCEP.Compartilhado.Enumeradores;
 
-namespace DotCEP.Localidades.Repositorio.Municipio
+namespace DotCEP.Localidades
 {
     internal class MunicipioRepositorio : IMunicipioRepositorio
     {
@@ -13,12 +14,12 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             _bancoDeDados = new BancosDeDados();
         }
 
-        public Localidades.Municipio ObterMunicipio(uint codigo)
+        public Municipio ObterMunicipio(uint codigo)
         {
             var sql = "Select * from Municipios m where m.Codigo = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Municipio>(sql, new {codigo});
+                return _bancoDeDados.Conexao.QueryFirst<Municipio>(sql, new {codigo});
             }
             catch (Exception ex)
             {
@@ -26,7 +27,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             }
         }
 
-        public Localidades.Municipio ObterMunicipio(string nomeMunicipio, string nomeEstado)
+        public Municipio ObterMunicipio(string nomeMunicipio, string nomeEstado)
         {
             var sql = "select m.* from estados e " +
                       "inner join municipios m " +
@@ -35,7 +36,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
 
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Municipio>
+                return _bancoDeDados.Conexao.QueryFirst<Municipio>
                     (sql, new {municipio = nomeMunicipio, estado = nomeEstado});
             }
             catch (Exception ex)
@@ -44,7 +45,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             }
         }
 
-        public Localidades.Municipio ObterMunicipio(string nomeMunicipio, UF Estado)
+        public Municipio ObterMunicipio(string nomeMunicipio, UF Estado)
         {
             var sql = "select m.* from estados e " +
                       "inner join municipios m " +
@@ -52,7 +53,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
                       "where m.nome = @nome and e.codigo = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.QueryFirst<Localidades.Municipio>(sql,
+                return _bancoDeDados.Conexao.QueryFirst<Municipio>(sql,
                     new {nome = nomeMunicipio, codigo = (byte) Estado});
             }
             catch (Exception ex)
@@ -61,12 +62,12 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             }
         }
 
-        public IEnumerable<Localidades.Municipio> ListarTodos()
+        public IEnumerable<Municipio> ListarTodos()
         {
             var sql = "select t.* from Municipios t";
             try
             {
-                return _bancoDeDados.Conexao.Query<Localidades.Municipio>(sql);
+                return _bancoDeDados.Conexao.Query<Municipio>(sql);
             }
             catch (Exception ex)
             {
@@ -74,12 +75,12 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             }
         }
 
-        public IEnumerable<Localidades.Municipio> ListarPorEstado(UF estado)
+        public IEnumerable<Municipio> ListarPorEstado(UF estado)
         {
             var sql = "select t.* from Municipios t where t.CodigoEstado = @codigo";
             try
             {
-                return _bancoDeDados.Conexao.Query<Localidades.Municipio>(sql, new {codigo = (byte) estado});
+                return _bancoDeDados.Conexao.Query<Municipio>(sql, new {codigo = (byte) estado});
             }
             catch (Exception ex)
             {
@@ -87,7 +88,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             }
         }
 
-        public IEnumerable<Localidades.Municipio> ListarPorEstado(string nomeEstado)
+        public IEnumerable<Municipio> ListarPorEstado(string nomeEstado)
         {
             var sql = @"select m.* from Municipios m  
                 inner join Estados e
@@ -97,7 +98,7 @@ namespace DotCEP.Localidades.Repositorio.Municipio
             try
 
             {
-                return _bancoDeDados.Conexao.Query<Localidades.Municipio>(sql,
+                return _bancoDeDados.Conexao.Query<Municipio>(sql,
                     new {parametro = nomeEstado.RemoverAcentos()});
             }
             catch (Exception ex)

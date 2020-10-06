@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DotCEP.Localidades.Repositorio.Municipio;
+using DotCEP.Compartilhado.Enumeradores;
 
 namespace DotCEP.Localidades
 {

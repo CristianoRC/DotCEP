@@ -1,4 +1,6 @@
-﻿namespace DotCEP
+﻿using DotCEP.Compartilhado.Enumeradores;
+
+namespace DotCEP
 {
     public class Endereco
     {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DotCEP.Compartilhado.Enumeradores;
 using Newtonsoft.Json;
 
 namespace DotCEP

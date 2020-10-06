@@ -1,4 +1,4 @@
-﻿namespace DotCEP
+﻿namespace DotCEP.Compartilhado.Enumeradores
 {
     public enum UF : byte
     {

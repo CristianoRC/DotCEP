@@ -1,4 +1,6 @@
-﻿namespace DotCEP
+﻿using DotCEP.Compartilhado.Enumeradores;
+
+namespace DotCEP
 {
     internal static class ControleDeUrl
     {

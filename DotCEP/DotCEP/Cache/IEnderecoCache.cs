@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DotCEP.Compartilhado.Enumeradores;
 
 namespace DotCEP
 {

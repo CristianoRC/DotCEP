@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using DotCEP.Compartilhado.Enumeradores;
+using Xunit;
 
-namespace DotCEP.Test
+namespace DotCEP.Tests
 {
     public class TestUF
     {

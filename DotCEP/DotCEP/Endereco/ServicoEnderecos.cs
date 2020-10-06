@@ -37,8 +37,8 @@ namespace DotCEP
 
         private IEnumerable<Endereco> BuscarSemCache(UF UF, string cidade, string logradouro)
         {
-            var url = ControleDeUrl.GerarURLDaPesquisa(UF, cidade, logradouro);
-            var strJSON = Requisicoes.ObterJSON(url);
+            var url = ControleDeUrl.GerarUrlDaPesquisa(UF, cidade, logradouro);
+            var strJSON = Requisicoes.ObterJson(url);
 
             return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
         }
@@ -78,9 +78,9 @@ namespace DotCEP
         {
             Endereco endereco;
 
-            var url = ControleDeUrl.GerarURLDaPesquisa(cep.Valor);
+            var url = ControleDeUrl.GerarUrlDaPesquisa(cep.Valor);
 
-            var requisicaoJson = Requisicoes.ObterJSON(url);
+            var requisicaoJson = Requisicoes.ObterJson(url);
 
             if (Requisicoes.ContemErros(requisicaoJson))
                 return null;

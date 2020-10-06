@@ -62,7 +62,7 @@ namespace DotCEP
         {
             if (!Valido) return false;
 
-            return Requisicoes.ExistenciaDoCEP(this);
+            return Requisicoes.ExistenciaDoCep(this);
         }
     }
 }

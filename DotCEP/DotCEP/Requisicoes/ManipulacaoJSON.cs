@@ -3,47 +3,45 @@ using Newtonsoft.Json;
 
 namespace DotCEP
 {
-    internal static class ManipulacaoJSON
+    internal static class ManipulacaoJson
     {
-        internal static string ObterCEPdaStrJSON(string strJSON)
+        internal static string ObterCePdaStrJson(string strJson)
         {
-            var enderecoBase = JsonConvert.DeserializeObject<Endereco>(strJSON);
+            var enderecoBase = JsonConvert.DeserializeObject<Endereco>(strJson);
 
-            var CEPtemp = enderecoBase.CEP.Replace("-", "");
+            var cepTemp = enderecoBase.CEP.Replace("-", "");
 
-            return CEPtemp;
+            return cepTemp;
         }
 
-        internal static List<Endereco> ObterEnderecos(List<string> enderecosJSON)
+        internal static List<Endereco> ObterEnderecos(IEnumerable<string> enderecosJson)
         {
             var enderecosDeRetorno = new List<Endereco>();
 
-            foreach (var item in enderecosJSON) enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
+            foreach (var item in enderecosJson) enderecosDeRetorno.Add(JsonConvert.DeserializeObject<Endereco>(item));
 
             return enderecosDeRetorno;
         }
 
-        internal static Endereco ObterEndereco(string enderecoJSON)
+        internal static Endereco ObterEndereco(string enderecoJson)
         {
-            return JsonConvert.DeserializeObject<Endereco>(enderecoJSON);
+            return JsonConvert.DeserializeObject<Endereco>(enderecoJson);
         }
 
         /// <summary>
         ///     Separa o array JSON em objetos e logo após converte novamente para um objeto em JSON.
         /// </summary>
-        /// <param name="strJSON">String json.</param>
-        internal static List<string> SepararArrayJSON(string strJSON)
+        /// <param name="strJson">String json.</param>
+        internal static List<string> SepararArrayJson(string strJson)
         {
-            var EnderecosJSON = new List<string>();
-
-            var Enderecos = new List<Endereco>();
-
-            Enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
+            var enderecosJson = new List<string>();
+            
+           var enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJson);
 
 
-            foreach (var item in Enderecos) EnderecosJSON.Add(JsonConvert.SerializeObject(item));
+            foreach (var item in enderecos) enderecosJson.Add(JsonConvert.SerializeObject(item));
 
-            return EnderecosJSON;
+            return enderecosJson;
         }
     }
 }

@@ -2,16 +2,16 @@
 {
     internal static class ControleDeUrl
     {
-        internal static string GerarURLDaPesquisa(string CEP)
+        internal static string GerarUrlDaPesquisa(string cep)
         {
-            CEP = CEP.Replace("-", "");
+            cep = cep.Replace("-", "");
 
-            return $"https://viacep.com.br/ws/{CEP}/json/";
+            return $"https://viacep.com.br/ws/{cep}/json/";
         }
 
-        internal static string GerarURLDaPesquisa(UF UF, string Cidade, string Logradouro)
+        internal static string GerarUrlDaPesquisa(UF uf, string cidade, string logradouro)
         {
-            return $"https://viacep.com.br/ws/{UF.ToString()}/{Cidade}/{Logradouro}/json/";
+            return $"https://viacep.com.br/ws/{uf.ToString()}/{cidade}/{logradouro}/json/";
         }
     }
 }

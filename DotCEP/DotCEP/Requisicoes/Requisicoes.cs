@@ -6,13 +6,13 @@ namespace DotCEP
 {
     internal static class Requisicoes
     {
-        internal static bool ExistenciaDoCEP(CEP cep)
+        internal static bool ExistenciaDoCep(CEP cep)
         {
             try
             {
-                var url = ControleDeUrl.GerarURLDaPesquisa(cep.Valor);
+                var url = ControleDeUrl.GerarUrlDaPesquisa(cep.Valor);
 
-                var json = ObterJSON(url);
+                var json = ObterJson(url);
 
                 return !ContemErros(json);
             }
@@ -22,7 +22,7 @@ namespace DotCEP
             }
         }
 
-        internal static string ObterJSON(string url)
+        internal static string ObterJson(string url)
         {
             try
             {
@@ -41,9 +41,9 @@ namespace DotCEP
             }
         }
 
-        internal static bool ContemErros(string strJSON)
+        internal static bool ContemErros(string strJson)
         {
-            return strJSON.Contains("\"erro\": true");
+            return strJson.Contains("\"erro\": true");
         }
     }
 }

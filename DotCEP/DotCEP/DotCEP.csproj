@@ -4,9 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-        <PackageReference Include="Dapper" Version="1.50.4" />
-        <PackageReference Include="Microsoft.Data.SQLite" Version="2.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />

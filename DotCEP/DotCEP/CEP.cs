@@ -5,8 +5,6 @@ namespace DotCEP
 {
     public class CEP
     {
-        private readonly IEnderecoCache _enderecoCache;
-
         private string _valor;
 
         public CEP(string valor)

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Dapper;
 
 namespace DotCEP.Localidades
@@ -16,14 +15,8 @@ namespace DotCEP.Localidades
         public Estado ObterPorCodigo(sbyte codigo)
         {
             var sql = "select * from estados where codigo = @codigo";
-            try
-            {
-                return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {codigo});
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {codigo});
         }
 
         public Estado ObterPorSiglaOuNome(string siglaOuNome)
@@ -40,27 +33,15 @@ namespace DotCEP.Localidades
                 sql = "select * from ESTADOS t where t.Nome = @parametro";
             }
 
-            try
-            {
-                return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {parametro = siglaOuNome});
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return _bancoDeDados.Conexao.QueryFirst<Estado>(sql, new {parametro = siglaOuNome});
         }
 
         public IEnumerable<Estado> Listar()
         {
             var sql = "select t.* from ESTADOS t order by t.Nome";
-            try
-            {
-                return _bancoDeDados.Conexao.Query<Estado>(sql);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+
+            return _bancoDeDados.Conexao.Query<Estado>(sql);
         }
     }
 }

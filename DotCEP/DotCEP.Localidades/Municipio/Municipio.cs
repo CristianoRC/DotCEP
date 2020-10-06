@@ -10,11 +10,11 @@ namespace DotCEP.Localidades
 
         public Municipio()
         {
+            _municipioRepositorio = new MunicipioRepositorio();
         }
 
-        public Municipio(uint codigo)
+        public Municipio(uint codigo) : this()
         {
-            _municipioRepositorio = new MunicipioRepositorio();
             try
             {
                 var municipioTemp = _municipioRepositorio.ObterMunicipio(codigo);
@@ -29,39 +29,22 @@ namespace DotCEP.Localidades
             }
         }
 
-        public Municipio(string nomeMunicipio, UF siglaEstado)
+        public Municipio(string nomeMunicipio, UF siglaEstado) : this()
         {
-            _municipioRepositorio = new MunicipioRepositorio();
-            try
-            {
-                var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, siglaEstado);
+            var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, siglaEstado);
 
-                Codigo = municipioTemp.Codigo;
-                codigoEstado = municipioTemp.codigoEstado;
-                Nome = municipioTemp.Nome;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            Codigo = municipioTemp.Codigo;
+            codigoEstado = municipioTemp.codigoEstado;
+            Nome = municipioTemp.Nome;
         }
 
-        public Municipio(string nomeMunicipio, string nomeEstado)
+        public Municipio(string nomeMunicipio, string nomeEstado) : this()
         {
-            _municipioRepositorio = new MunicipioRepositorio();
+            var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, nomeEstado);
 
-            try
-            {
-                var municipioTemp = _municipioRepositorio.ObterMunicipio(nomeMunicipio, nomeEstado);
-
-                Codigo = municipioTemp.Codigo;
-                codigoEstado = municipioTemp.codigoEstado;
-                Nome = municipioTemp.Nome;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            Codigo = municipioTemp.Codigo;
+            codigoEstado = municipioTemp.codigoEstado;
+            Nome = municipioTemp.Nome;
         }
 
         public uint Codigo { get; }
@@ -75,44 +58,20 @@ namespace DotCEP.Localidades
 
         public static IEnumerable<Municipio> ListarTodos()
         {
-            IMunicipioRepositorio _municipioRepositorio = new MunicipioRepositorio();
-
-            try
-            {
-                return _municipioRepositorio.ListarTodos();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var municipioRepositorio = new MunicipioRepositorio();
+            return municipioRepositorio.ListarTodos();
         }
 
         public static IEnumerable<Municipio> ListarPorEstado(UF siglaEstado)
         {
-            IMunicipioRepositorio _municipioRepositorio = new MunicipioRepositorio();
-
-            try
-            {
-                return _municipioRepositorio.ListarPorEstado(siglaEstado);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var municipioRepositorio = new MunicipioRepositorio();
+            return municipioRepositorio.ListarPorEstado(siglaEstado);
         }
 
         public static IEnumerable<Municipio> ListarPorEstado(string nomeEstado)
         {
-            IMunicipioRepositorio _municipioRepositorio = new MunicipioRepositorio();
-
-            try
-            {
-                return _municipioRepositorio.ListarPorEstado(nomeEstado);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var municipioRepositorio = new MunicipioRepositorio();
+            return municipioRepositorio.ListarPorEstado(nomeEstado);
         }
     }
 }

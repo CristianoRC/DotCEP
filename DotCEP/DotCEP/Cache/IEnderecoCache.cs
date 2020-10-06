@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DotCEP.Compartilhado.Enumeradores;
 
 namespace DotCEP
 {
     public interface IEnderecoCache
     {
-        Endereco ObterCache(CEP cep);
-        IEnumerable<Endereco> ObterCache(UF uf, string cidade, string logradouro);
+        Task<Endereco> ObterCache(CEP cep);
+        Task<IEnumerable<Endereco>> ObterCache(UF uf, string cidade, string logradouro);
 
-        void CriarCache(Endereco endereco);
-        void CriarCache(IEnumerable<Endereco> enderecos);
+        Task CriarCache(Endereco endereco);
+        Task CriarCache(IEnumerable<Endereco> enderecos);
     }
 }

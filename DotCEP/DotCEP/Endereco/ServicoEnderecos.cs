@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DotCEP.Compartilhado.Enumeradores;
 using Newtonsoft.Json;
 
@@ -19,13 +20,13 @@ namespace DotCEP
         }
 
 
-        public IEnumerable<Endereco> Buscar(UF UF, string Cidade, string Logradouro)
+        public async Task<IEnumerable<Endereco>> Buscar(UF UF, string Cidade, string Logradouro)
         {
             if (_enderecoCache != null)
             {
-                var enderecosDoCache = _enderecoCache.ObterCache(UF, Cidade, Logradouro);
+                var enderecosDoCache = await _enderecoCache.ObterCache(UF, Cidade, Logradouro);
 
-                if (enderecosDoCache.ToList().Count != 0) return enderecosDoCache;
+                if (enderecosDoCache.ToList().Any()) return enderecosDoCache;
 
                 var enderecos = BuscarSemCache(UF, Cidade, Logradouro);
 
@@ -44,14 +45,14 @@ namespace DotCEP
             return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
         }
 
-        public Endereco ObterEndereco(CEP cep)
+        public async Task<Endereco> ObterEndereco(CEP cep)
         {
             if (!cep.Valido)
                 return new Endereco();
 
             if (_enderecoCache != null)
             {
-                var cache = _enderecoCache.ObterCache(cep);
+                var cache = await _enderecoCache.ObterCache(cep);
                 if (cache != null) return cache;
 
                 var endereco = ObterEnderecoSemCache(cep);
@@ -68,11 +69,11 @@ namespace DotCEP
             return ObterEnderecoSemCache(cep);
         }
 
-        public Endereco ObterEndereco(string cep)
+        public async Task<Endereco> ObterEndereco(string cep)
         {
             var cepConvertido = new CEP(cep);
 
-            return ObterEndereco(cepConvertido);
+            return await ObterEndereco(cepConvertido);
         }
 
         private Endereco ObterEnderecoSemCache(CEP cep)

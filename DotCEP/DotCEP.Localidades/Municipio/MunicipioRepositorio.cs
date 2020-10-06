@@ -60,9 +60,9 @@ namespace DotCEP.Localidades
 
         public IEnumerable<Municipio> ListarPorEstado(string nomeEstado)
         {
-            var sql = "select m.* from Municipios m" +
-                      "inner join Estados e" +
-                      "on e.codigo = m.codigoestado" +
+            var sql = "select m.* from Municipios m " +
+                      "inner join Estados e " +
+                      "on e.codigo = m.codigoestado " +
                       "where e.nome = @parametro";
 
             return _bancoDeDados.Conexao.Query<Municipio>(sql,

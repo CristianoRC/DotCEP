@@ -8,47 +8,30 @@ namespace DotCEP.Localidades
     {
         private readonly IEstadoRepositorio _estadoRepositorio;
 
-
-        public Estado()
-        {
-        }
-
-        public Estado(string SiglaOuNome)
+        private Estado()
         {
             _estadoRepositorio = new EstadoRepositorio();
-
-            if (SiglaOuNome.Trim().Length == 2) SiglaOuNome = SiglaOuNome.Trim().ToUpper();
-
-            try
-            {
-                var estadoTemp = _estadoRepositorio.ObterPorSiglaOuNome(SiglaOuNome);
-
-                Codigo = estadoTemp.Codigo;
-                Nome = estadoTemp.Nome;
-                Sigla = estadoTemp.Sigla;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
 
-        public Estado(sbyte codigo)
+        public Estado(string siglaOuNome) : this()
         {
-            _estadoRepositorio = new EstadoRepositorio();
+            if (siglaOuNome.Trim().Length == 2) siglaOuNome = siglaOuNome.Trim().ToUpper();
 
-            try
-            {
-                var estadoTemp = _estadoRepositorio.ObterPorCodigo(codigo);
 
-                Codigo = estadoTemp.Codigo;
-                Nome = estadoTemp.Nome;
-                Sigla = estadoTemp.Sigla;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            var estadoTemp = _estadoRepositorio.ObterPorSiglaOuNome(siglaOuNome);
+
+            Codigo = estadoTemp.Codigo;
+            Nome = estadoTemp.Nome;
+            Sigla = estadoTemp.Sigla;
+        }
+
+        public Estado(sbyte codigo) : this()
+        {
+            var estadoDoRepositorio = _estadoRepositorio.ObterPorCodigo(codigo);
+
+            Codigo = estadoDoRepositorio.Codigo;
+            Nome = estadoDoRepositorio.Nome;
+            Sigla = estadoDoRepositorio.Sigla;
         }
 
         public sbyte Codigo { get; }
@@ -60,16 +43,9 @@ namespace DotCEP.Localidades
 
         public static IEnumerable<Estado> ObterListaDeEstados()
         {
-            IEstadoRepositorio _estadoRepositorio = new EstadoRepositorio();
+            var estadoRepositorio = new EstadoRepositorio();
 
-            try
-            {
-                return _estadoRepositorio.Listar();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return estadoRepositorio.Listar();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace DotCEP
             }
             catch
             {
-                throw new Exception($"Não foi possívl formatar o CEP {Valor}");
+                throw new ArgumentException($"Não foi possívl formatar o CEP {Valor}");
             }
         }
 

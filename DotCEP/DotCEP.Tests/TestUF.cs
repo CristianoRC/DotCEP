@@ -1,22 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace DotCEP.Test
 {
-    [TestClass]
     public class TestUF
     {
-        [TestMethod]
+        [Fact]
         public void TestSiglaEstado()
         {
-            Assert.AreEqual("RS", UF.RS.ToString());
+            Assert.Equal("RS", UF.RS.ToString());
         }
 
-        [TestMethod]
+        [Fact]
         public void TestCodigoEstado()
         {
             int codigoEstado = (int) UF.RS;
 
-            Assert.AreEqual(43, codigoEstado);
+            Assert.Equal(43, codigoEstado);
         }
     }
 }

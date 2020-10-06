@@ -14,7 +14,7 @@ namespace DotCEP.Tests
         [Fact]
         public void TestCodigoEstado()
         {
-            int codigoEstado = (int) UF.RS;
+            var codigoEstado = (int) UF.RS;
 
             Assert.Equal(43, codigoEstado);
         }

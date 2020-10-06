@@ -6,7 +6,6 @@ namespace DotCEP.Tests
 {
     public class TesteEndereco
     {
-
         [Fact]
         public void TesteConsultaEnderecoCompletoValido()
         {
@@ -25,7 +24,7 @@ namespace DotCEP.Tests
         {
             var servicos = new ServicoEnderecos();
 
-          var  enderecoBase = servicos.ObterEndereco(new CEP("960850000"));
+            var enderecoBase = servicos.ObterEndereco(new CEP("960850000"));
 
             Assert.Null(enderecoBase.Localidade);
             Assert.Null(enderecoBase.Bairro);

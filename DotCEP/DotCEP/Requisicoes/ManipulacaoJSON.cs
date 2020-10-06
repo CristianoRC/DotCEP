@@ -35,8 +35,8 @@ namespace DotCEP
         internal static List<string> SepararArrayJson(string strJson)
         {
             var enderecosJson = new List<string>();
-            
-           var enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJson);
+
+            var enderecos = JsonConvert.DeserializeObject<List<Endereco>>(strJson);
 
 
             foreach (var item in enderecos) enderecosJson.Add(JsonConvert.SerializeObject(item));

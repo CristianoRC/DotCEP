@@ -1,5 +1,6 @@
 using System.Linq;
 using DotCEP.Localidades;
+using FluentAssertions;
 using Xunit;
 
 namespace DotCEP.Tests.Localidades
@@ -10,24 +11,21 @@ namespace DotCEP.Tests.Localidades
         public void TestObtendoCodigoDoEstadoAtravesDaSigla()
         {
             var resultado = new Estado("rs").Codigo;
-
-            Assert.Equal(43, resultado);
+            resultado.Should().Be(43);
         }
 
         [Fact]
         public void TestObtendoCodigoDoEstadoAtravesDoNome()
         {
             var resultado = new Estado("Rio Grande do Sul").Codigo;
-
-            Assert.Equal(43, resultado);
+            resultado.Should().Be(43);
         }
 
         [Fact]
         public void TestObtendoNomeDoEstadoAtravesDaSigla()
         {
             var resultado = new Estado("RS").Nome;
-
-            Assert.Equal("Rio Grande do Sul", resultado);
+            resultado.Should().Be("Rio Grande do Sul");
         }
 
 
@@ -43,16 +41,14 @@ namespace DotCEP.Tests.Localidades
         public void TestObtendoSiglaDoEstadoAtravesDoId()
         {
             var resultado = new Estado(43).Sigla;
-
-            Assert.Equal("RS", resultado);
+            resultado.Should().Be("RS");
         }
 
         [Fact]
         public void TestObtendoSiglaDoEstadoAtravesDoNome()
         {
             var resultado = new Estado("Rio Grande do Sul").Sigla;
-
-            Assert.Equal("RS", resultado);
+            resultado.Should().Be("RS");
         }
 
         [Fact]
@@ -62,11 +58,10 @@ namespace DotCEP.Tests.Localidades
 
             var numeroDeResultados = listaEstados.Count;
             var estadoNumeroZero = listaEstados[0];
-
-            Assert.Equal(12, estadoNumeroZero.Codigo);
-            Assert.Equal("AC", estadoNumeroZero.Sigla);
-            Assert.Equal("Acre", estadoNumeroZero.Nome);
-            Assert.Equal(27, numeroDeResultados);
+            estadoNumeroZero.Codigo.Should().Be(12);
+            estadoNumeroZero.Sigla.Should().Be("AC");
+            estadoNumeroZero.Nome.Should().Be("Acre");
+            numeroDeResultados.Should().Be(27);
         }
     }
 }

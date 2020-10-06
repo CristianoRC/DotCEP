@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DotCEP.Compartilhado.Enumeradores;
+using FluentAssertions;
 using Xunit;
 
 namespace DotCEP.Tests
@@ -10,12 +11,11 @@ namespace DotCEP.Tests
         public void TesteConsultaEnderecoCompletoValido()
         {
             var servicos = new ServicoEnderecos();
-
             var enderecoBase = servicos.ObterEndereco(new CEP("96085000"));
 
-            Assert.Equal("Pelotas", enderecoBase.Localidade);
-            Assert.Equal("Areal", enderecoBase.Bairro);
-            Assert.Equal("Avenida Ferreira Viana", enderecoBase.Logradouro);
+            enderecoBase.Localidade.Should().Be("Pelotas");
+            enderecoBase.Bairro.Should().Be("Areal");
+            enderecoBase.Logradouro.Should().Be("Avenida Ferreira Viana");
         }
 
 
@@ -23,56 +23,51 @@ namespace DotCEP.Tests
         public void TesteConsultaEnderecoCompletoInvalido()
         {
             var servicos = new ServicoEnderecos();
-
             var enderecoBase = servicos.ObterEndereco(new CEP("960850000"));
 
-            Assert.Null(enderecoBase.Localidade);
-            Assert.Null(enderecoBase.Bairro);
-            Assert.Null(enderecoBase.Logradouro);
+            enderecoBase.Localidade.Should().BeNull();
+            enderecoBase.Bairro.Should().BeNull();
+            enderecoBase.Logradouro.Should().BeNull();
         }
 
         [Fact]
         public void TesteConsultaEnderecoCompletoValidoComString()
         {
             var servicos = new ServicoEnderecos();
-
             var enderecoBase = servicos.ObterEndereco("96085000");
 
-            Assert.Equal("Pelotas", enderecoBase.Localidade);
-            Assert.Equal("Areal", enderecoBase.Bairro);
-            Assert.Equal("Avenida Ferreira Viana", enderecoBase.Logradouro);
+            enderecoBase.Localidade.Should().Be("Pelotas");
+            enderecoBase.Bairro.Should().Be("Areal");
+            enderecoBase.Logradouro.Should().Be("Avenida Ferreira Viana");
         }
 
         [Fact]
         public void TesteConsultaEnderecoCompletoInvalidoComString()
         {
             var servicos = new ServicoEnderecos();
-
             var enderecoBase = servicos.ObterEndereco("960850000");
 
-            Assert.Null(enderecoBase.Localidade);
-            Assert.Null(enderecoBase.Bairro);
-            Assert.Null(enderecoBase.Logradouro);
+            enderecoBase.Localidade.Should().BeNull();
+            enderecoBase.Bairro.Should().BeNull();
+            enderecoBase.Logradouro.Should().BeNull();
         }
 
         [Fact]
         public void TesteConsultaListaEnderecos()
         {
             var servicos = new ServicoEnderecos();
-
             var listaEnderecos = servicos.Buscar(UF.RS, "Pelotas", "Ferreira");
 
-            Assert.Equal(11, listaEnderecos.ToList().Count);
+            listaEnderecos.Count().Should().Be(11);
         }
 
         [Fact]
         public void TesteConsultaListaInvalidos()
         {
             var servicos = new ServicoEnderecos();
-
             var listaEnderecos = servicos.Buscar(UF.RS, "Test", "Ferreira");
 
-            Assert.Empty(listaEnderecos.ToList());
+            listaEnderecos.Should().BeEmpty();
         }
     }
 }

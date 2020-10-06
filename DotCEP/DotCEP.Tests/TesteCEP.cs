@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using Xunit;
 
 namespace DotCEP.Tests
@@ -11,7 +12,7 @@ namespace DotCEP.Tests
         public void TestVerificacaoCepValido(string valor)
         {
             var cep = new CEP(valor);
-            Assert.True(cep.Valido);
+            cep.Valido.Should().BeTrue();
         }
 
         [Theory]
@@ -20,7 +21,7 @@ namespace DotCEP.Tests
         public void TestVerificacaoCepInvalido(string valor)
         {
             var cep = new CEP(valor);
-            Assert.False(cep.Valido);
+            cep.Valido.Should().BeFalse();
         }
 
         [Theory]
@@ -29,7 +30,7 @@ namespace DotCEP.Tests
         public void TestVerificacaoDeCepExistente(string valor)
         {
             var resultadoDaExistencia = new CEP(valor).VerificarExistencia();
-            Assert.True(resultadoDaExistencia);
+            resultadoDaExistencia.Should().BeTrue();
         }
 
         [Theory]
@@ -38,7 +39,7 @@ namespace DotCEP.Tests
         public void TestVerificacaoDeCepInexistente(string valor)
         {
             var resultadoDaExistencia = new CEP(valor).VerificarExistencia();
-            Assert.False(resultadoDaExistencia);
+            resultadoDaExistencia.Should().BeFalse();
         }
 
         #region Formatacao
@@ -47,14 +48,14 @@ namespace DotCEP.Tests
         public void TestFormatacaoComEspacosEmBranco()
         {
             var cep = new CEP("9 6 0 8 5 0 0 0");
-            Assert.Equal("96085-000", cep.Valor);
+            cep.Valor.Should().Be("96085-000");
         }
 
         [Fact]
         public void TestCepFormatadoErrado()
         {
             var cep = new CEP("96-085 000");
-            Assert.Equal("96085-000", cep.Valor);
+            cep.Valor.Should().Be("96085-000");
         }
 
         [Theory]
@@ -62,7 +63,9 @@ namespace DotCEP.Tests
         [InlineData("96085=000")]
         public void TestFormatacaoNaoValido(string cePparaVerificar)
         {
-            Assert.Throws<ArgumentException>(() => new CEP(cePparaVerificar));
+            Action act = () => { new CEP(cePparaVerificar); };
+
+            act.Should().Throw<ArgumentException>();
         }
 
         #endregion

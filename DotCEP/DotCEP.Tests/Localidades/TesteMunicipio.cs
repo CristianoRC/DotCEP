@@ -1,6 +1,7 @@
 using System.Linq;
 using DotCEP.Compartilhado.Enumeradores;
 using DotCEP.Localidades;
+using FluentAssertions;
 using Xunit;
 
 namespace DotCEP.Tests.Localidades
@@ -11,8 +12,7 @@ namespace DotCEP.Tests.Localidades
         public void TestObtendoCodigoDoMunicipioUf()
         {
             var resultado = new Municipio("Pelotas", UF.RS).Codigo;
-
-            Assert.Equal((uint) 4314407, resultado);
+            resultado.Should().Be(4314407);
         }
 
 
@@ -20,21 +20,16 @@ namespace DotCEP.Tests.Localidades
         public void TestObtendoCodigoDoMunicipioNomeEstado()
         {
             var resultado = new Municipio("Pelotas", "Rio Grande do Sul").Codigo;
-
-            Assert.Equal((uint) 4314407, resultado);
+            resultado.Should().Be(4314407);
         }
-        //TODO: Implementar busca do município com a sigla do estado
-        //TODO: Implementar busca do município com o código do estado
-
 
         [Fact]
         public void TestObtendoInformacoesDoMunicipioCodigo()
         {
             var informacoesMunicipio = new Municipio(4314407);
-
-            Assert.Equal((uint) 4314407, informacoesMunicipio.Codigo);
-            Assert.Equal(43, (byte) informacoesMunicipio.Estado);
-            Assert.Equal("Pelotas", informacoesMunicipio.Nome);
+            informacoesMunicipio.Codigo.Should().Be(4314407);
+            informacoesMunicipio.Estado.Should().Be(43);
+            informacoesMunicipio.Nome.Should().Be("Pelotas");
         }
 
 
@@ -43,9 +38,9 @@ namespace DotCEP.Tests.Localidades
         {
             var informacoesMunicipio = new Municipio("Pelotas", UF.RS);
 
-            Assert.Equal((uint) 4314407, informacoesMunicipio.Codigo);
-            Assert.Equal(43, (byte) informacoesMunicipio.Estado);
-            Assert.Equal("Pelotas", informacoesMunicipio.Nome);
+            informacoesMunicipio.Codigo.Should().Be(4314407);
+            informacoesMunicipio.Estado.Should().Be(43);
+            informacoesMunicipio.Nome.Should().Be("Pelotas");
         }
 
 
@@ -54,9 +49,9 @@ namespace DotCEP.Tests.Localidades
         {
             var informacoesMunicipio = new Municipio("Pelotas", "Rio Grande do Sul");
 
-            Assert.Equal((uint) 4314407, informacoesMunicipio.Codigo);
-            Assert.Equal(43, (byte) informacoesMunicipio.Estado);
-            Assert.Equal("Pelotas", informacoesMunicipio.Nome);
+            informacoesMunicipio.Codigo.Should().Be(4314407);
+            informacoesMunicipio.Estado.Should().Be(43);
+            informacoesMunicipio.Nome.Should().Be("Pelotas");
         }
 
 
@@ -64,15 +59,14 @@ namespace DotCEP.Tests.Localidades
         public void TestObtendoNomeDoMunicipio()
         {
             var resultado = new Municipio(4314407).Nome;
-
-            Assert.Equal("Pelotas", resultado);
+            resultado.Should().Be("Pelotas");
         }
 
         [Fact]
         public void TestListaDeTodosMunicipios()
         {
             var numeroDeTodosRegistros = Municipio.ListarTodos().Count();
-            Assert.Equal(5570, numeroDeTodosRegistros);
+            numeroDeTodosRegistros.Should().Be(5570);
         }
 
 
@@ -80,14 +74,14 @@ namespace DotCEP.Tests.Localidades
         public void TestListaDeMunicipiosPorUf()
         {
             var numeroDeTodosRegistrosDoRs = Municipio.ListarPorEstado(UF.RS).Count();
-            Assert.Equal(497, numeroDeTodosRegistrosDoRs);
+            numeroDeTodosRegistrosDoRs.Should().Be(497);
         }
 
         [Fact]
         public void TestListaDeMunicipiosPorEstado()
         {
             var numeroDeTodosRegistrosDoRs = Municipio.ListarPorEstado("São Paulo").Count();
-            Assert.Equal(645, numeroDeTodosRegistrosDoRs);
+            numeroDeTodosRegistrosDoRs.Should().Be(645);
         }
     }
 }

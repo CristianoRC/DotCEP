@@ -1,4 +1,5 @@
 ﻿using DotCEP.Compartilhado.Enumeradores;
+using FluentAssertions;
 using Xunit;
 
 namespace DotCEP.Tests
@@ -8,15 +9,14 @@ namespace DotCEP.Tests
         [Fact]
         public void TestSiglaEstado()
         {
-            Assert.Equal("RS", UF.RS.ToString());
+            UF.RS.ToString().Should().Be("RS");
         }
 
         [Fact]
         public void TestCodigoEstado()
         {
             var codigoEstado = (int) UF.RS;
-
-            Assert.Equal(43, codigoEstado);
+            codigoEstado.Should().Be(43);
         }
     }
 }

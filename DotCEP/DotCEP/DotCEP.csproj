@@ -11,6 +11,6 @@
         <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />
+      <ProjectReference Include="..\DotCEP.Shared\DotCEP.Shared.csproj" />
     </ItemGroup>
 </Project>

@@ -4,10 +4,10 @@
         <TargetFramework>netstandard2.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
-        <ProjectReference Include="..\DotCEP.Share\DotCEP.Share.csproj" />
-    </ItemGroup>
-    <ItemGroup>
         <PackageReference Include="Dapper" Version="2.0.35" />
         <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.1" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DotCEP.Shared\DotCEP.Shared.csproj" />
     </ItemGroup>
 </Project>

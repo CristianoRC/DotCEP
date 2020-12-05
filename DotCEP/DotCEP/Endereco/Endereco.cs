@@ -8,8 +8,7 @@ namespace DotCEP
         {
         }
 
-        public Endereco(string cep, string logradouro, string complemento, string bairro, string localidade, UF uf,
-            string unidade, string ibge, string gia)
+        public Endereco(string cep, string logradouro, string complemento, string bairro, string localidade, UF uf, string unidade, string ibge, string gia)
         {
             CEP = cep;
             Logradouro = logradouro;

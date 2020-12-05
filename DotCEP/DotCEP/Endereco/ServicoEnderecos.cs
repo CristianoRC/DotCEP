@@ -20,29 +20,29 @@ namespace DotCEP
         }
 
 
-        public async Task<IEnumerable<Endereco>> Buscar(UF UF, string Cidade, string Logradouro)
+        public async Task<IEnumerable<Endereco>> Buscar(UF uf, string cidade, string logradouro)
         {
             if (_enderecoCache != null)
             {
-                var enderecosDoCache = await _enderecoCache.ObterCache(UF, Cidade, Logradouro);
+                var enderecosDoCache = await _enderecoCache.ObterCache(uf, cidade, logradouro);
 
-                if (enderecosDoCache.ToList().Any()) return enderecosDoCache;
+                if (enderecosDoCache.Any()) return enderecosDoCache;
 
-                var enderecos = BuscarSemCache(UF, Cidade, Logradouro);
+                var enderecos = BuscarSemCache(uf, cidade, logradouro);
 
-                _enderecoCache.CriarCache(enderecos);
+                await _enderecoCache.CriarCache(enderecos);
                 return enderecos;
             }
 
-            return BuscarSemCache(UF, Cidade, Logradouro);
+            return BuscarSemCache(uf, cidade, logradouro);
         }
 
-        private IEnumerable<Endereco> BuscarSemCache(UF UF, string cidade, string logradouro)
+        private IEnumerable<Endereco> BuscarSemCache(UF uf, string cidade, string logradouro)
         {
-            var url = ControleDeUrl.GerarUrlDaPesquisa(UF, cidade, logradouro);
-            var strJSON = Requisicoes.ObterJson(url);
+            var url = ControleDeUrl.GerarUrlDaPesquisa(uf, cidade, logradouro);
+            var json = Requisicoes.ObterJson(url);
 
-            return JsonConvert.DeserializeObject<List<Endereco>>(strJSON);
+            return JsonConvert.DeserializeObject<List<Endereco>>(json);
         }
 
         public async Task<Endereco> ObterEndereco(CEP cep)
@@ -59,7 +59,7 @@ namespace DotCEP
 
                 if (endereco != null)
                 {
-                    _enderecoCache.CriarCache(endereco);
+                    await _enderecoCache.CriarCache(endereco);
                     return endereco;
                 }
 
@@ -78,8 +78,6 @@ namespace DotCEP
 
         private Endereco ObterEnderecoSemCache(CEP cep)
         {
-            Endereco endereco;
-
             var url = ControleDeUrl.GerarUrlDaPesquisa(cep.Valor);
 
             var requisicaoJson = Requisicoes.ObterJson(url);
@@ -87,9 +85,7 @@ namespace DotCEP
             if (Requisicoes.ContemErros(requisicaoJson))
                 return null;
 
-            endereco = JsonConvert.DeserializeObject<Endereco>(requisicaoJson);
-
-            return endereco;
+            return JsonConvert.DeserializeObject<Endereco>(requisicaoJson);
         }
     }
 }

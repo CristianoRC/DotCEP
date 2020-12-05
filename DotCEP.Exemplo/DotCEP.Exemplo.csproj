@@ -1,22 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="DotCEP, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\DotCEP\DotCEP\bin\Debug\netstandard2.0\DotCEP.dll</HintPath>
-    </Reference>
-    <Reference Include="DotCEP.Compartilhado, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\DotCEP\DotCEP\bin\Debug\netstandard2.0\DotCEP.Compartilhado.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="StackExchange.Redis" Version="2.0.513" />
+    <PackageReference Include="DotCEP" Version="2.0.0c" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
   </ItemGroup>
 
 </Project>

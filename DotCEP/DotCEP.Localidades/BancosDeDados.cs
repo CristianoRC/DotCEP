@@ -7,7 +7,6 @@ namespace DotCEP.Localidades
     {
         internal BancosDeDados()
         {
-            var asd = $"{AppDomain.CurrentDomain.BaseDirectory}Lugares.db";
             Conexao = new SqliteConnection($@"Data Source={AppDomain.CurrentDomain.BaseDirectory}Lugares.db");
         }
 

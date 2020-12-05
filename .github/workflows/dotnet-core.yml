@@ -15,8 +15,8 @@ jobs:
       with:
         dotnet-version: 3.1.301
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore DotCEP
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build DotCEP --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test DotCEP --no-restore --verbosity normal

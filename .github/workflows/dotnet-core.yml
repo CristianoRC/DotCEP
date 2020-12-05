@@ -18,5 +18,9 @@ jobs:
       run: dotnet restore DotCEP
     - name: Build
       run: dotnet build DotCEP --configuration Release --no-restore
+    - name: Preparar testes
+      run: cp DB/Lugares.db DotCEP/DotCEP.Tests/bin/Release/netcoreapp3.1/
     - name: Test
-      run: dotnet test DotCEP --no-restore --verbosity normal
+      run: dotnet test DotCEP --configuration Release --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack

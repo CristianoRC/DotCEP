@@ -23,4 +23,4 @@ jobs:
     - name: Test
       run: dotnet test DotCEP --configuration Release --no-restore --verbosity normal
     - name: Pack
-      run: dotnet pack
+      run: dotnet pack DotCEP

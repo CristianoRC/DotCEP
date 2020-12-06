@@ -1,5 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <Version>1.0.1</Version>
+        <Authors>Cristiano Raffi Cunha</Authors>
+        <PackageIconUrl>https://api.nuget.org/v3-flatcontainer/dotcep/1.2.3/icon</PackageIconUrl>
+        <Description>
+            Biblioteca para facilitar o trabalho com CEP, utilizando .NET C#.
+            Você pode encontrar a documentação e exemplos em: https://github.com/CristianoRC/DotCEP
+        </Description>
     </PropertyGroup>
 </Project>

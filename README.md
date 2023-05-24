@@ -12,6 +12,10 @@
 <br>
 
 
+## **Projeto desativado** 
+
+o código não está muito legal, criei quando era iniciante na programação, então estou deixando de dar manutenção na biblioteca, mas caso queiras utilizar ela, ainda esta no Nuget.
+
 
 <h1>Sobre</h1>
 
